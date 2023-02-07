@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit,ViewChild } from '@angular/core';
 import { Usuario } from 'src/app/model';
 import { UserService } from 'src/app/services/user.service';
 
@@ -8,30 +8,46 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./inicio.component.css']
 })
 
-export class InicioComponent implements OnInit{
+export class InicioComponent implements OnInit,AfterViewInit{
 	
 	usuarios?: Usuario[];
-	count	
-	 today = new Date();
-	 currentMonth = this.today.getMonth();
-	 currentYear = this.today.getFullYear();
+	monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre',
+	'Octubre','Noviembre','Diciembre'];
+	currentDate:Date;
+	currentDay:any;
+    monthNumber: any;
+    currentYear: any;
+	@ViewChild('year') year: ElementRef;
+	@ViewChild('month') month: ElementRef;
+	@ViewChild('dates') dates: ElementRef;
+	@ViewChild('prevMonthDOM') prev: ElementRef;
+	@ViewChild('nextMonthDOM') next: ElementRef;
 
-// Obtener el último día del mes
-	 lastDayOfMonth = new Date(this.currentYear, this.currentMonth + 1, 0);
 
-// Obtener el número de días en el mes
-	 daysInMonth = this.lastDayOfMonth.getDate();
 constructor(	
-	private userService:UserService
+	private userService:UserService,
+	
 ){
+	this.currentDate = new Date();
+	this.currentDay = this.currentDate.getDate();
+	this.monthNumber = this.currentDate.getMonth();
+	this.currentYear = this.currentDate.getFullYear();
+	
 }
+    ngAfterViewInit(): void {
+		this.month.nativeElement.textContent = this.monthNames[this.monthNumber];
+		this.year.nativeElement.textContent = this.currentYear.toString();
+
+
+    }
     ngOnInit(): void {
-	this.userService.todosLosUsuarios()
+
+	/*this.userService.todosLosUsuarios()
 	.subscribe(usuarios => {
 		this.usuarios = usuarios;
 	})
-	console.log(localStorage.getItem("credencial"))
+	console.log(localStorage.getItem("credencial"))*/
+
     }
-   
 }
 
