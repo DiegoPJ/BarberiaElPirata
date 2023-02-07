@@ -1,0 +1,90 @@
+#cuerpo {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)), url("/assets/img/hoscuro.jpg");
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	min-height:100vh;
+	color: white;
+	font-family: PiratesBay;
+display: flex;
+  align-items: center;
+  flex-direction:column;
+  }
+
+
+.form {
+  width: 350px;
+}
+#formLoggin{
+	margin:20px;
+}
+
+#cabecera {
+	animation: fadein 10s;
+	margin-top:20px;
+	font-size:60px;
+	font-family:Caribbean;
+    text-shadow:
+    -1px -1px 20px #999,
+    0 0 1px darkblue,
+    1px 1px 1px black,
+    2px 2px 1px #555,
+    3px 3px 1px #222,
+    4px 4px 20px #fff;
+    text-align: center;
+}
+#logo{
+	margin:10px;
+	opacity:0.7;
+}
+#email{
+	color:white;
+	background-color: rgba(0, 0, 0, .5);
+}
+#password{
+	
+}
+.botones{
+		display: flex;
+    justify-content: center;
+    margin-top:5px;
+}
+#iniciarSesion{
+	margin-top:20px;
+	margin-bottom:20px;
+	width:100%;
+	background: linear-gradient(180deg, #275f87 0%, #306485 100%);
+	border:0;
+}
+#iniciarSesion:hover{
+	background: linear-gradient(180deg, #227bba 0%, #275f87 100%);
+}
+
+#crearCuenta{
+	margin:5px;
+}
+a{
+	text-decoration :none;
+	color:#227bba !important;
+}
+a:hover{
+	color:#275f87 !important;
+}
+<!--  -->
+.modal-dialog,.modal-content,.modal-header,#exampleModalLabel,#modal-body,.modal-footer{
+	text-align: center;
+	justify-content: center;
+	background-color: black;
+	color:gray;
+		font-family: PiratesBay;
+	
+}
+@keyframes fadein {
+    from {
+        opacity:1;
+    }
+    to {
+        opacity:1;
+    }
+}

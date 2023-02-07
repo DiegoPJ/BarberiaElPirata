@@ -1,0 +1,50 @@
+<!-- -->
+#modalCrearCuenta{
+	
+  }
+#modalEstilos{
+	background:black;
+	opacity:0.9;
+	color:#8F9093;
+	text-align: center;
+			font-family:PiratesBay;
+			padding:5%;
+}
+.modal-header{
+	text-align: center;
+   
+}
+#modalEstilosMain{
+	width:100%;
+    text-align: center;
+}
+.btn-close{
+	color:white;
+	background-color:white;
+	margin-bottom:15px;
+}
+#tituloCrearCuenta{
+	position:absolute;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    top:5%;
+}
+.modal-footer{
+		text-align: center;
+	justify-content: center
+}
+
+@font-face {
+	font-family: PiratesBay;
+	src: url("/assets/font/PiratesBay.ttf");
+}
+@font-face {
+	font-family: Caribbean;
+	src: url("/assets/font/Caribbean.ttf");
+}
+#inputImagen{
+	width:50%;
+}
+input{
+	text-align: center;
+}

@@ -1,0 +1,125 @@
+<div class="modal fade" id="modalCrearCuenta" tabindex="-1"
+	aria-hidden="true">
+	<div id="modalEstilosMain" class="modal-dialog modal-dialog-centered">
+		<div id="modalEstilos" class="modal-content">
+			<div class="modal-header">
+				<h1 id="tituloCrearCuenta">Registrate</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+			<form [formGroup]='formSubmit' (ngSubmit)="enviar(formSubmit.value)"
+				class="container">
+
+				<div class="modal-body">
+
+					<div class="row">
+						<div class="form-group col-md-12 ">
+							<label for="inputEmail4" class="mb-2">Nombre</label> <input
+								type="text" class="form-control" maxlength="30"
+								formControlName="nombre">
+
+							<div *ngIf="errores === true">
+
+								<span class="text-warning"
+									*ngIf="formSubmit.get('nombre').hasError('required')">El
+									nombre es requerido<br></span>
+									<span class="text-warning"
+									*ngIf="formSubmit.get('nombre').hasError('minlength')">Nombre entre 3 y 30 caracteres</span>
+							</div>
+						</div>
+					
+
+						<div class="form-group col-md-12 mt-2">
+							<label for="inputAddress" class="mb-2">Email</label> <input
+								type="email" class="form-control" formControlName="email"
+								maxlength="40">
+							<div *ngIf="errores === true">
+								<span class="text-warning"
+									*ngIf="formSubmit.get('email').hasError('required')">El
+									email es requerido<br></span> <span class="text-warning"
+									*ngIf="formSubmit.get('email').hasError('email')">El
+									email debe de ser tipo email<br></span>
+									<span class="text-warning"
+									*ngIf="formSubmit.get('email').hasError('noEmailValido')">El
+									email ya está registrado </span>
+							</div>
+
+						</div>
+
+						<div class="form-group col-md-12 mt-2">
+							<label for="inputAddress2" class="mb-2">Teléfono</label> <input
+								maxlength="9" type="text" class="form-control"
+								formControlName="telefono"
+								placeholder="Apartment, studio, or floor">
+							<div *ngIf="errores === true">
+								<span class="text-warning"
+									*ngIf="formSubmit.get('telefono').hasError('required')">El
+									teléfono es requerido<br></span>
+									<span class="text-warning"
+									*ngIf="formSubmit.get('telefono').hasError('minlength')">Debe rellenar 9 numeros</span>
+									<span class="text-warning"
+									*ngIf="formSubmit.get('telefono').hasError('pattern')">Debe ser de tipo numérico</span>
+							</div>
+
+						</div>
+						<div class="form-group col-md-12 mt-2">
+							<label for="inputAddress2" class="mb-2">Contraseña</label> <input
+								maxlength="20" type="password" class="form-control"
+								formControlName="contraseña">
+							<div *ngIf="errores === true">
+								<span class="text-warning"
+									*ngIf="formSubmit.get('contraseña').hasError('required')">La
+									contraseña es requerida<br></span>
+									<span class="text-warning"
+									*ngIf="formSubmit.get('contraseña').hasError('minlength')">8 y 20 caracteres<br></span>
+									<span class="text-warning"
+									*ngIf="formSubmit.get('contraseña').hasError('hasCapitalCase')">Se requiere una mayuscula<br></span>
+									<span class="text-warning"
+									*ngIf="formSubmit.get('contraseña').hasError('hasSmallCase')">Se requiere una minuscula<br></span>
+									<span class="text-warning"
+									*ngIf="formSubmit.get('contraseña').hasError('hasSpecialCharacters')">No se admiten caracteres especiales</span>
+							</div>
+
+						</div>
+						<div class="form-group col-md-12 mt-2">
+							<label for="inputAddress2" class="mb-2">Repite Contraseña</label>
+							<input type="password" class="form-control" maxlength="15"
+								formControlName="repiteContraseña"><br>
+							<div *ngIf="errores === true">
+								<span class="text-warning"
+									*ngIf="formSubmit.get('repiteContraseña').hasError('required');else otroError ">La
+									contraseña es requerida</span>
+								<ng-template #otroError> <span
+									class="text-warning"
+									*ngIf="formSubmit.get('repiteContraseña').value !== formSubmit.get('contraseña').value">La
+									contraseña no es igual</span></ng-template>
+							</div>
+						</div>
+						<!-- <div class="form-group col-md-12 mt-2">
+							<label for="inputCity" class="mb-2">Imagen</label><br> <input
+								type="file"  class="btn btn-secondary btn-sm mb-2"
+								id="inputImagen" formControlName="foto"
+								accept="image/png,image/jpeg"> <br>
+							<div *ngIf="errores === true">
+								<span class="text-warning"
+									*ngIf="formSubmit.get('foto').hasError('required')">La
+									foto es requerida</span>
+							</div>
+						</div>
+						 -->
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" (click)="limpiar()"
+						data-bs-dismiss="modal">Limpiar y Salir</button>
+					<button (click)="registrarse()" type="submit"
+						class="btn btn-primary">Registrarse</button>
+				</div>
+			</form>
+
+		</div>
+	</div>
+	<div class="alert alert-success" role="alert">
+  This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+</div>
+</div>

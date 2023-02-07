@@ -1,0 +1,13 @@
+#cuerpo {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)), url("/assets/img/mapapeque.jpg");
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	min-height:100vh;
+	color: white;
+	font-family: PiratesBay;
+display: flex;
+  align-items: center;
+  flex-direction:column;
+  }
