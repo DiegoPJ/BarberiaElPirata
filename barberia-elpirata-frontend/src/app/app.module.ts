@@ -14,6 +14,7 @@ import { ValidationsComponent } from './utils/validations/validations.component'
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { AuthInterceptor } from './helpers/auth.interceptor';
 import { AuthGuard } from './helpers/auth.guard';
+import { CalendarioComponent } from './components/calendario/calendario.component';
 
 
 const appRoutes:Routes =[
@@ -37,7 +38,8 @@ const appRoutes:Routes =[
     LoginComponent,
     ListaPreciosComponent,
     ValidationsComponent,
-    InicioComponent
+    InicioComponent,
+    CalendarioComponent
   ],
   imports: [
     BrowserModule,
