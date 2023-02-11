@@ -7,9 +7,11 @@
 	min-height:100vh;
 	color: white;
 	font-family: PiratesBay;
-display: flex;
-  align-items: center;
-  flex-direction:column;
+	display: flex;
+  	align-items: center;
+  	flex-direction:column;
+  	z-index:0;
+  	
   }
 
 
@@ -36,6 +38,7 @@ display: flex;
 }
 #logo{
 	margin:10px;
+	margin-top:25px;
 	opacity:0.7;
 }
 #email{

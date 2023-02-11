@@ -26,10 +26,13 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "usuario")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "usuario_usuRol")
     @JsonIgnore
 	private Set<UsuarioRol> usuarioRoles = new HashSet<>();
 
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "usuario")
+	private Set<Cita> citas = new HashSet<>();
+	
 	private String nombre;
 	private String username;
 	private String email;

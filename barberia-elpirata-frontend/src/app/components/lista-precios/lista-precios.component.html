@@ -1,22 +1,24 @@
 
-<div class="cajaPrecios">
-	<ul>
-		<h1>Precios</h1>
-		<li>primero</li>
-		<li>segundo</li>
-	</ul>
+<div id="cajaPrecios" data-bs-toggle="offcanvas"
+	data-bs-target="#offcanvasWithBothOptions"
+	aria-controls="offcanvasWithBothOptions">
 
-
-	<button id="boton" type="button" class="btn btn-primary btn-sm">
-AAAAAAAA
-	</button>
+	<span>P<br><br>r<br><br>e<br><br>c<br><br>i<br><br>o<br><br>s</span>
 
 </div>
 
-<script>
-	document.getElementById('boton').onclick = function() {
-		alert("button was clicked");
-		console.log("HIJO DE PUTA");
-	}​;
-</script>
 
+<div class="offcanvas offcanvas-start text-bg-dark"
+	data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+	aria-labelledby="offcanvasWithBothOptionsLabel">
+	<div class="offcanvas-header">
+		<h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Lista de Precios</h5>
+		<button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+			aria-label="Close"></button>
+	</div>
+	<div class="offcanvas-body">
+		<p>To los precios papi</p>
+	</div>
+</div>
+<!-- 	  <video src="/assets/img/precios.mp4" muted autoplay loop ></video>
+ -->

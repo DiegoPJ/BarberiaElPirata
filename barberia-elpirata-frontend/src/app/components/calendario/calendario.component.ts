@@ -43,28 +43,33 @@ constructor(
     }
     
     writeMonth(month:any){
-
 		for(let i = this.startDay(); i > 0; i--){
 			this.dates.nativeElement.innerHTML += `<div class="calendar__item calendar__lastDays" style="opacity:.3">
 			${this.getTotalDays(this.monthNumber-1)-(i-1)}
 			</div>`;
-			console.log(this.getTotalDays(this.monthNumber+1)-(i-1));
-			console.log(this.startDay());
 		}
 		
-		let esteMes = new Date().getMonth();
+
 		for(let i = 1 ; i <= this.getTotalDays(month); i++){
-			if(i === this.currentDay && this.monthNames[esteMes] == this.month.nativeElement.textContent){
-				this.dates.nativeElement.innerHTML += `<div class="calendar__item calendar__today" 
-				style="background-color: blue;
-				color: white;
-				width: 50%;
-				border-radius: 50%;
-				margin: auto;">${i}</div>`;
-			}else{
-				this.dates.nativeElement.innerHTML += `<div class="calendar__item">${i}</div>`;
-			}
+				let dayHtml = document.createElement('div');
+				dayHtml.classList.add("calendar__item");
+				dayHtml.textContent = i+"";
+				this.dates.nativeElement.appendChild(dayHtml);
 		}
+		  for (let i = 1; i <= 42 - this.getTotalDays(month) - this.startDay(); i++) {
+		    let dayHtml = document.createElement("div");
+		    dayHtml.classList.add("calendar__startDays");
+		    dayHtml.style.opacity =".3";
+		    dayHtml.textContent = i + "";
+		    this.dates.nativeElement.appendChild(dayHtml);
+		 }
+		  
+			this.dates.nativeElement.addEventListener('click', (event:any) => {
+				if (!event.target.classList.contains("calendar__lastDays") &&
+					!event.target.classList.contains("calendar__startDays")) {
+					console.log("Has seleccionado el día: " + event.target.textContent);
+				}
+			});
 	}
 	
 	getTotalDays(month:any){
