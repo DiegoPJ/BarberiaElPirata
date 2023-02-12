@@ -29,7 +29,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
     
     @Autowired 
-    UsuarioRepository usuarioRepository;
+    private UsuarioRepository usuarioRepository;
     
     
     @PostMapping("/")

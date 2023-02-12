@@ -1,23 +1,3 @@
 #horario{
 	font-family: PiratesBay;
 }
-#boton{
-	background: #c0c0c0;
-	font-size: 20px;
-	font-family: PiratesBay;
-}
-#accordion-item{
-	background-color: red;
-	font-family: PiratesBay;
-}
-.accordionExample,.accordion-item{
-	background-color: gray;
-	color:white;
-	text-align: center;
-	font-family: PiratesBay;
-}
-.accordion-body{
-	text-align: center;
-			font-family: PiratesBay;
-	
-}

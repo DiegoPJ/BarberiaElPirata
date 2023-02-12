@@ -45,6 +45,8 @@ public class WebSecurityConfig   {
 			.authorizeHttpRequests()
 			.requestMatchers("/api/usuarios/")
 			.permitAll()
+			.requestMatchers("/api/guardarHorario")
+			.permitAll()
 			.anyRequest()
 			.authenticated()
 			.and()

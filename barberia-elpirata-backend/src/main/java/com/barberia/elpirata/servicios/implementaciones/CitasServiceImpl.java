@@ -5,10 +5,10 @@ import org.springframework.stereotype.Service;
 
 import com.barberia.elpirata.entidades.Cita;
 import com.barberia.elpirata.repositorios.CitaRepository;
-import com.barberia.elpirata.servicios.CitasService;
+import com.barberia.elpirata.servicios.CitaService;
 
 @Service
-public class CitasServiceImpl implements CitasService{
+public class CitasServiceImpl implements CitaService{
 
 	@Autowired
 	private CitaRepository citaRepository;
