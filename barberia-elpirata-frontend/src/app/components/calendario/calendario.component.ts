@@ -42,7 +42,8 @@ constructor(
 
     }
     
-    writeMonth(month:any){
+
+     writeMonth(month:any){
 		for(let i = this.startDay(); i > 0; i--){
 			this.dates.nativeElement.innerHTML += `<div class="calendar__item calendar__lastDays" style="opacity:.3">
 			${this.getTotalDays(this.monthNumber-1)-(i-1)}
