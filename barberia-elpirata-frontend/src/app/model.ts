@@ -11,3 +11,13 @@ export interface Usuario {
 	telefono:String;
 	password:String;
 }	
+
+export interface Horario {
+	
+	id:number;
+	diaSemana:String;
+	hora_apertura_mañana:String;
+	hora_cierre_mañana:String;
+	hora_apertura_tarde:String;
+	hora_cierre_tarde:String;
+}	

@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-calendario',
@@ -6,6 +6,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
   styleUrls: ['./calendario.component.css']
 })
 export class CalendarioComponent {
+
 
 monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre',
 	'Octubre','Noviembre','Diciembre'];
@@ -18,7 +19,9 @@ monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto',
 	@ViewChild('dates') dates: ElementRef;
 	@ViewChild('prevMonthDOM') prev: ElementRef;
 	@ViewChild('nextMonthDOM') next: ElementRef;
-	
+    eventClickHandler: (event: any) => void;
+	@Output() calendarioSeleccionado = new EventEmitter();
+
 constructor(	
 	
 ){
@@ -37,6 +40,7 @@ constructor(
 		this.writeMonth(this.monthNumber);
 
     }
+    
     ngOnInit(): void {
 
 
@@ -65,12 +69,17 @@ constructor(
 		    this.dates.nativeElement.appendChild(dayHtml);
 		 }
 		  
-			this.dates.nativeElement.addEventListener('click', (event:any) => {
+			this.dates.nativeElement.removeEventListener('click', this.eventClickHandler);
+			this.eventClickHandler = (event:any) => {
 				if (!event.target.classList.contains("calendar__lastDays") &&
 					!event.target.classList.contains("calendar__startDays")) {
 					console.log("Has seleccionado el día: " + event.target.textContent);
+					
+				    this.calendarioSeleccionado.emit(event.target.textContent);
+
 				}
-			});
+			};
+			this.dates.nativeElement.addEventListener('click', this.eventClickHandler);
 	}
 	
 	getTotalDays(month:any){

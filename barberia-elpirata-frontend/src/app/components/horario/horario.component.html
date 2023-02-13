@@ -4,8 +4,10 @@
 			<div class="col">
 				<div class="container">
 
-					<h2>Mañana</h2>
-
+					<h2>Mañana {{calendarioSelecIni}}</h2>
+<ul>
+      <li *ngFor="let horario of horarios">{{ horario.diaSemana }}</li>
+    </ul>
 					<div class="row">
 						<Button class="col-md-2">10:00</Button>
 						<Button class="col-md-2">10:00</Button>

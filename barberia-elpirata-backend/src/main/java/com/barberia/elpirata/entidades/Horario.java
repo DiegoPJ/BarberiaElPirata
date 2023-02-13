@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 public class Horario {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
     @Column(name="diaSemana", unique=true)

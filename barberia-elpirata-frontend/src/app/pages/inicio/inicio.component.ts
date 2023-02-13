@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, ElementRef, OnInit,ViewChild } from '@angular/core';
-import { CalendarioComponent } from 'src/app/components/calendario/calendario.component';
 import { Usuario } from 'src/app/model';
 import { UserService } from 'src/app/services/user.service';
 
@@ -12,11 +11,12 @@ import { UserService } from 'src/app/services/user.service';
 export class InicioComponent implements OnInit,AfterViewInit{
 	
 	usuarios?: Usuario[];
-	
+	calendarioSelecIni:Date;
 constructor(	
 	private userService:UserService
 ){
 }
+
     ngAfterViewInit(): void {
 		
     }
@@ -29,6 +29,9 @@ constructor(
 	console.log(localStorage.getItem("credencial"))*/
 
     }
+    escuchaCalendario(event:any) {
+	  this.calendarioSelecIni = event;
+	}
    
 }
 
