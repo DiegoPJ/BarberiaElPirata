@@ -65,7 +65,7 @@ export class HorarioComponent implements OnInit,OnChanges{
 	}
 	 isDateValid(fecha:any): boolean {
     return !isNaN(Date.parse(fecha));
-  }
+  } 
   
   generarHoras(apertura_mañana:any,cierre_mañana:any
   				,apertura_tarde:any,cierre_tarde:any): void {
@@ -86,6 +86,13 @@ export class HorarioComponent implements OnInit,OnChanges{
 
   	this.horasTa.push(cierre_tarde);
 }
+
+	fechaCita(event:any){
+		let fechaCita = new Date(this.calendarioSelecIni);
+		let horaMinuto = event.target.textContent.split(':');
+		fechaCita.setHours(parseInt(horaMinuto[0]), parseInt(horaMinuto[1]));
+		alert(fechaCita);
+	}
 
 
 }

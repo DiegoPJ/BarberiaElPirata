@@ -53,7 +53,7 @@ constructor(
 			${this.getTotalDays(this.monthNumber-1)-(i-1)}
 			</div>`;
 		}
-		
+			
 
 		for(let i = 1 ; i <= this.getTotalDays(month); i++){
 				let dayHtml = document.createElement('div');

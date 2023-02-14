@@ -11,5 +11,5 @@ import com.barberia.elpirata.entidades.Cita;
 public interface CitaRepository extends JpaRepository<Cita, Long>{
 
 	public Cita findByUsuario(String usuario);
-	public Cita findByFechaAndHora(Date fecha, Date hora);
+	public Cita findByFecha(Date fecha);
 }

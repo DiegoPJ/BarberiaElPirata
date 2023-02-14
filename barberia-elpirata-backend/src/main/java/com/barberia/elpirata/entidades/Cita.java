@@ -22,9 +22,7 @@ public class Cita {
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
-	private Date fecha;
-	private Date hora;
-	
+	private Date fecha;	
 	public Cita() {
 	}
 
@@ -34,7 +32,6 @@ public class Cita {
 		this.id = id;
 		this.usuario = usuario;
 		this.fecha = fecha;
-		this.hora = hora;
 	}
 	
 	public int getId() {
@@ -67,14 +64,6 @@ public class Cita {
 	}
 
 
-	public Date getHora() {
-		return hora;
-	}
-
-
-	public void setHora(Date hora) {
-		this.hora = hora;
-	}
 
 
 	

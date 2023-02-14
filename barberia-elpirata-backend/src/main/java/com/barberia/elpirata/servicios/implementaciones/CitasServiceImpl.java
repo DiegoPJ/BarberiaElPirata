@@ -16,8 +16,8 @@ public class CitasServiceImpl implements CitaService{
 	
 	@Override
 	public Cita guardarCita(Cita cita) throws Exception {
-		Cita citaBD = citaRepository.findByFechaAndHora(cita.getFecha(), cita.getHora())	;
-		if(citaBD.getFecha() == cita.getFecha() && citaBD.getHora() == cita.getHora()) {
+		Cita citaBD = citaRepository.findByFecha(cita.getFecha())	;
+		if(citaBD.getFecha() == cita.getFecha()) {
 			System.out.println("La cita ya esta cogida");
             throw new Exception("La cita ya esta cogida");
 		}else {
