@@ -29,7 +29,7 @@ constructor(
 	console.log(localStorage.getItem("credencial"))*/
 
     }
-    escuchaCalendario(event:any) {
+    escuchaCalendario(event:Date) {
 	  this.calendarioSelecIni = event;
 	}
    

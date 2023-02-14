@@ -59,7 +59,7 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner{
 		
 		Horario horario3 = new Horario();
 		horario.setId(3);
-		horario3.setDiaSemana("Miercoles");
+		horario3.setDiaSemana("Miércoles");
 		horario3.setHora_apertura_mañana("11:00");
 		horario3.setHora_cierre_mañana("14:00");
 		horario3.setHora_apertura_tarde("16:00");
@@ -95,7 +95,7 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner{
 		
 		Horario horario6 = new Horario();
 		horario.setId(6);
-		horario6.setDiaSemana("Sabado");
+		horario6.setDiaSemana("Sábado");
 		horario6.setHora_apertura_mañana("10:00");
 		horario6.setHora_cierre_mañana("14:00");
 		horario6.setHora_apertura_tarde("16:00");

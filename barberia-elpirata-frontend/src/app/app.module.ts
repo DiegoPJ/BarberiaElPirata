@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +16,8 @@ import { AuthInterceptor } from './helpers/auth.interceptor';
 import { AuthGuard } from './helpers/auth.guard';
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { HorarioComponent } from './components/horario/horario.component';
+import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
 
 
 const appRoutes:Routes =[
@@ -49,13 +51,21 @@ const appRoutes:Routes =[
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    CommonModule
   ],
   providers: [
  		{
-		  provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true
-		}
+		  provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true,
+		},
+		DatePipe,
+		    { provide: LOCALE_ID, useValue: 'es' }
+
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+	  constructor() {
+    	registerLocaleData(localeEs);
+  }
+}

@@ -20,7 +20,7 @@ monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto',
 	@ViewChild('prevMonthDOM') prev: ElementRef;
 	@ViewChild('nextMonthDOM') next: ElementRef;
     eventClickHandler: (event: any) => void;
-	@Output() calendarioSeleccionado = new EventEmitter();
+	@Output() calendarioSeleccionado = new EventEmitter<Date>();
 
 constructor(	
 	
@@ -75,7 +75,10 @@ constructor(
 					!event.target.classList.contains("calendar__startDays")) {
 					console.log("Has seleccionado el día: " + event.target.textContent);
 					
-				    this.calendarioSeleccionado.emit(event.target.textContent);
+					let fecha = new Date(this.currentYear, this.monthNumber, event.target.textContent);
+					
+					this.calendarioSeleccionado.emit(fecha);
+					
 
 				}
 			};

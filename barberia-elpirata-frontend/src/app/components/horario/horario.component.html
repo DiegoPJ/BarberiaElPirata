@@ -1,28 +1,15 @@
 <div class="container" id="horario">
+					<h1>AAAA{{diaSemanaDatePiPe}}</h1>
+
 	<div class="container text-center">
 		<div class="row">
 			<div class="col">
 				<div class="container">
 
 					<h2>Mañana {{calendarioSelecIni}}</h2>
-<ul>
-      <li *ngFor="let horario of horarios">{{ horario.diaSemana }}</li>
-    </ul>
-					<div class="row">
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
+
+					<div *ngFor="let hora of horasMa" class="row">
+						<Button class="col-md-2">{{hora}}</Button>
 					</div>
 				</div>
 			</div>
@@ -31,23 +18,12 @@
 				<div class="container">
 <div class="container">
 
+					
 					<h2>Tarde</h2>
 
-					<div class="row">
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
-						<Button class="col-md-2">10:00</Button>
+						<div *ngFor="let hora of horasTa" class="row">
+						<Button class="col-md-2">{{hora}}</Button>
+						
 					</div>
 				</div>
 
