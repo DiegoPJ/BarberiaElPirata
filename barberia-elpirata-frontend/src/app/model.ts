@@ -21,3 +21,10 @@ export interface Horario {
 	hora_apertura_tarde:String;
 	hora_cierre_tarde:String;
 }	
+
+export interface Cita {
+	
+	id:number;
+	fecha:Date;
+	id_usuario:Usuario;
+}

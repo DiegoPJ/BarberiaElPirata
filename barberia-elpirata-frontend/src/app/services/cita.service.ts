@@ -1,16 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Horario } from '../model';
+import { Cita } from '../model';
 import baserUrl from './helper';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HorarioService {
+export class CitaService {
 
-  	  horarios: Horario[];
-		
+  citas: Cita[];
+
   constructor(private httpClient :HttpClient) { }
   
 /*  public añadirUsuario(user:any){
@@ -20,7 +20,7 @@ export class HorarioService {
    public comprobarEmail(email:any){
 	  return this.httpClient.get(`${baserUrl}/usuarios/${email}`);
   }*/
-  public todosLosHorarios(): Observable<Horario[]>{
-	  	  return this.httpClient.get<Horario[]>(`${baserUrl}/api/horarios`);
+  public todosLasCitas(): Observable<Cita[]>{
+	  	  return this.httpClient.get<Cita[]>(`${baserUrl}/api/citas`);
   }
 }

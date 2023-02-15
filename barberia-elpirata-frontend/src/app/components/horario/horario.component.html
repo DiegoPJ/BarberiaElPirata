@@ -1,5 +1,5 @@
 <div class="container" id="horario">
-
+ {{calendarioSelecIni}}
 	<div class="container text-center">
 		<div class="row">
 			<div class="col">
@@ -8,8 +8,10 @@
 					<h2>Mañana</h2>
 
 					<div class="row">
-						<Button click="fechaCita()" *ngFor="let hora of horasMa"
-							class="col-md-2" (click)="fechaCita($event)">{{hora}}</Button>
+						<Button *ngFor="let hora of horasMa" class="col-md-2"
+						    [ngClass]="{'hora-reservada': horaReservada(hora, citas)}"
+						    [disabled]="horaReservada(hora, citas)"
+						    (click)="fechaCita($event)">{{hora}}</Button>
 					</div>
 				</div>
 			</div>
@@ -22,8 +24,10 @@
 						<h2>Tarde</h2>
 
 						<div class="row">
-							<Button *ngFor="let hora of horasTa" class="col-md-2"
-								(click)="fechaCita($event)">{{hora}}</Button>
+						  <Button *ngFor="let hora of horasTa" class="col-md-2"
+						    [ngClass]="{'hora-reservada': horaReservada(hora, citas)}"
+						    [disabled]="horaReservada(hora, citas)"
+						    (click)="fechaCita($event)">{{hora}}</Button>
 						</div>
 					</div>
 				</div>

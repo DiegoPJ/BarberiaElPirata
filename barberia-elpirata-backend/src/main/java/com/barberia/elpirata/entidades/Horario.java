@@ -13,7 +13,9 @@ import lombok.NoArgsConstructor;
 @Data @NoArgsConstructor 
 public class Horario {
 	
+	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
     @Column(name="diaSemana", unique=true)
@@ -24,10 +26,8 @@ public class Horario {
 	private String hora_apertura_tarde;
 	private String hora_cierre_tarde;
 	
-	
 	public Horario(String diaSemana, String hora_apertura_mañana, String hora_cierre_mañana, String hora_apertura_tarde,
 			String hora_cierre_tarde) {
-		
 		super();
 		this.diaSemana = diaSemana;
 		this.hora_apertura_mañana = hora_apertura_mañana;
@@ -35,9 +35,6 @@ public class Horario {
 		this.hora_apertura_tarde = hora_apertura_tarde;
 		this.hora_cierre_tarde = hora_cierre_tarde;
 	}
-
-	
-	
 	
 	
 }

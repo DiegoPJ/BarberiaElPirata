@@ -60,3 +60,13 @@
 	opacity: .3!;
 	color:blue;
 }
+.calendar__item.selected{
+	background-color:red!important;
+	background:red;
+	color:red!important;
+	margin:50px;
+}
+.selected{
+	background:red;
+}
+

@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-calendario',
@@ -20,10 +20,10 @@ monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto',
 	@ViewChild('prevMonthDOM') prev: ElementRef;
 	@ViewChild('nextMonthDOM') next: ElementRef;
     eventClickHandler: (event: any) => void;
-	@Output() calendarioSeleccionado = new EventEmitter<Date>();
+	@Output() calendarioSeleccionado = new EventEmitter<Date | null>();
 
 constructor(	
-	
+	private cdRef: ChangeDetectorRef
 ){
 	this.currentDate = new Date();
 	this.currentDay = this.currentDate.getDate();
@@ -74,17 +74,33 @@ constructor(
 				if (!event.target.classList.contains("calendar__lastDays") &&
 					!event.target.classList.contains("calendar__startDays")) {
 					console.log("Has seleccionado el día: " + event.target.textContent);
-					
+					console.log(event.target);
+					let buttons2 = document.querySelectorAll(".calendar__item");
+					buttons2.forEach(button =>{
+					  button.addEventListener("click",_ =>{
+					    buttons2.forEach(button =>{
+					      button.classList.remove("selected");
+					    })
+					    button.classList.toggle("selected");
+					  })
+					})
+					this.year.nativeElement.classList.add("selected")
+					//event.target.classList.add("selected");
+					//event.target.style.backgroundColor="red";
+					  this.cdRef.detectChanges();
+
 					let fecha = new Date(this.currentYear, this.monthNumber, event.target.textContent);
 					
 					this.calendarioSeleccionado.emit(fecha);
 					
-
 				}
 			};
 			this.dates.nativeElement.addEventListener('click', this.eventClickHandler);
 	}
 	
+	 
+	
+  
 	getTotalDays(month:any){
 		if(month === -1) month = 11;
 		
@@ -112,15 +128,19 @@ constructor(
 		}
 		
 		this.setNewDate();
+		this.calendarioSeleccionado.emit(null);
+
 	}
 	nextMonth(){
 		if(this.monthNumber !== 11){
 			this.monthNumber++;
+			
 		}else{
 			this.monthNumber = 0;
 			this.currentYear++;
 		}
 				this.setNewDate();
+		this.calendarioSeleccionado.emit(null);
 
 	}
 	setNewDate(){
