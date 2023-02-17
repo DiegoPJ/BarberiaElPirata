@@ -17,12 +17,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.barberia.elpirata.entidades.Cita;
 import com.barberia.elpirata.entidades.Horario;
+import com.barberia.elpirata.entidades.Barberia;
 import com.barberia.elpirata.entidades.Rol;
+import com.barberia.elpirata.entidades.Corte;
+import com.barberia.elpirata.entidades.Estilo;
 import com.barberia.elpirata.entidades.Usuario;
 import com.barberia.elpirata.entidades.UsuarioRol;
 import com.barberia.elpirata.repositorios.UsuarioRepository;
 import com.barberia.elpirata.servicios.CitaService;
+import com.barberia.elpirata.servicios.CorteService;
+import com.barberia.elpirata.servicios.EstiloService;
 import com.barberia.elpirata.servicios.HorarioService;
+import com.barberia.elpirata.servicios.BarberiaService;
 import com.barberia.elpirata.servicios.UsuarioService;
 import com.barberia.elpirata.servicios.implementaciones.CitasServiceImpl;
 
@@ -41,6 +47,14 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 	@Autowired
 	private CitaService citaService;
 	
+	@Autowired
+	private BarberiaService barberiaService;
+	
+	@Autowired
+	private CorteService corteService;
+	
+	@Autowired
+	private EstiloService estiloService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(BarberiaElpirataBackendApplication.class, args);
@@ -168,5 +182,50 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 //		
 //		citaService.guardarCita(cita2);
 //		}
+//		
+//		Barberia barberia1 = new Barberia();
+//		barberia1.setNombre("Peluqueria");
+//		barberiaService.guardarBarberia(barberia1);
+//		
+//		Barberia barberia2 = new Barberia();
+//		barberia2.setNombre("Cejas");
+//		barberia2.setPrecio(2);
+//		barberiaService.guardarBarberia(barberia2);
+//		
+//		Barberia barberia3 = new Barberia();
+//		barberia3.setNombre("Barba");
+//		barberia3.setPrecio(5);
+//		barberiaService.guardarBarberia(barberia3);
+//		
+//		
+//		
+//		Corte corte1 = new Corte();
+//		corte1.setNombre("Corte Clasico");
+//		corte1.setPrecio(8.0);
+//		corte1.setSuplemento("Lavado");
+//		corte1.setBarberia(barberia1);
+//		corteService.guardarCorte(corte1);
+//		
+//		Corte corte2 = new Corte();
+//		corte2.setNombre("Degradado");
+//		corte2.setPrecio(10.0);
+//		corte2.setSuplemento("Lavado");
+//		corte2.setBarberia(barberia1);
+//		corteService.guardarCorte(corte2);
+//
+//		
+//		Corte corte3 = new Corte();
+//		corte3.setNombre("Afeitado De Cabeza");
+//		corte3.setPrecio(5.0);
+//		corte3.setBarberia(barberia1);
+//		corteService.guardarCorte(corte3);
+//
+//		
+//		Estilo estilo1 = new Estilo();
+//		estilo1.setNombre("Mohicano");
+//		estilo1.setPrecio(12.0);
+//		estilo1.setSuplemento("Lavado");
+//		estilo1.setCorte(corte2);
+//		estiloService.guardarEstilo(estilo1);
 	}
 }

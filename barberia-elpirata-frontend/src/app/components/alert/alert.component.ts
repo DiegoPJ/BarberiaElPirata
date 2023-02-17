@@ -21,7 +21,6 @@ export class AlertComponent {
     if (type === 'success') {
       this.alertIcon = '../assets/img/success.png';
 
-
     } else {
       this.alertIcon = '../assets/img/error.png';
     }

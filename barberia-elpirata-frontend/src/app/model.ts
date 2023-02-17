@@ -28,3 +28,11 @@ export interface Cita {
 	fecha:Date;
 	id_usuario:Usuario;
 }
+
+export interface Barberia {
+	
+	id:number;
+	nombre:String;
+	precio:number;
+	suplemente:String;
+}

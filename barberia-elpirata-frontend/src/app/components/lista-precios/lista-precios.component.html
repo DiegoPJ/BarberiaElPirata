@@ -17,7 +17,9 @@
 			aria-label="Close"></button>
 	</div>
 	<div class="offcanvas-body">
-		<p>To los precios papi</p>
+		<ul>
+  <li *ngFor="let lista of listas">{{ lista }}</li>
+</ul>
 	</div>
 </div>
 <!-- 	  <video src="/assets/img/precios.mp4" muted autoplay loop ></video>

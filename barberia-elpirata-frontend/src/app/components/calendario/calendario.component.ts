@@ -150,7 +150,6 @@ constructor(
 		
 		this.setNewDate();
 		this.calendarioSeleccionado.emit(null);
-
 	}
 	nextMonth(){
 		
