@@ -1,0 +1,9 @@
+<div class="overlay" [ngClass]="{ active: showPopup }"></div>
+
+<div *ngIf="showPopup" class="alert-popup" [ngClass]="alertType" #alertDom>
+  <div class="alert-content">
+    <img class="alert-icon" [src]="alertIcon" alt="Alert Icon" width="100px">
+    <div class="alert-message">{{ alertMessage }}</div>
+    <button (click)="closeAlert()">Cerrar</button>
+  </div>
+</div>

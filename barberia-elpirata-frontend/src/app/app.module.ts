@@ -1,5 +1,6 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { LOCALE_ID, NgModule, RendererFactory2 } from '@angular/core';
+import { BrowserModule, ɵDomRendererFactory2 } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,7 @@ import { CalendarioComponent } from './components/calendario/calendario.componen
 import { HorarioComponent } from './components/horario/horario.component';
 import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import { AlertComponent } from './components/alert/alert.component';
 
 
 const appRoutes:Routes =[
@@ -43,7 +45,8 @@ const appRoutes:Routes =[
     ValidationsComponent,
     InicioComponent,
     CalendarioComponent,
-    HorarioComponent
+    HorarioComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,15 +55,13 @@ const appRoutes:Routes =[
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
-    CommonModule
+    CommonModule,
   ],
   providers: [
- 		{
-		  provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true,
-		},
-		DatePipe,
-		    { provide: LOCALE_ID, useValue: 'es' }
 
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true },
+    DatePipe,
+    { provide: LOCALE_ID, useValue: 'es' }
   ],
   bootstrap: [AppComponent]
 })

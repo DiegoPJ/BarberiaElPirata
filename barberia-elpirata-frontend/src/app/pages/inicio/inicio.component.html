@@ -1,7 +1,13 @@
-<div id="cuerpo">
-	<h1 style="text-align:center">SACA TU CITAAA</h1>
+<div class="row" id="cuerpo">
 
-	<app-calendario (calendarioSeleccionado)="escuchaCalendario($event)"></app-calendario>
-	<app-horario [calendarioSelecIni] = "calendarioSelecIni"></app-horario>
+	<div class="col-md-6 col-sm-12" id="calendario">
+		<h1>Selecciona tu cita</h1>
+		<app-calendario (calendarioSeleccionado)="escuchaCalendario($event)"
+			></app-calendario>
+	</div>
+	<div class="col-md-6 col-sm-12 d-md-block" id="horario">
+		<app-horario [calendarioSelecIni]="calendarioSelecIni" ></app-horario>
+	</div>
+
 </div>
 

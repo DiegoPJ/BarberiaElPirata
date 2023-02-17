@@ -34,14 +34,6 @@
 	justify-content: center
 }
 
-@font-face {
-	font-family: PiratesBay;
-	src: url("/assets/font/PiratesBay.ttf");
-}
-@font-face {
-	font-family: Caribbean;
-	src: url("/assets/font/Caribbean.ttf");
-}
 #inputImagen{
 	width:50%;
 }

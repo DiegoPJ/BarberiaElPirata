@@ -1,4 +1,4 @@
-#cuerpo {
+ #cuerpo {
 	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)),
 		url("/assets/img/mapapeque.jpg");
 	background-size: 100%;
@@ -8,9 +8,37 @@
 	min-height: 100vh;
 	color: white;
 	font-family: PiratesBay;
-	display: flex;
-	flex-direction: column;
+	
 }
-* {
-	box-sizing: border-box;
+
+#calendario{
+	text-align:center;
+	margin-top:30px;
+	padding-left:4em;
+	padding-top:1em;
 }
+#horario{
+	text-align:center;
+	margin-top:30px;
+	padding-top:1em;
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  #calendario {
+    margin-top: 30px;
+    padding-left: 100px;
+    padding-top: 20px;
+    background-color: blue;
+  }
+}
+
+@media (max-width: 767.98px) {
+  #cuerpo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+}
+ 
