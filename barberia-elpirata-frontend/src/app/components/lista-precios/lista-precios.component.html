@@ -3,7 +3,14 @@
 	data-bs-target="#offcanvasWithBothOptions"
 	aria-controls="offcanvasWithBothOptions">
 
-	<span>P<br><br>r<br><br>e<br><br>c<br><br>i<br><br>o<br><br>s</span>
+	<span>P<br>
+	<br>r<br>
+	<br>e<br>
+	<br>c<br>
+	<br>i<br>
+	<br>o<br>
+	<br>s
+	</span>
 
 </div>
 
@@ -12,14 +19,24 @@
 	data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
 	aria-labelledby="offcanvasWithBothOptionsLabel">
 	<div class="offcanvas-header">
-		<h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Lista de Precios</h5>
+		<h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Lista
+			de Precios</h5>
 		<button type="button" class="btn-close" data-bs-dismiss="offcanvas"
 			aria-label="Close"></button>
 	</div>
 	<div class="offcanvas-body">
 		<ul>
-  <li *ngFor="let lista of listas">{{ lista }}</li>
-</ul>
+			<li *ngFor="let barberia of barberias">{{ barberia.nombre }} ---- {{barberia.precio}}€
+				<ul>
+					<li *ngFor="let corte of barberia.cortes">{{ corte.nombre }} ---- {{barberia.precio}}€
+						<ul>
+							<li *ngFor="let estilo of corte.estilos">{{ estilo.nombre }} ---- {{barberia.precio}}€
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
 	</div>
 </div>
 <!-- 	  <video src="/assets/img/precios.mp4" muted autoplay loop ></video>

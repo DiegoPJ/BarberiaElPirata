@@ -24,15 +24,15 @@ public class EstiloController {
 	@Autowired
 	private EstiloService estiloService;
 	
-	@GetMapping("/estilo")
+	@GetMapping("/estilos")
     public List<Estilo> obtenerEstilos(){
     		List<Estilo> x = estiloRepository.findAll();
         return x;
     }
 	
-	@PostMapping("/guardarEstilo")
-    public Estilo guardarEstilo(@RequestBody Estilo estilo) throws Exception{
-        return estiloService.guardarEstilo(estilo);
-    }
+//	@PostMapping("/guardarEstilo")
+//    public Estilo guardarEstilo(@RequestBody Estilo estilo) throws Exception{
+//        return estiloService.guardarEstilo(estilo);
+//    }
 	
 }

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { AlertComponent } from 'src/app/components/alert/alert.component';
 import { UserService } from 'src/app/services/user.service';
 import { ValidationsComponent } from 'src/app/utils/validations/validations.component';
 @Component({
@@ -8,7 +9,10 @@ import { ValidationsComponent } from 'src/app/utils/validations/validations.comp
 	styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
+	@ViewChild(AlertComponent) alert: AlertComponent;
+  	@ViewChild('buttonClose') buttonClose: any;
 
+ 
 	formSubmit: any;
 	errores : boolean;
 	constructor(
@@ -19,20 +23,19 @@ export class SignupComponent {
 		this.formSubmit = this._builder.group({
 			nombre: ['', [Validators.required, Validators.minLength(3)]],
 			username: ['',Validators.compose([Validators.required,Validators.minLength(4)])],
-			email: ['', Validators.compose([Validators.email, Validators.required]),ValidationsComponent.existeEmail(this.userService)],
+			email: ['', Validators.compose([Validators.email, Validators.required]), ValidationsComponent.existeEmail(this.userService)],
 			telefono: ['', [Validators.required, Validators.minLength(9),Validators.pattern("^[0-9]*$")]],
 			contraseña: [ '', Validators.compose([
-         	Validators.required,
-         	ValidationsComponent.patternValidator(/\d/, { hasNumber: true }),
-         	ValidationsComponent.patternValidator(/[A-Z]/, { hasCapitalCase: true }),
-         	ValidationsComponent.patternValidator(/[a-z]/, { hasSmallCase: true }),
-         	ValidationsComponent.patternValidatorPassword((/(?=.*[$@^!%*?&])/), { hasSpecialCharacters: true }),
-         	Validators.minLength(8)])],
+	     	Validators.required,
+	     	ValidationsComponent.patternValidator(/\d/, { hasNumber: true }),
+	     	ValidationsComponent.patternValidator(/[A-Z]/, { hasCapitalCase: true }),
+	     	ValidationsComponent.patternValidator(/[a-z]/, { hasSmallCase: true }),
+	     	ValidationsComponent.patternValidatorPassword((/(?=.*[$@^!%*?&])/), { hasSpecialCharacters: true }),
+	     	Validators.minLength(8)])],
 			repiteContraseña: ['', Validators.required],
 			//foto: ['', Validators.required]
-
-		})
-	}
+			})
+		}
 	
 	registrarse(){
 		
@@ -58,8 +61,13 @@ export class SignupComponent {
 				this.userService.añadirUsuario(this.formSubmit.value).subscribe(
 			(data) => {
 				console.log("usuario guardado")
+				this.buttonClose.nativeElement.click();
+				this.alert.show('success', 'Usuario Guardado');
 			},(error) => {
 				console.log(error);
+				this.buttonClose.nativeElement.click();
+				this.alert.show('error', 'Error al crear el usuario');
+
 			}
 			
 		)
@@ -67,6 +75,8 @@ export class SignupComponent {
 		
 		
 	}
+	
+	
 	enviar(values: FormGroup) {
 		console.log(values);
 	}

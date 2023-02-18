@@ -183,6 +183,11 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 //		citaService.guardarCita(cita2);
 //		}
 //		
+		
+		
+//		
+//		
+//		
 //		Barberia barberia1 = new Barberia();
 //		barberia1.setNombre("Peluqueria");
 //		barberiaService.guardarBarberia(barberia1);

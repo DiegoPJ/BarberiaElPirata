@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { map } from 'rxjs';
+import { AbstractControl, AsyncValidatorFn, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { map, Observable } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -10,19 +10,15 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ValidationsComponent {
 
-	static existeEmail(userService : UserService){
-		return(control :AbstractControl) => {
-			const value = control.value;
-			return userService.comprobarEmail(value)
-			.pipe(
-				map(response => {
-					return response  ? {NoEmailValido : true} : null ;
-				})
-			)
-		}
-		
-		
-	}
+	  static existeEmail(userService: UserService): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      return userService.comprobarEmail(control.value).pipe(
+        map(res => {
+          return res ? { 'noEmailValido': true } : null;
+        })
+      )
+    };
+  }
 	static patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
   return (control: AbstractControl) => {
     if (!control.value) {

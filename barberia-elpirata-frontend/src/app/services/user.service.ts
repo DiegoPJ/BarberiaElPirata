@@ -12,11 +12,11 @@ export class UserService {
   constructor(private httpClient :HttpClient) { }
   
   public añadirUsuario(user:any){
-	  return this.httpClient.post(`${baserUrl}/usuarios/`,user);
+	  return this.httpClient.post(`${baserUrl}/api/usuarios/`,user);
   }
    
    public comprobarEmail(email:any){
-	  return this.httpClient.get(`${baserUrl}/usuarios/${email}`);
+	  return this.httpClient.get(`${baserUrl}/api/usuarios/${email}`);
   }
   public todosLosUsuarios(): Observable<Usuario[]>{
 	  	  return this.httpClient.get<Usuario[]>(`${baserUrl}/api/usuarios/todosLosUsuarios`);

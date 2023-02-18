@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,10 +32,17 @@ public class UsuarioController {
     @Autowired 
     private UsuarioRepository usuarioRepository;
     
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     
     @PostMapping("/")
     public Usuario guardarUsuario(@RequestBody Usuario usuario) throws Exception{
+    	
         usuario.setFoto("default.png");
+        String password = usuario.getContraseña();
+        String encodedPassword = passwordEncoder.encode(password);
+        usuario.setContraseña(encodedPassword);
+        
         Set<UsuarioRol> usuarioRoles = new HashSet<>();
 
         Rol rol = new Rol();

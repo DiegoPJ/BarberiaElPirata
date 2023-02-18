@@ -24,7 +24,7 @@ public class BarberiaController {
 	@Autowired
 	private BarberiaService barberiaService;
 	
-	@GetMapping("/barberia")
+	@GetMapping("/barberias")
     public List<Barberia> obtenerBarberias(){
     		List<Barberia> x = barberiaRepository.findAll();
         return x;

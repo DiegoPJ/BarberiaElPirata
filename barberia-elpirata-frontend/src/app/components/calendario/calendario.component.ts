@@ -23,7 +23,7 @@ monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto',
 	@ViewChild('nextMonthDOM') next: ElementRef;
     eventClickHandler: (event: any) => void;
 	@Output() calendarioSeleccionado = new EventEmitter<Date | null>();
-  @ViewChild(AlertComponent) alert: AlertComponent;
+  	@ViewChild(AlertComponent) alert: AlertComponent;
 
 constructor(	
 	private cdRef: ChangeDetectorRef,

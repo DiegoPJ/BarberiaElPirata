@@ -10,21 +10,26 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-	creds: Credenciales = {
-		email:'',password:''
-	}
-	constructor(
-		private userService:UserService,
-		private router: Router
-	) {
-		
-	}
-	login (form: NgForm){
-		console.log('form value' , form.value);
-			this.userService.login(this.creds).subscribe(response => {
-				this.router.navigate(['/']);
-			})
-				  console.log(this.userService.getToken())
-
-		}
+  creds: Credenciales = {
+    email:'',password:''
+  }
+  error = false;
+  
+  constructor(
+    private userService:UserService,
+    private router: Router
+  ) {
+    
+  }
+  
+  login(form: NgForm) {
+    this.userService.login(this.creds).subscribe(
+      response => {
+        this.router.navigate(['/']);
+      },
+      error => {
+        this.error = true;
+      }
+    );
+  }
 }

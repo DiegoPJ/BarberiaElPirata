@@ -31,8 +31,30 @@ export interface Cita {
 
 export interface Barberia {
 	
-	id:number;
-	nombre:String;
-	precio:number;
-	suplemente:String;
+	  id: number;
+	  nombre: string;
+	  precio: number;
+	  imagen: string;
+	  extra: string;
+	  cortes: Corte[];
+}
+
+export interface Corte {
+	
+	 id: number;
+	  nombre: string;
+	  precio: number;
+	  imagen: string;
+	  extra: string;
+	  barberia: Barberia;
+	  estilos: Estilo[];
+}
+
+export interface Estilo {
+      corte: Corte;
+	  id: number;
+	  nombre: string;
+	  precio: number;
+	  imagen: string;
+	  extra: string;
 }

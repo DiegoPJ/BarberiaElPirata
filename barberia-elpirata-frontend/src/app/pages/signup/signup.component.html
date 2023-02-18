@@ -5,7 +5,7 @@
 			<div class="modal-header">
 				<h1 id="tituloCrearCuenta">Registrate</h1>
 				<button type="button" class="btn-close" data-bs-dismiss="modal"
-					aria-label="Close"></button>
+					aria-label="Close" #buttonClose></button>
 			</div>
 			<form [formGroup]='formSubmit' (ngSubmit)="enviar(formSubmit.value)"
 				class="container">
@@ -22,12 +22,13 @@
 
 								<span class="text-warning"
 									*ngIf="formSubmit.get('nombre').hasError('required')">El
-									nombre es requerido<br></span>
-									<span class="text-warning"
-									*ngIf="formSubmit.get('nombre').hasError('minlength')">Nombre entre 3 y 30 caracteres</span>
+									nombre es requerido<br>
+								</span> <span class="text-warning"
+									*ngIf="formSubmit.get('nombre').hasError('minlength')">Nombre
+									entre 3 y 30 caracteres</span>
 							</div>
 						</div>
-					
+
 
 						<div class="form-group col-md-12 mt-2">
 							<label for="inputAddress" class="mb-2">Email</label> <input
@@ -36,10 +37,11 @@
 							<div *ngIf="errores === true">
 								<span class="text-warning"
 									*ngIf="formSubmit.get('email').hasError('required')">El
-									email es requerido<br></span> <span class="text-warning"
+									email es requerido<br>
+								</span> <span class="text-warning"
 									*ngIf="formSubmit.get('email').hasError('email')">El
-									email debe de ser tipo email<br></span>
-									<span class="text-warning"
+									email debe de ser tipo email<br>
+								</span> <span class="text-warning"
 									*ngIf="formSubmit.get('email').hasError('noEmailValido')">El
 									email ya está registrado </span>
 							</div>
@@ -54,11 +56,12 @@
 							<div *ngIf="errores === true">
 								<span class="text-warning"
 									*ngIf="formSubmit.get('telefono').hasError('required')">El
-									teléfono es requerido<br></span>
-									<span class="text-warning"
-									*ngIf="formSubmit.get('telefono').hasError('minlength')">Debe rellenar 9 numeros</span>
-									<span class="text-warning"
-									*ngIf="formSubmit.get('telefono').hasError('pattern')">Debe ser de tipo numérico</span>
+									teléfono es requerido<br>
+								</span> <span class="text-warning"
+									*ngIf="formSubmit.get('telefono').hasError('minlength')">Debe
+									rellenar 9 numeros</span> <span class="text-warning"
+									*ngIf="formSubmit.get('telefono').hasError('pattern')">Debe
+									ser de tipo numérico</span>
 							</div>
 
 						</div>
@@ -69,15 +72,19 @@
 							<div *ngIf="errores === true">
 								<span class="text-warning"
 									*ngIf="formSubmit.get('contraseña').hasError('required')">La
-									contraseña es requerida<br></span>
-									<span class="text-warning"
-									*ngIf="formSubmit.get('contraseña').hasError('minlength')">8 y 20 caracteres<br></span>
-									<span class="text-warning"
-									*ngIf="formSubmit.get('contraseña').hasError('hasCapitalCase')">Se requiere una mayuscula<br></span>
-									<span class="text-warning"
-									*ngIf="formSubmit.get('contraseña').hasError('hasSmallCase')">Se requiere una minuscula<br></span>
-									<span class="text-warning"
-									*ngIf="formSubmit.get('contraseña').hasError('hasSpecialCharacters')">No se admiten caracteres especiales</span>
+									contraseña es requerida<br>
+								</span> <span class="text-warning"
+									*ngIf="formSubmit.get('contraseña').hasError('minlength')">8
+									y 20 caracteres<br>
+								</span> <span class="text-warning"
+									*ngIf="formSubmit.get('contraseña').hasError('hasCapitalCase')">Se
+									requiere una mayuscula<br>
+								</span> <span class="text-warning"
+									*ngIf="formSubmit.get('contraseña').hasError('hasSmallCase')">Se
+									requiere una minuscula<br>
+								</span> <span class="text-warning"
+									*ngIf="formSubmit.get('contraseña').hasError('hasSpecialCharacters')">No
+									se admiten caracteres especiales</span>
 							</div>
 
 						</div>
@@ -119,7 +126,6 @@
 
 		</div>
 	</div>
-	<div class="alert alert-success" role="alert">
-  This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
 </div>
-</div>
+<app-alert #alert></app-alert>
+

@@ -24,7 +24,7 @@ public class CorteController {
 	@Autowired
 	private CorteService corteService;
 	
-	@GetMapping("/corte")
+	@GetMapping("/cortes")
     public List<Corte> obtenerCortes(){
     		List<Corte> x = corteRepository.findAll();
         return x;

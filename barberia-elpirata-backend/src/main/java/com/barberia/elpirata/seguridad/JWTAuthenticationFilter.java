@@ -20,6 +20,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
+	
+	//Recoge las credenciales
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
@@ -40,6 +42,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		return getAuthenticationManager().authenticate(usernamePAT);
 	}
 	
+	// genera un token JWT y lo devuelve al cliente en la respuesta HTTP.
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws java.io.IOException, ServletException {

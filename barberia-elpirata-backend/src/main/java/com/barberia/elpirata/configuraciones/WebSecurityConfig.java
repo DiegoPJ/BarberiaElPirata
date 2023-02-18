@@ -6,9 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -37,7 +35,7 @@ public class WebSecurityConfig   {
 		SecurityFilterChain filterChain(HttpSecurity http,AuthenticationManager authManager ) throws Exception {
 			JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter();
 			jwtAuthenticationFilter.setAuthenticationManager(authManager);
-			//jwtAuthenticationFilter.setFilterProcessesUrl("/login");
+			jwtAuthenticationFilter.setFilterProcessesUrl("/login");
 		
 		
 		return http
@@ -45,12 +43,11 @@ public class WebSecurityConfig   {
 			.and()
 			.csrf().disable()
 			.authorizeHttpRequests()
-			.requestMatchers("/api/usuarios/")
-			.permitAll()
-			.requestMatchers("/api/guardarHorario")
-			.permitAll()
-			.anyRequest()
-			.authenticated()
+			.requestMatchers("/api/usuarios/").permitAll()
+		    .requestMatchers("/api/barberias").permitAll()
+		    .requestMatchers("/api/estilos").permitAll()
+		    .requestMatchers("/api/cortes").permitAll()
+		    .anyRequest().authenticated()
 			.and()
 			.httpBasic()
 			.and()
@@ -66,12 +63,12 @@ public class WebSecurityConfig   {
 //	UserDetailsService userDetailsService() {
 //		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
 //		manager.createUser(User.withUsername("admin")
-//				.password(passwordEncoder().encode("0000"))
+//				.password(passwordEncoder().encode("admin"))
 //				.roles()
 //				.build());
 //		return manager;
 //	}
-//	
+	
 	@Bean
 	AuthenticationManager authManager(HttpSecurity http) throws Exception {
 
