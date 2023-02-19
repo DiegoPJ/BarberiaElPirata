@@ -1,28 +1,28 @@
 <div id="horario">
-<!-- 	<div class="container">{{calendarioSelecIni}}</div>
- -->	
+	<!-- 	<div class="container">{{calendarioSelecIni}}</div>
+ -->
+
+	<div class="container">
+		<h2>Mañana</h2>
+		<Button data-bs-target="#modalPrincipal" data-bs-toggle="modal"
+			*ngFor="let hora of horasMa" class="col-md-2"
+			[ngClass]="{'hora-reservada': horaReservada(hora, citas)}"
+			[disabled]="horaReservada(hora, citas)" (click)="fechaCita($event)">{{hora}}</Button>
+	</div>
+
+
+
+	<div class="container">
+		<h2>Tarde</h2>
+
+
+		<Button data-bs-target="#modalPrincipal" data-bs-toggle="modal"
+			*ngFor="let hora of horasTa" class="col-md-2"
+			[ngClass]="{'hora-reservada': horaReservada(hora, citas)}"
+			[disabled]="horaReservada(hora, citas)" (click)="fechaCita($event)">{{hora}}</Button>
+
+
+	</div>
 	
-			<div class="container">
-				<h2>Mañana</h2>
-					<Button *ngFor="let hora of horasMa" class="col-md-2"
-						[ngClass]="{'hora-reservada': horaReservada(hora, citas)}"
-						[disabled]="horaReservada(hora, citas)"
-						(click)="fechaCita($event)">{{hora}}</Button>
-			</div>
-		
-
-
-			<div class="container">
-				<h2>Tarde</h2>
-
-				
-					<Button *ngFor="let hora of horasTa" class="col-md-2"
-						[ngClass]="{'hora-reservada': horaReservada(hora, citas)}"
-						[disabled]="horaReservada(hora, citas)"
-						(click)="fechaCita($event)">{{hora}}</Button>
-				
-
-			</div>
 	
-
 </div>

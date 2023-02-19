@@ -1,14 +1,12 @@
 package com.barberia.elpirata.servicios;
 
-
 import java.util.List;
 
 import com.barberia.elpirata.entidades.Cita;
+import com.barberia.elpirata.entidades.Servicio;
 import com.barberia.elpirata.entidades.Usuario;
 
-public interface CitaService {
+public interface ServicioService {
 
-	public Cita guardarCita(Cita cita) throws Exception;
-	public List <Cita> getCitasPorUsuario(Usuario usuario);
-
+	public Servicio guardarServicio(Servicio servicio) throws Exception;
 }

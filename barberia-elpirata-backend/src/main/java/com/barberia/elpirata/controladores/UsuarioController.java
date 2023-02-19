@@ -63,7 +63,7 @@ public class UsuarioController {
         return x;
     }
     @GetMapping("/{email}")
-    public Usuario obtenerEmail(@PathVariable("email") String email){
+    public Usuario obtenerEmail(@PathVariable String email){
         return usuarioService.obtenerEmail(email);
     }
 

@@ -2,12 +2,39 @@
 
 	<div class="col-md-6 col-sm-12" id="calendario">
 		<h1>Selecciona tu cita</h1>
-		<app-calendario (calendarioSeleccionado)="escuchaCalendario($event)"
-			></app-calendario>
+		<app-calendario (calendarioSeleccionado)="escuchaCalendario($event)"></app-calendario>
 	</div>
 	<div class="col-md-6 col-sm-12 d-md-block" id="horario">
-		<app-horario [calendarioSelecIni]="calendarioSelecIni" ></app-horario>
+		<app-horario [calendarioSelecIni]="calendarioSelecIni"></app-horario>
+		<div class="contaier">
+
+			<h1>Tus citas:</h1>
+			<div *ngIf="usuario">
+				<p>Bienvenido, {{ usuario.nombre }}!</p>
+				<p>Email: {{ usuario.email }}</p>
+				<p>Teléfono: {{ usuario.telefono }}</p>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Fecha</th>
+						<th>Hora</th>
+						<th>Descripción</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let cita of citas">
+						<td>{{ cita.fecha | date }}</td>
+						<td>{{ cita.fecha | date }}</td>
+<!-- 						<td>{{ cita.corte.nombre }}</td>
+ -->					</tr>
+				</tbody>
+			</table>
+		</div>
+
 	</div>
 
 </div>
+<!-- //MODAL -->
 
+<app-carro-servicio></app-carro-servicio>

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.barberia.elpirata.entidades.Cita;
+import com.barberia.elpirata.entidades.Usuario;
 
 import java.util.List;
 
@@ -13,6 +14,6 @@ import java.util.List;
 public interface CitaRepository extends JpaRepository<Cita, Long>{
 	
 	public List<Cita>  findAll();
-	public Cita findByUsuario(String usuario);
+	public List<Cita> findByUsuario(Usuario usuario);
 	public Cita findByFecha(Date fecha);
 }

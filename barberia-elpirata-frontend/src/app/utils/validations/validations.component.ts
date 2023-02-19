@@ -12,7 +12,7 @@ export class ValidationsComponent {
 
 	  static existeEmail(userService: UserService): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      return userService.comprobarEmail(control.value).pipe(
+      return userService.obtenerEmail(control.value).pipe(
         map(res => {
           return res ? { 'noEmailValido': true } : null;
         })

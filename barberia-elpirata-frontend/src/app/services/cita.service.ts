@@ -23,4 +23,7 @@ export class CitaService {
   public todosLasCitas(): Observable<Cita[]>{
 	  	  return this.httpClient.get<Cita[]>(`${baserUrl}/api/citas`);
   }
+  public getCitasByUsuario(id_usuario: number): Observable<Cita[]> {
+  return this.httpClient.get<Cita[]>(`${baserUrl}/api/citas/${id_usuario}`);
+	}
 }

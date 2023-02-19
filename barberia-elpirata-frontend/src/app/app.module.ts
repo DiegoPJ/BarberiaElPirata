@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UsuarioComponent } from './usuario/usuario.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -20,6 +19,7 @@ import { HorarioComponent } from './components/horario/horario.component';
 import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { AlertComponent } from './components/alert/alert.component';
+import { CarroServicioComponent } from './components/carro-servicio/carro-servicio.component';
 
 
 const appRoutes:Routes =[
@@ -38,7 +38,6 @@ const appRoutes:Routes =[
 @NgModule({
   declarations: [
     AppComponent,
-    UsuarioComponent,
     SignupComponent,
     LoginComponent,
     ListaPreciosComponent,
@@ -47,6 +46,7 @@ const appRoutes:Routes =[
     CalendarioComponent,
     HorarioComponent,
     AlertComponent,
+    CarroServicioComponent,
   ],
   imports: [
     BrowserModule,

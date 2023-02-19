@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { Barberia, Corte, Estilo } from 'src/app/model';
 import { ListaServiciosService } from 'src/app/services/lista-servicios.service';
-import { forkJoin } from 'rxjs';
 
 @Component({
-  selector: 'app-lista-precios',
-  templateUrl: './lista-precios.component.html',
-  styleUrls: ['./lista-precios.component.css']
+  selector: 'app-carro-servicio',
+  templateUrl: './carro-servicio.component.html',
+  styleUrls: ['./carro-servicio.component.css']
 })
-export class ListaPreciosComponent implements OnInit {
-  barberias: Barberia[] = []; 
-  
-  constructor(private listaServiciosService: ListaServiciosService) { }
-  
-  ngOnInit(): void {
-    forkJoin({
+export class CarroServicioComponent implements OnInit {
+	barberias :Barberia[] = [];
+	cortes : Corte[] = [];
+	estilos : Estilo[] = [];
+
+constructor(private listaServiciosService:ListaServiciosService){
+	
+}
+    ngOnInit(): void {
+        forkJoin({
       barberias: this.listaServiciosService.todaLaListaDeServiciosBarberia(),
       cortes: this.listaServiciosService.todaLaListaDeServiciosCorte(),
       estilos: this.listaServiciosService.todaLaListaDeServiciosEstilo()
@@ -29,5 +32,13 @@ export class ListaPreciosComponent implements OnInit {
         }
       }
     );
-  }
+    }
+    
+
+modalCortes(barberia: Barberia) {
+  this.cortes = barberia.cortes;
+}
+modalEstilos(corte: Corte) {
+  this.estilos = corte.estilos;
+}
 }

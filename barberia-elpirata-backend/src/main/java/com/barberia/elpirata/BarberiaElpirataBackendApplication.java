@@ -1,5 +1,6 @@
 package com.barberia.elpirata;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
@@ -17,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.barberia.elpirata.entidades.Cita;
 import com.barberia.elpirata.entidades.Horario;
-import com.barberia.elpirata.entidades.Barberia;
+import com.barberia.elpirata.entidades.Servicio;
 import com.barberia.elpirata.entidades.Rol;
 import com.barberia.elpirata.entidades.Corte;
 import com.barberia.elpirata.entidades.Estilo;
@@ -28,7 +29,7 @@ import com.barberia.elpirata.servicios.CitaService;
 import com.barberia.elpirata.servicios.CorteService;
 import com.barberia.elpirata.servicios.EstiloService;
 import com.barberia.elpirata.servicios.HorarioService;
-import com.barberia.elpirata.servicios.BarberiaService;
+import com.barberia.elpirata.servicios.ServicioService;
 import com.barberia.elpirata.servicios.UsuarioService;
 import com.barberia.elpirata.servicios.implementaciones.CitasServiceImpl;
 
@@ -40,30 +41,30 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
+
 	@Autowired
 	private HorarioService horarioService;
 
 	@Autowired
 	private CitaService citaService;
-	
+
 	@Autowired
-	private BarberiaService barberiaService;
-	
+	private ServicioService servicioService;
+
 	@Autowired
 	private CorteService corteService;
-	
+
 	@Autowired
 	private EstiloService estiloService;
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(BarberiaElpirataBackendApplication.class, args);
-		
+
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		
+
 //		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 //		String password = passwordEncoder.encode("0000");
 //		System.out.println(password);
@@ -163,44 +164,20 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 //
 //		usuarioService.guardarUsuario(usuario, usuarioRoles);
 //
-//		/// CITAS
-//		Optional<Usuario> optionalUsuario = Optional.ofNullable(usuarioRepository.findByEmail("d@d.com"));
-//		if (optionalUsuario.isPresent()) {
-//		    Usuario usuario2 = optionalUsuario.get();
-//		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//		Date date = formato.parse("2023-02-19 12:00:00");
-//		Cita cita = new Cita();
-//		cita.setUsuario(usuario2);
-//		cita.setFecha(date);
+
+//		Servicio servicio1 = new Servicio();
+//		servicio1.setNombre("Peluqueria");
+//		servicioService.guardarServicio(servicio1);
 //		
-//		citaService.guardarCita(cita);
-//
-//		Date date2 = formato.parse("2023-02-19 18:00:00");
-//		Cita cita2 = new Cita();
-//		cita2.setUsuario(usuario2);
-//		cita2.setFecha(date2);
+//		Servicio servicio2 = new Servicio();
+//		servicio2.setNombre("Cejas");
+//		servicio2.setPrecio(2);
+//		servicioService.guardarServicio(servicio2);
 //		
-//		citaService.guardarCita(cita2);
-//		}
-//		
-		
-		
-//		
-//		
-//		
-//		Barberia barberia1 = new Barberia();
-//		barberia1.setNombre("Peluqueria");
-//		barberiaService.guardarBarberia(barberia1);
-//		
-//		Barberia barberia2 = new Barberia();
-//		barberia2.setNombre("Cejas");
-//		barberia2.setPrecio(2);
-//		barberiaService.guardarBarberia(barberia2);
-//		
-//		Barberia barberia3 = new Barberia();
-//		barberia3.setNombre("Barba");
-//		barberia3.setPrecio(5);
-//		barberiaService.guardarBarberia(barberia3);
+//		Servicio servicio3 = new Servicio();
+//		servicio3.setNombre("Barba");
+//		servicio3.setPrecio(5);
+//		servicioService.guardarServicio(servicio3);
 //		
 //		
 //		
@@ -208,21 +185,21 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 //		corte1.setNombre("Corte Clasico");
 //		corte1.setPrecio(8.0);
 //		corte1.setSuplemento("Lavado");
-//		corte1.setBarberia(barberia1);
+//		corte1.setServicio(servicio1);
 //		corteService.guardarCorte(corte1);
 //		
 //		Corte corte2 = new Corte();
 //		corte2.setNombre("Degradado");
 //		corte2.setPrecio(10.0);
 //		corte2.setSuplemento("Lavado");
-//		corte2.setBarberia(barberia1);
+//		corte2.setServicio(servicio1);
 //		corteService.guardarCorte(corte2);
 //
 //		
 //		Corte corte3 = new Corte();
 //		corte3.setNombre("Afeitado De Cabeza");
 //		corte3.setPrecio(5.0);
-//		corte3.setBarberia(barberia1);
+//		corte3.setServicio(servicio1);
 //		corteService.guardarCorte(corte3);
 //
 //		
@@ -232,5 +209,25 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 //		estilo1.setSuplemento("Lavado");
 //		estilo1.setCorte(corte2);
 //		estiloService.guardarEstilo(estilo1);
+//
+		/// CITAS
+//		Optional<Usuario> optionalUsuario = Optional.ofNullable(usuarioRepository.findByEmail("d@d.com"));
+//		if (optionalUsuario.isPresent()) {
+//			Usuario usuario2 = optionalUsuario.get();
+//			SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//			Date date = formato.parse("2023-02-19 12:00:00");
+//			Cita cita = new Cita();
+//			cita.setUsuario(usuario2);
+//			cita.setFecha(new Timestamp(date.getTime()));
+//			cita.setCorte(corte2);
+//			citaService.guardarCita(cita);
+//
+//			Date date2 = formato.parse("2023-02-19 18:00:00");
+//			Cita cita2 = new Cita();
+//			cita2.setUsuario(usuario2);
+//			cita2.setFecha(new Timestamp(date2.getTime()));
+//			cita2.setServicio(servicio3);
+//			citaService.guardarCita(cita2);
+//		}
 	}
 }

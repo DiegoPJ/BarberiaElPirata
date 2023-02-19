@@ -27,8 +27,8 @@ public class Corte {
     private int id;
     
     @ManyToOne
-    @JoinColumn(name = "id_barberia")
-    private Barberia barberia;
+    @JoinColumn(name = "id_servicio")
+    private Servicio servicio;
     
     private String nombre;
     

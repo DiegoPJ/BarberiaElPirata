@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit,ViewChild } from '@angular/core';
-import { Usuario } from 'src/app/model';
+import { switchMap } from 'rxjs';
+import { Cita, Usuario } from 'src/app/model';
+import { CitaService } from 'src/app/services/cita.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -9,20 +11,37 @@ import { UserService } from 'src/app/services/user.service';
 })
 
 export class InicioComponent implements OnInit,AfterViewInit{
-	
+	usuario:any;
 	usuarios?: Usuario[];
 	calendarioSelecIni:Date;
+	citas:Cita[];
+	credenciales:String | null;
 constructor(	
-	private userService:UserService
+	private userService:UserService,private citaService:CitaService
 ){
 }
 
     ngAfterViewInit(): void {
-		
+		this.credenciales = localStorage.getItem("credencial");
+		this.userService.obtenerEmail(this.credenciales)
+		  .pipe(
+		    switchMap(usuario => {
+		      this.usuario = usuario;
+		      return this.citaService.getCitasByUsuario(this.usuario.id);
+		    })
+		  )
+		  .subscribe(citas => {
+		    this.citas = citas;
+		  });
+    	
     }
     ngOnInit(): void {
 
-	/*this.userService.todosLosUsuarios()
+	/*
+	
+	
+	
+	this.userService.todosLosUsuarios()
 	.subscribe(usuarios => {
 		this.usuarios = usuarios;
 	})

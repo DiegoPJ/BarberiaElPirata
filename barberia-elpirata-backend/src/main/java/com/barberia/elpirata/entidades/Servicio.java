@@ -16,8 +16,8 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor
-@Table(name = "barberia")
-public class Barberia{
+@Table(name = "servicio")
+public class Servicio{
 	  
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class Barberia{
 	private String imagen;
 	private String extra;
 	  
-	@OneToMany(mappedBy = "barberia", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List <Corte> cortes;
 }

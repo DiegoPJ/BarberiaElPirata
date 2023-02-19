@@ -15,7 +15,7 @@ export class UserService {
 	  return this.httpClient.post(`${baserUrl}/api/usuarios/`,user);
   }
    
-   public comprobarEmail(email:any){
+   public obtenerEmail(email:any){
 	  return this.httpClient.get(`${baserUrl}/api/usuarios/${email}`);
   }
   public todosLosUsuarios(): Observable<Usuario[]>{

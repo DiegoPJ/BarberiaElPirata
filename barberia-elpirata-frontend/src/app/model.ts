@@ -26,7 +26,8 @@ export interface Cita {
 	
 	id:number;
 	fecha:Date;
-	id_usuario:Usuario;
+	usuario:Usuario;
+	corte:Corte
 }
 
 export interface Barberia {

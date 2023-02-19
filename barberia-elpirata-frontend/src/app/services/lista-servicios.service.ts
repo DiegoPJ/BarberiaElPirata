@@ -7,7 +7,7 @@ import baserUrl from './helper';
 @Injectable({
   providedIn: 'root'
 })
-export class ListaPreciosService {
+export class ListaServiciosService {
   constructor(private httpClient :HttpClient) { }
 
 

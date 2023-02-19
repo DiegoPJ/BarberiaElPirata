@@ -1,0 +1,80 @@
+
+
+<div class="modal fade" id="modalPrincipal" aria-hidden="true"
+	aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalToggleLabel">Modal
+					1</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div *ngFor="let barberia of barberias" class="d-inline-block m-4">
+					<div *ngIf="barberia.cortes.length > 0">
+						<button class="btn btn-primary" data-bs-target="#modalCorte"
+							(click)="modalCortes(barberia)" data-bs-toggle="modal">+</button>
+					</div>
+					{{ barberia.nombre }}
+				</div>
+			</div>
+			<div class="modal-footer"></div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="modalCorte" aria-hidden="true"
+	aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal
+					2</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div *ngFor="let corte of cortes" class="d-inline-block m-4">
+					<div *ngIf="corte.estilos.length > 0">
+
+						<button class="btn btn-primary" data-bs-target="#modalEstilo"
+							(click)="modalEstilos(corte)" data-bs-toggle="modal">+</button>
+					</div>
+					{{ corte.nombre }}
+
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary" data-bs-target="#modalPrincipal"
+					data-bs-toggle="modal">Atras</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="modal fade" id="modalEstilo" aria-hidden="true"
+	aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal
+					2</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div *ngFor="let estilo of estilos" class="d-inline-block m-4">
+
+					{{ estilo.nombre }}</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary" data-bs-target="#modalCorte"
+					data-bs-toggle="modal">Atras</button>
+			</div>
+		</div>
+	</div>
+</div>

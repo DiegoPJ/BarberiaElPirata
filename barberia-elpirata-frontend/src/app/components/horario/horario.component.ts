@@ -103,7 +103,6 @@ export class HorarioComponent implements OnInit,OnChanges{
 		let fechaCita = new Date(this.calendarioSelecIni);
 		let horaMinuto = event.target.textContent.split(':');
 		fechaCita.setHours(parseInt(horaMinuto[0]), parseInt(horaMinuto[1]));
-		alert(fechaCita);
 	}
 	
 	horaReservada(hora: string, citas: Cita[]): boolean {
