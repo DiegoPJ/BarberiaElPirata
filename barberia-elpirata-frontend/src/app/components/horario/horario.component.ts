@@ -1,4 +1,4 @@
-import { Component,Input,OnChanges,OnInit, SimpleChanges } from '@angular/core';
+import { Component,EventEmitter,Input,OnChanges,OnInit, Output, SimpleChanges } from '@angular/core';
 import { Cita, Horario } from 'src/app/model';
 import { HorarioService } from 'src/app/services/horario.service';
 import { DatePipe } from '@angular/common';
@@ -13,7 +13,7 @@ import { CitaService } from 'src/app/services/cita.service';
 
 export class HorarioComponent implements OnInit,OnChanges{
 	
-	
+	@Output() fechaCitaCompleta =  new EventEmitter <Date | null>();
 	public horasMa: string[] = [];
 	public horasTa: string[] = [];
 
@@ -103,6 +103,8 @@ export class HorarioComponent implements OnInit,OnChanges{
 		let fechaCita = new Date(this.calendarioSelecIni);
 		let horaMinuto = event.target.textContent.split(':');
 		fechaCita.setHours(parseInt(horaMinuto[0]), parseInt(horaMinuto[1]));
+		this.fechaCitaCompleta.emit(fechaCita);
+
 	}
 	
 	horaReservada(hora: string, citas: Cita[]): boolean {

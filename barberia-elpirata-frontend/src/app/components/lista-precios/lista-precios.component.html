@@ -26,11 +26,11 @@
 	</div>
 	<div class="offcanvas-body">
 		<ul>
-			<li *ngFor="let barberia of barberias">{{ barberia.nombre }} ---- {{barberia.precio}}€
+			<li *ngFor="let servicio of servicios">{{ servicio.nombre }} ---- {{servicio.precio}}€
 				<ul>
-					<li *ngFor="let corte of barberia.cortes">{{ corte.nombre }} ---- {{barberia.precio}}€
+					<li *ngFor="let corte of servicio.cortes">{{ corte.nombre }} ---- {{servicio.precio}}€
 						<ul>
-							<li *ngFor="let estilo of corte.estilos">{{ estilo.nombre }} ---- {{barberia.precio}}€
+							<li *ngFor="let estilo of corte.estilos">{{ estilo.nombre }} ---- {{servicio.precio}}€
 							</li>
 						</ul>
 					</li>

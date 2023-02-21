@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit,ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit,ViewChild } from '@angular/core';
 import { switchMap } from 'rxjs';
 import { Cita, Usuario } from 'src/app/model';
 import { CitaService } from 'src/app/services/cita.service';
@@ -16,9 +16,12 @@ export class InicioComponent implements OnInit,AfterViewInit{
 	calendarioSelecIni:Date;
 	citas:Cita[];
 	credenciales:String | null;
+	@Input() fechaCitaCompleta : Date;
+	
 constructor(	
 	private userService:UserService,private citaService:CitaService
 ){
+	
 }
 
     ngAfterViewInit(): void {
@@ -50,7 +53,9 @@ constructor(
     }
     escuchaCalendario(event:any) {
 	  this.calendarioSelecIni = event;
+	  this.fechaCitaCompleta = event;
 	}
+	
    
 }
 

@@ -62,7 +62,6 @@ constructor(
 				e.classList.add("calendar__item");
 				e.textContent = i+"";
 				this.dates.nativeElement.appendChild(e);
-		    				console.log("EEE" + this.dates.nativeElement);
 
 		}
 		  for (let i = 1; i <= 42 - this.getTotalDays(month) - this.startDay(); i++) {
@@ -78,7 +77,6 @@ constructor(
 			this.eventClickHandler = (event:any) => {
 				if (!event.target.classList.contains("calendar__lastDays") &&
 					!event.target.classList.contains("calendar__startDays")) {
-					console.log("Has seleccionado el día: " + event.target.textContent);
 					
 					//event.target.style.background ="red";
 					//No funciona , pero lo dejamos para el final.

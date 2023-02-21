@@ -27,10 +27,12 @@ export interface Cita {
 	id:number;
 	fecha:Date;
 	usuario:Usuario;
-	corte:Corte
+	corte:Corte[]
+	estilo:Estilo[]
+	servicio:Servicio[]
 }
 
-export interface Barberia {
+export interface Servicio {
 	
 	  id: number;
 	  nombre: string;
@@ -47,7 +49,7 @@ export interface Corte {
 	  precio: number;
 	  imagen: string;
 	  extra: string;
-	  barberia: Barberia;
+	  servicio: Servicio;
 	  estilos: Estilo[];
 }
 

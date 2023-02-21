@@ -2,8 +2,10 @@ package com.barberia.elpirata;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -202,6 +204,12 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 //		corte3.setServicio(servicio1);
 //		corteService.guardarCorte(corte3);
 //
+//		Corte corte4 = new Corte();
+//		corte4.setNombre("Degradado De Barba");
+//		corte4.setPrecio(5.0);
+//		corte4.setServicio(servicio3);
+//		corteService.guardarCorte(corte4);
+//
 //		
 //		Estilo estilo1 = new Estilo();
 //		estilo1.setNombre("Mohicano");
@@ -210,23 +218,42 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 //		estilo1.setCorte(corte2);
 //		estiloService.guardarEstilo(estilo1);
 //
-		/// CITAS
+//	
 //		Optional<Usuario> optionalUsuario = Optional.ofNullable(usuarioRepository.findByEmail("d@d.com"));
 //		if (optionalUsuario.isPresent()) {
+//			
 //			Usuario usuario2 = optionalUsuario.get();
 //			SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //			Date date = formato.parse("2023-02-19 12:00:00");
 //			Cita cita = new Cita();
+//			List<Corte> cortes = new ArrayList();
+//			cortes.add(corte3);
+//			cortes.add(corte4);
+//			
+//			List<Servicio> servicios = new ArrayList();;
+//			servicios.add(servicio2);
+//			
 //			cita.setUsuario(usuario2);
 //			cita.setFecha(new Timestamp(date.getTime()));
-//			cita.setCorte(corte2);
+//			cita.setCorte(cortes);
+//			cita.setServicio(servicios);
 //			citaService.guardarCita(cita);
 //
+//			
 //			Date date2 = formato.parse("2023-02-19 18:00:00");
 //			Cita cita2 = new Cita();
+//			
+//			List<Servicio> servicios2 = new ArrayList();;
+//			servicios2.add(servicio3);
+//			servicios2.add(servicio2);
+//					
+//			List<Estilo> estilos2 = new ArrayList();;
+//			estilos2.add(estilo1);
+//			
 //			cita2.setUsuario(usuario2);
 //			cita2.setFecha(new Timestamp(date2.getTime()));
-//			cita2.setServicio(servicio3);
+//			cita2.setServicio(servicios2);
+//			cita2.setEstilo(estilos2);
 //			citaService.guardarCita(cita2);
 //		}
 	}

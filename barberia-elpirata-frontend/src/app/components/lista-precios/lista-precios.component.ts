@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Barberia, Corte, Estilo } from 'src/app/model';
+import { Servicio, Corte, Estilo } from 'src/app/model';
 import { ListaServiciosService } from 'src/app/services/lista-servicios.service';
 import { forkJoin } from 'rxjs';
 
@@ -9,23 +9,23 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./lista-precios.component.css']
 })
 export class ListaPreciosComponent implements OnInit {
-  barberias: Barberia[] = []; 
+  servicios: Servicio[] = []; 
   
   constructor(private listaServiciosService: ListaServiciosService) { }
   
   ngOnInit(): void {
     forkJoin({
-      barberias: this.listaServiciosService.todaLaListaDeServiciosBarberia(),
+      servicios: this.listaServiciosService.todaLaListaDeServicios(),
       cortes: this.listaServiciosService.todaLaListaDeServiciosCorte(),
       estilos: this.listaServiciosService.todaLaListaDeServiciosEstilo()
     }).subscribe(
-      ({ barberias, cortes, estilos }) => {
-        this.barberias = barberias;
+      ({ servicios, cortes, estilos }) => {
+        this.servicios = servicios;
         for (const corte of cortes) {
           corte.estilos = estilos.filter(e => e.corte.id === corte.id);
         }
-        for (const barberia of barberias) {
-          barberia.cortes = cortes.filter(c => c.barberia.id === barberia.id);
+        for (const servicio of servicios) {
+          servicio.cortes = cortes.filter(c => c.servicio.id === servicio.id);
         }
       }
     );

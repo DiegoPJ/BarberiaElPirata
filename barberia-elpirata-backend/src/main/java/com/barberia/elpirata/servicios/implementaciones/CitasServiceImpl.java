@@ -26,7 +26,8 @@ public class CitasServiceImpl implements CitaService{
 			SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date date = formato.parse(cita.getFecha().toString());
 			cita.setFecha(new Timestamp(date.getTime()));;
-
+			
+			
 			return citaRepository.save(cita);
 		}else {
 			System.out.println("La cita ya esta cogida");

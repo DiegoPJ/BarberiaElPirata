@@ -13,10 +13,10 @@ export class CitaService {
 
   constructor(private httpClient :HttpClient) { }
   
-/*  public añadirUsuario(user:any){
-	  return this.httpClient.post(`${baserUrl}/usuarios/`,user);
+  public añadirCita(cita:Cita){
+	  return this.httpClient.post(`${baserUrl}/api/guardarCita`,cita);
   }
-   
+ /*  
    public comprobarEmail(email:any){
 	  return this.httpClient.get(`${baserUrl}/usuarios/${email}`);
   }*/

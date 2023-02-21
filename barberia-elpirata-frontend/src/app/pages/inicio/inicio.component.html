@@ -5,14 +5,16 @@
 		<app-calendario (calendarioSeleccionado)="escuchaCalendario($event)"></app-calendario>
 	</div>
 	<div class="col-md-6 col-sm-12 d-md-block" id="horario">
-		<app-horario [calendarioSelecIni]="calendarioSelecIni"></app-horario>
+		<app-horario [calendarioSelecIni]="calendarioSelecIni"
+			(fechaCitaCompleta)="escuchaCalendario($event)"></app-horario>
+		<app-carro-servicio [fechaCitaCompleta]="fechaCitaCompleta"></app-carro-servicio>
 		<div class="contaier">
 
 			<h1>Tus citas:</h1>
 			<div *ngIf="usuario">
 				<p>Bienvenido, {{ usuario.nombre }}!</p>
 				<p>Email: {{ usuario.email }}</p>
-				<p>Teléfono: {{ usuario.telefono }}</p>
+				inicio - {{fechaCitaCompleta}}
 			</div>
 			<table>
 				<thead>
@@ -24,10 +26,25 @@
 				</thead>
 				<tbody>
 					<tr *ngFor="let cita of citas">
-						<td>{{ cita.fecha | date }}</td>
-						<td>{{ cita.fecha | date }}</td>
-<!-- 						<td>{{ cita.corte.nombre }}</td>
- -->					</tr>
+						<td>{{ cita.fecha | date: 'dd/MM/yyyy' }}</td>
+						<td>{{ cita.fecha | date: 'HH:mm' }}</td>
+						<td>
+							<ul>
+								<li *ngFor="let corte of cita.corte">{{ corte.nombre }}</li>
+							</ul>
+						</td>
+						<td>
+							<ul>
+								<li *ngFor="let estilo of cita.estilo">{{ estilo.nombre }}</li>
+							</ul>
+						</td>
+						<td>
+							<ul>
+								<li *ngFor="let servicio of cita.servicio">{{
+									servicio.nombre }}</li>
+							</ul>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
@@ -35,6 +52,3 @@
 	</div>
 
 </div>
-<!-- //MODAL -->
-
-<app-carro-servicio></app-carro-servicio>
