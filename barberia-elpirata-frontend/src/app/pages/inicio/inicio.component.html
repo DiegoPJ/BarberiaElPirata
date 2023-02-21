@@ -7,7 +7,7 @@
 	<div class="col-md-6 col-sm-12 d-md-block" id="horario">
 		<app-horario [calendarioSelecIni]="calendarioSelecIni"
 			(fechaCitaCompleta)="escuchaCalendario($event)"></app-horario>
-		<app-carro-servicio [fechaCitaCompleta]="fechaCitaCompleta"></app-carro-servicio>
+		<app-carro-servicio [fechaCitaCompleta]="fechaCitaCompleta" (nuevaCita)="actualizarCitas()"></app-carro-servicio>
 		<div class="contaier">
 
 			<h1>Tus citas:</h1>
@@ -43,6 +43,9 @@
 								<li *ngFor="let servicio of cita.servicio">{{
 									servicio.nombre }}</li>
 							</ul>
+						</td>
+							<button class="btn btn-danger"  (click)="eliminarCita(cita)" > Eliminar Cita </button>
+						<td>
 						</td>
 					</tr>
 				</tbody>

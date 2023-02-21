@@ -16,8 +16,11 @@ export class CitaService {
   public añadirCita(cita:Cita){
 	  return this.httpClient.post(`${baserUrl}/api/guardarCita`,cita);
   }
+public eliminarCita(cita: Cita) {
+  return this.httpClient.delete(`${baserUrl}/api/eliminarCita/${cita.id.toString()}`);
+}
  /*  
-   public comprobarEmail(email:any){
+   public obtenerUsuario(email:any){
 	  return this.httpClient.get(`${baserUrl}/usuarios/${email}`);
   }*/
   public todosLasCitas(): Observable<Cita[]>{

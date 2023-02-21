@@ -12,5 +12,5 @@ public interface ServicioRepository extends JpaRepository<Servicio, Long>{
 	
 	 public List<Servicio> findAll();
 	 public Servicio findByNombre(String nombre);
-
+	 public Servicio findById(int id);
 }

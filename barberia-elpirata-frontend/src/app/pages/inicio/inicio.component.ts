@@ -14,7 +14,7 @@ export class InicioComponent implements OnInit,AfterViewInit{
 	usuario:any;
 	usuarios?: Usuario[];
 	calendarioSelecIni:Date;
-	citas:Cita[];
+	@Input() citas:Cita[];
 	credenciales:String | null;
 	@Input() fechaCitaCompleta : Date;
 	
@@ -51,11 +51,28 @@ constructor(
 	console.log(localStorage.getItem("credencial"))*/
 
     }
+    actualizarCitas(){
+		this.credenciales = localStorage.getItem("credencial");
+		this.userService.obtenerEmail(this.credenciales)
+		  .pipe(
+		    switchMap(usuario => {
+		      this.usuario = usuario;
+		      return this.citaService.getCitasByUsuario(this.usuario.id);
+		    })
+		  )
+		  .subscribe(citas => {
+		    this.citas = citas;
+		  });
+	}
     escuchaCalendario(event:any) {
 	  this.calendarioSelecIni = event;
 	  this.fechaCitaCompleta = event;
 	}
-	
+	eliminarCita(cita: Cita) {
+		  this.citaService.eliminarCita(cita).subscribe(() => {
+		  });
+		  this.actualizarCitas();
+		}
    
 }
 

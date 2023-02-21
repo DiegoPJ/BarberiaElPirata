@@ -21,7 +21,7 @@ public class Servicio{
 	  
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	private String nombre;
 	private int precio;

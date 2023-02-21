@@ -1,10 +1,11 @@
-import { Component,OnInit,Input } from '@angular/core';
+import { Component,OnInit,Input, Output, EventEmitter } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { Servicio, Corte, Estilo, Cita, Usuario } from 'src/app/model';
 import { ListaServiciosService } from 'src/app/services/lista-servicios.service';
 import { CitaService } from 'src/app/services/cita.service';
 import { UserService } from 'src/app/services/user.service';
 import { DatePipe } from '@angular/common';
+import * as moment from 'moment';
 
 
 @Component({
@@ -23,6 +24,8 @@ export class CarroServicioComponent implements OnInit {
 	cita: Cita;
     credenciales: string | null;
     usuario : any;
+    @Output() nuevaCita = new EventEmitter<Cita>();
+
 constructor(private listaServiciosService:ListaServiciosService,
 			private citaService:CitaService,
 			private userService:UserService,
@@ -108,10 +111,8 @@ constructor(private listaServiciosService:ListaServiciosService,
 	const estilo = this.serviciosSeleccionados.filter(s => s.servicio);
 	const corte = this.serviciosSeleccionados.filter(s => s.corte);
 	const servicio = this.serviciosSeleccionados.filter(s => !s.servicio && !s.corte);
-    const formattedDate = this.datePipe.transform(this.fechaCitaCompleta, 'yyyy-MM-dd HH:mm:ss');
-	this.cita.fecha = new Date(""+formattedDate);
-	console.log("--" +formattedDate)
-	console.log(this.cita.fecha);
+	this.cita.fecha = this.fechaCitaCompleta;
+	console.log(this.fechaCitaCompleta + " fechaCitaCompleta");
 	this.cita.servicio = servicio;
 	this.cita.corte = corte;
 	this.cita.estilo = estilo;
@@ -119,6 +120,7 @@ constructor(private listaServiciosService:ListaServiciosService,
 	
 	this.citaService.añadirCita(this.cita).subscribe(
 			(data) => {
+				 this.nuevaCita.emit();
 				console.log(data)
 			},(error) => {
 				console.log(error);

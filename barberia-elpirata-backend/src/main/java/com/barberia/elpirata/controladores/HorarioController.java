@@ -31,9 +31,7 @@ public class HorarioController {
 	
 	@PostMapping("/guardarHorario")
     public Horario guardarHorario(@RequestBody Horario horario) throws Exception{
-        return horarioService.guardarHorario(
-        		horario.getDiaSemana(),horario.getHora_apertura_mañana(), horario.getHora_cierre_mañana(),
-        								horario.getHora_apertura_tarde(),horario.getHora_cierre_tarde());
+        return horarioService.guardarHorario(horario);
     }
 	
 }

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -80,8 +81,7 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 //		horario.setHora_apertura_tarde("16:00");
 //		horario.setHora_cierre_tarde("21:00");
 //
-//		horarioService.guardarHorario(horario.getDiaSemana(), horario.getHora_apertura_mañana(),
-//				horario.getHora_cierre_mañana(), horario.getHora_apertura_tarde(), horario.getHora_cierre_tarde());
+//		horarioService.guardarHorario(horario);
 //
 //		Horario horario2 = new Horario();
 //		horario2.setDiaSemana("Martes");
@@ -90,8 +90,7 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 //		horario2.setHora_apertura_tarde("16:00");
 //		horario2.setHora_cierre_tarde("23:00");
 //
-//		horarioService.guardarHorario(horario2.getDiaSemana(), horario2.getHora_apertura_mañana(),
-//				horario2.getHora_cierre_mañana(), horario2.getHora_apertura_tarde(), horario2.getHora_cierre_tarde());
+//		horarioService.guardarHorario(horario2);
 //
 //		Horario horario3 = new Horario();
 //		horario3.setDiaSemana("Miércoles");
@@ -100,8 +99,7 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 //		horario3.setHora_apertura_tarde("16:00");
 //		horario3.setHora_cierre_tarde("22:00");
 //
-//		horarioService.guardarHorario(horario3.getDiaSemana(), horario3.getHora_apertura_mañana(),
-//				horario3.getHora_cierre_mañana(), horario3.getHora_apertura_tarde(), horario3.getHora_cierre_tarde());
+//		horarioService.guardarHorario(horario3);
 //
 //		Horario horario4 = new Horario();
 //		horario4.setDiaSemana("Jueves");
@@ -110,8 +108,7 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 //		horario4.setHora_apertura_tarde("16:00");
 //		horario4.setHora_cierre_tarde("21:00");
 //
-//		horarioService.guardarHorario(horario4.getDiaSemana(), horario4.getHora_apertura_mañana(),
-//				horario4.getHora_cierre_mañana(), horario4.getHora_apertura_tarde(), horario4.getHora_cierre_tarde());
+//		horarioService.guardarHorario(horario4);
 //
 //		Horario horario5 = new Horario();
 //		horario5.setDiaSemana("Viernes");
@@ -120,8 +117,7 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 //		horario5.setHora_apertura_tarde("16:00");
 //		horario5.setHora_cierre_tarde("21:00");
 //
-//		horarioService.guardarHorario(horario5.getDiaSemana(), horario5.getHora_apertura_mañana(),
-//				horario5.getHora_cierre_mañana(), horario5.getHora_apertura_tarde(), horario5.getHora_cierre_tarde());
+//		horarioService.guardarHorario(horario5);
 //
 //		Horario horario6 = new Horario();
 //		horario6.setDiaSemana("Sábado");
@@ -130,8 +126,7 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 //		horario6.setHora_apertura_tarde("16:00");
 //		horario6.setHora_cierre_tarde("21:00");
 //
-//		horarioService.guardarHorario(horario6.getDiaSemana(), horario6.getHora_apertura_mañana(),
-//				horario6.getHora_cierre_mañana(), horario6.getHora_apertura_tarde(), horario6.getHora_cierre_tarde());
+//		horarioService.guardarHorario(horario6);
 //
 //		Horario horario7 = new Horario();
 //		horario7.setDiaSemana("Domingo");
@@ -140,8 +135,7 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 //		horario7.setHora_apertura_tarde("16:00");
 //		horario7.setHora_cierre_tarde("21:00");
 //
-//		horarioService.guardarHorario(horario7.getDiaSemana(), horario7.getHora_apertura_mañana(),
-//				horario7.getHora_cierre_mañana(), horario7.getHora_apertura_tarde(), horario7.getHora_cierre_tarde());
+//		horarioService.guardarHorario(horario7);
 //
 //		// creas usuario
 //		Usuario usuario = new Usuario();
@@ -165,7 +159,7 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 //		usuarioRoles.add(usuarioRol);
 //
 //		usuarioService.guardarUsuario(usuario, usuarioRoles);
-//
+
 
 //		Servicio servicio1 = new Servicio();
 //		servicio1.setNombre("Peluqueria");

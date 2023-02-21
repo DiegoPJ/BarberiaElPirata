@@ -25,7 +25,7 @@ public class ServicioController {
 	private ServicioService servicioService;
 	
 	@GetMapping("/servicios")
-    public List<Servicio> obtenerBarberias(){
+    public List<Servicio> obtenerServicios(){
     		List<Servicio> x = servicioRepository.findAll();
         return x;
     }

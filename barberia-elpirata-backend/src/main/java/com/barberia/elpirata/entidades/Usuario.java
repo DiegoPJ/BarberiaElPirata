@@ -20,6 +20,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "usuarios")
@@ -28,13 +29,14 @@ public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-
+	private Long id;
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "usuario_usuRol")
     @JsonIgnore
 	private Set<UsuarioRol> usuarioRoles = new HashSet<>();
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "usuario")
+	@JsonIgnore
 	private Set<Cita> citas = new HashSet<>();
 	
 	private String nombre;
