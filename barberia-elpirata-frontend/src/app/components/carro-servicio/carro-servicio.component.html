@@ -43,7 +43,7 @@
 					</ul>
 				</div>
 				<button class="btn btn-success" data-bs-target="#modalFinalizar"
-					data-bs-toggle="modal" (click)="finalizarCompra()">Finalizar</button>
+					data-bs-toggle="modal" [disabled]="serviciosSeleccionados.length === 0" (click)="finalizarCompra()">Finalizar</button>
 			</div>
 		</div>
 	</div>
@@ -68,7 +68,7 @@
 							(click)="seleccionarServicio(corte)">+</button>
 					</div>
 					<div *ngIf="corte.estilos.length > 0">
-						<button class="btn btn-primary" data-bs-target="#modalEstilo"
+						<button class="btn btn-primary"  data-bs-target="#modalEstilo"
 							(click)="modalEstilos(corte)" data-bs-toggle="modal">ver
 							mas</button>
 					</div>
@@ -91,7 +91,7 @@
 				<button class="btn btn-primary" data-bs-target="#modalPrincipal"
 					data-bs-toggle="modal">Atras</button>
 				<button class="btn btn-success" data-bs-target="#modalFinalizar"
-					data-bs-toggle="modal" (click)="finalizarCompra()">Finalizar</button>
+					data-bs-toggle="modal" [disabled]="serviciosSeleccionados.length === 0">Finalizar</button>
 			</div>
 		</div>
 	</div>
@@ -133,7 +133,7 @@
 				<button class="btn btn-primary" data-bs-target="#modalCorte"
 					data-bs-toggle="modal">Atras</button>
 				<button class="btn btn-success" data-bs-target="#modalFinalizar"
-					data-bs-toggle="modal" (click)="finalizarCompra()">Finalizar</button>
+					data-bs-toggle="modal"[disabled]="serviciosSeleccionados.length === 0" (click)="finalizarCompra()">Finalizar</button>
 			</div>
 		</div>
 	</div>
@@ -160,10 +160,12 @@
 			</div>
 			<div class="modal-footer">
 				<div class="container">Total : {{totalPrecio}}€</div>
+					<button type="button" class="btn btn-danger"
+						data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
 				<button class="btn btn-primary" data-bs-target="#modalPrincipal"
 					data-bs-toggle="modal">Atras</button>
-				<button class="btn btn-success" data-bs-target="#modalPago"
-					data-bs-toggle="modal">Finalizar</button>
+				<button type="button" class="btn btn-success"
+						data-bs-dismiss="modal" aria-label="Close" (click)="guardarCita()">Reservar Cita</button>
 
 			</div>
 		</div>
@@ -179,9 +181,7 @@
 			<div class="modal-body">
 				<div class="container">
 					Reserva la cita y paga en efectivo
-					<button type="button" class="btn btn-danger"
-						data-bs-dismiss="modal" aria-label="Close" (click)="guardarCita()">Pagar en
-						Efectivo</button>
+					
 
 				</div>
 				<div class="container">

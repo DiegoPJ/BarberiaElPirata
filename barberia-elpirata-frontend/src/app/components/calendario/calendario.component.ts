@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { AlertComponent } from 'src/app/components/alert/alert.component';
 
 @Component({
@@ -24,14 +24,16 @@ monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto',
     eventClickHandler: (event: any) => void;
 	@Output() calendarioSeleccionado = new EventEmitter<Date | null>();
   	@ViewChild(AlertComponent) alert: AlertComponent;
+	@ViewChild('prueba') prueba: ElementRef;
 
 constructor(	
-	private cdRef: ChangeDetectorRef,
+	
 ){
 	this.currentDate = new Date();
 	this.currentDay = this.currentDate.getDate();
 	this.monthNumber = this.currentDate.getMonth();
 	this.currentYear = this.currentDate.getFullYear();
+	
 
 }
     ngAfterViewInit(): void {
@@ -40,20 +42,24 @@ constructor(
 		this.prev.nativeElement.addEventListener('click',()=>this.lastMonth());
 		this.next.nativeElement.addEventListener('click',()=>this.nextMonth());
 		this.writeMonth(this.monthNumber);
-
     }
 
     ngOnInit(): void {
-
 
     }
     
 
      writeMonth(month:any){
+		 
+		
 		for(let i = this.startDay(); i > 0; i--){
-			this.dates.nativeElement.innerHTML += `<div class="calendar__item calendar__lastDays" style="opacity:.2">
-			${this.getTotalDays(this.monthNumber-1)-(i-1)}
-			</div>`;
+			
+			let div = document.createElement('div');
+		div.classList.add('calendar__item', 'calendar__lastDays');
+		//div.setAttribute("style","opacity:.2")
+		div.textContent = (this.getTotalDays(this.monthNumber-1)-(i-1)).toString();
+		this.dates.nativeElement.appendChild(div);
+			
 		}
 			
 
@@ -66,33 +72,29 @@ constructor(
 		}
 		  for (let i = 1; i <= 42 - this.getTotalDays(month) - this.startDay(); i++) {
 		    let dayHtml = document.createElement("div");
-		    dayHtml.classList.add("calendar__startDays");
-		    dayHtml.style.opacity =".2";
+			dayHtml.classList.add('calendar__item', 'calendar__startDays');
 		    dayHtml.textContent = i + "";
 		    this.dates.nativeElement.appendChild(dayHtml);
 
 		 }
-		  
-			this.dates.nativeElement.removeEventListener('click', this.eventClickHandler);
-			this.eventClickHandler = (event:any) => {
-				if (!event.target.classList.contains("calendar__lastDays") &&
-					!event.target.classList.contains("calendar__startDays")) {
-					
-					//event.target.style.background ="red";
-					//No funciona , pero lo dejamos para el final.
-					
-					let buttons2 = document.querySelectorAll(".calendar__item");
+		  let buttons2 = document.querySelectorAll(".calendar__item");
 					buttons2.forEach(button =>{
-					  button.addEventListener("click",_ =>{
+						if (!button.classList.contains("calendar__lastDays") &&
+					!button.classList.contains("calendar__startDays")){
+						
+						 button.addEventListener("click",_ =>{
 					    buttons2.forEach(button =>{
 					      button.classList.remove("selected");
 					    })
 					    button.classList.toggle("selected");
 					  })
-					})
-									
+					}
+				})
 					
-
+			this.dates.nativeElement.removeEventListener('click', this.eventClickHandler);
+			this.eventClickHandler = (event:any) => {
+				if (!event.target.classList.contains("calendar__lastDays") &&
+					!event.target.classList.contains("calendar__startDays")) {
 					let fecha = new Date(this.currentYear, this.monthNumber, event.target.textContent);
 					
 					this.calendarioSeleccionado.emit(fecha);
@@ -178,6 +180,10 @@ constructor(
 		
 		this.dates.nativeElement.textContent = '';
 		this.writeMonth(this.monthNumber);
+	}
+	
+	agregarClase(prueba : ElementRef){
+		prueba.nativeElement.classList.add('prueba2');
 	}
 }
 

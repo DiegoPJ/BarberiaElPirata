@@ -1,7 +1,5 @@
-* {
-	box-sizing: border-box;	
-}
-
+ * {
+	box-sizing: border-box;	}
 .calendar {
 	width: 80%;
 	max-width: 600px;
@@ -81,6 +79,19 @@
 	line-height: 3;
 	
 }
+ 
+.calendar__item2{
+	background:red;
+}
+::ng-deep .calendar__item.calendar__lastDays{
+	opacity:.2;
+}
+::ng-deep .calendar__item.calendar__startDays{
+	opacity:.2;
+}
+
+
+
 .calendar__item, .calendar__dates {
 	
 	text-align: center;
@@ -95,12 +106,12 @@
     4px 4px 20px #fff;     	
 	}
       	 
-.calendar__item.selected{
+::ng-deep .calendar__item.selected{
 	background: lighcoral;
-	color: red;
 	width: 50%;
-	border-radius: 50%;
+	border-radius: 70%;
 	margin: auto;
+	background:#33ffec;
 }
 
 

@@ -6,7 +6,7 @@
 		<Button data-bs-target="#modalPrincipal" data-bs-toggle="modal"
 			*ngFor="let hora of horasMa" class="col-md-2"
 			[ngClass]="{'hora-reservada': horaReservada(hora, citas)}"
-			[disabled]="horaReservada(hora, citas)" (click)="fechaCita($event)">{{hora}} - {{horaReservada(hora, citas)}}</Button>
+			[disabled]="horaReservada(hora, citas)" (click)="fechaCita($event)">{{hora}}h </Button>
 	</div>
 
 
@@ -18,7 +18,7 @@
 		<Button data-bs-target="#modalPrincipal" data-bs-toggle="modal"
 			*ngFor="let hora of horasTa" class="col-md-2"
 			[ngClass]="{'hora-reservada': horaReservada(hora, citas)}"
-			[disabled]="horaReservada(hora, citas)" (click)="fechaCita($event)">{{hora}}</Button>
+			[disabled]="horaReservada(hora, citas)" (click)="fechaCita($event)">{{hora}}h</Button>
 
 
 	</div>

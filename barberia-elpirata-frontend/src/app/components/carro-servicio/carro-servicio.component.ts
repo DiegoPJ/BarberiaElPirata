@@ -109,7 +109,9 @@ constructor(private listaServiciosService:ListaServiciosService,
 	
 	}
 	finalizarCompra(){
-		  
+		  if(this.serviciosSeleccionados.length == 0){
+			  this.alert.show('error','selecciona un servicio antes de avanzar')
+		  }
 	}
 	modalCortes(servicio: Servicio) {
 	  this.cortes = servicio.cortes;
