@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit,ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit,Output,ViewChild } from '@angular/core';
 import { switchMap } from 'rxjs';
 import { Cita, Usuario } from 'src/app/model';
 import { CitaService } from 'src/app/services/cita.service';
 import { UserService } from 'src/app/services/user.service';
-
+import { HorarioComponent } from 'src/app/components/horario/horario.component';
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
@@ -14,10 +14,11 @@ export class InicioComponent implements OnInit,AfterViewInit{
 	usuario:any;
 	usuarios?: Usuario[];
 	calendarioSelecIni:Date;
-	@Input() citas:Cita[];
+	@Input() citas:Cita[] = [];
 	credenciales:String | null;
 	@Input() fechaCitaCompleta : Date;
-	
+	@ViewChild('horarioIni') horarioIni: HorarioComponent;
+
 constructor(	
 	private userService:UserService,private citaService:CitaService
 ){
@@ -62,6 +63,9 @@ constructor(
 		  )
 		  .subscribe(citas => {
 		    this.citas = citas;
+		    this.horarioIni.escribirHoras();
+
+		    console.log("se ha actualizado")
 		  });
 	}
     escuchaCalendario(event:any) {
@@ -69,10 +73,19 @@ constructor(
 	  this.fechaCitaCompleta = event;
 	}
 	eliminarCita(cita: Cita) {
-		  this.citaService.eliminarCita(cita).subscribe(() => {
-		  });
-		  this.actualizarCitas();
-		}
+  this.citaService.deleteCita(cita).subscribe(
+    (response: any) => {
+      console.log(response); // imprimir la respuesta del servidor en la consola
+      this.actualizarCitas()
+    },
+    (error: any) => {
+      console.log(error); // imprimir el error en la consola
+      //this.alert.show('error', 'No puedes coger citas anteriores');
+      this.actualizarCitas()
+
+    }
+  );
+}
    
 }
 

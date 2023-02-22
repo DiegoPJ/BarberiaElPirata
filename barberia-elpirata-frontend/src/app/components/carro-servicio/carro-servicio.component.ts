@@ -1,4 +1,4 @@
-import { Component,OnInit,Input, Output, EventEmitter } from '@angular/core';
+import { Component,OnInit,Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { Servicio, Corte, Estilo, Cita, Usuario } from 'src/app/model';
 import { ListaServiciosService } from 'src/app/services/lista-servicios.service';
@@ -6,6 +6,7 @@ import { CitaService } from 'src/app/services/cita.service';
 import { UserService } from 'src/app/services/user.service';
 import { DatePipe } from '@angular/common';
 import * as moment from 'moment';
+import { AlertComponent } from 'src/app/components/alert/alert.component';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class CarroServicioComponent implements OnInit {
     credenciales: string | null;
     usuario : any;
     @Output() nuevaCita = new EventEmitter<Cita>();
+  	@ViewChild(AlertComponent) alert: AlertComponent;
 
 constructor(private listaServiciosService:ListaServiciosService,
 			private citaService:CitaService,
@@ -73,16 +75,27 @@ constructor(private listaServiciosService:ListaServiciosService,
     }
 	seleccionarServicio(x: any) {
 			const nombre = x.corte?.servicio.nombre || x.servicio?.nombre || x.nombre;
+			
 			console.log(this.tituloSeleccionado)
 			let servicioExistente = this.serviciosSeleccionados.find(s => 
 		    (s.corte?.servicio?.nombre === nombre ||
 		    s.servicio?.nombre === nombre || 
 		    s.nombre === nombre));	
 				
+			for(let servicio of this.servicios){
+				if (servicioExistente){
+					if(nombre == servicio.nombre){
+			 	 this.alert.show('error', 'Ya tienes un servicio de '+ servicio.nombre);
+				}
+				}
+				
+			}
+				
 			if (!servicioExistente) {
 			  this.serviciosSeleccionados.push(x);
 			  this.totalPrecio += x.precio;
-
+			}else{
+				console.log(JSON.stringify(servicioExistente));
 			}
 					
 	}
@@ -108,8 +121,8 @@ constructor(private listaServiciosService:ListaServiciosService,
 	}
 	guardarCita(){
 	
-	const estilo = this.serviciosSeleccionados.filter(s => s.servicio);
-	const corte = this.serviciosSeleccionados.filter(s => s.corte);
+	const corte = this.serviciosSeleccionados.filter(s => s.servicio);
+	const estilo = this.serviciosSeleccionados.filter(s => s.corte);
 	const servicio = this.serviciosSeleccionados.filter(s => !s.servicio && !s.corte);
 	this.cita.fecha = this.fechaCitaCompleta;
 	console.log(this.fechaCitaCompleta + " fechaCitaCompleta");
@@ -120,7 +133,8 @@ constructor(private listaServiciosService:ListaServiciosService,
 	
 	this.citaService.añadirCita(this.cita).subscribe(
 			(data) => {
-				 this.nuevaCita.emit();
+				this.nuevaCita.emit(this.cita);
+				this.serviciosSeleccionados.splice(0, this.serviciosSeleccionados.length);
 				console.log(data)
 			},(error) => {
 				console.log(error);

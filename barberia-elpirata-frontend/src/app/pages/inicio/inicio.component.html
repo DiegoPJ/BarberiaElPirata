@@ -5,8 +5,8 @@
 		<app-calendario (calendarioSeleccionado)="escuchaCalendario($event)"></app-calendario>
 	</div>
 	<div class="col-md-6 col-sm-12 d-md-block" id="horario">
-		<app-horario [calendarioSelecIni]="calendarioSelecIni"
-			(fechaCitaCompleta)="escuchaCalendario($event)"></app-horario>
+		<app-horario #horarioIni [calendarioSelecIni]="calendarioSelecIni"
+			(fechaCitaCompleta)="escuchaCalendario($event)" [citas]="citas"></app-horario>
 		<app-carro-servicio [fechaCitaCompleta]="fechaCitaCompleta" (nuevaCita)="actualizarCitas()"></app-carro-servicio>
 		<div class="contaier">
 

@@ -1,13 +1,12 @@
 <div id="horario">
 	<!-- 	<div class="container">{{calendarioSelecIni}}</div>
  -->
-		<h3></h3> horario - {{fechaCitaCompleta}}
 	<div class="container">
 		<h2>Mañana</h2>
 		<Button data-bs-target="#modalPrincipal" data-bs-toggle="modal"
 			*ngFor="let hora of horasMa" class="col-md-2"
 			[ngClass]="{'hora-reservada': horaReservada(hora, citas)}"
-			[disabled]="horaReservada(hora, citas)" (click)="fechaCita($event)">{{hora}}</Button>
+			[disabled]="horaReservada(hora, citas)" (click)="fechaCita($event)">{{hora}} - {{horaReservada(hora, citas)}}</Button>
 	</div>
 
 

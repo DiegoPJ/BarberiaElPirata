@@ -16,7 +16,7 @@ export class CitaService {
   public añadirCita(cita:Cita){
 	  return this.httpClient.post(`${baserUrl}/api/guardarCita`,cita);
   }
-public eliminarCita(cita: Cita) {
+public deleteCita(cita: Cita) {
   return this.httpClient.delete(`${baserUrl}/api/eliminarCita/${cita.id.toString()}`);
 }
  /*  

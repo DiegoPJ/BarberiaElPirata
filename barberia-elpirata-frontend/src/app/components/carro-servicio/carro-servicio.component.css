@@ -1,3 +1,9 @@
 .modal-content{
 	background-color:gray;
 }
+/*  #modalPrincipal,#modalCorte,#modalEstilo,#modalFinalizar,#modalPago{
+	z-index:1;
+} 
+.modal-content,.modal-dialog modal-dialog-centered{
+	z-index:2;
+} */

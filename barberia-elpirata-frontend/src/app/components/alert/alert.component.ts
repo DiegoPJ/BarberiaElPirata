@@ -21,9 +21,9 @@ export class AlertComponent {
     if (type === 'success') {
       this.alertIcon = '../assets/img/success.png';
 
-    } else {
+    } if (type === 'error') {
       this.alertIcon = '../assets/img/error.png';
-    }
+    } 
   }
   closeAlert() {
     this.showPopup = false;

@@ -18,7 +18,7 @@ export class HorarioComponent implements OnInit,OnChanges{
 	public horasTa: string[] = [];
 
   	horarios: Horario[];
-  	citas: Cita[];
+  	@Input() citas: Cita[];
   	@Input() calendarioSelecIni: Date;
   	myDate:Date;
   	diaSemanaDatePiPe:any;
@@ -30,8 +30,9 @@ export class HorarioComponent implements OnInit,OnChanges{
 	{  
 }
     ngOnChanges(changes: SimpleChanges): void {
-			console.log(changes['calendarioSelecIni']);
-			if(this.calendarioSelecIni != null){
+		
+	
+		    if(this.calendarioSelecIni != null){
 				      	this.escribirHoras();
 			}else{
 				this.horasMa = [];
@@ -50,6 +51,7 @@ export class HorarioComponent implements OnInit,OnChanges{
     	});
     }
 	escribirHoras(){
+		console.log("ENTRO EN ESCRIBIR HORAS")
 				if(this.isDateValid(this.calendarioSelecIni)){
 					this.myDate = new Date(this.calendarioSelecIni);
 					this.diaSemanaDatePiPe = this.datePipe.transform(this.myDate, 'EEEE', 'es'); 
@@ -109,14 +111,13 @@ export class HorarioComponent implements OnInit,OnChanges{
 	
 	horaReservada(hora: string, citas: Cita[]): boolean {
 	  for (const cita of citas) {
-
 	    if (moment(cita.fecha).format('HH:mm') === hora 
 	    && this.convertirFechaAEspana(this.calendarioSelecIni).getTime()
 	     == this.convertirFechaAEspana(cita.fecha).getTime()) {
-	      console.log("cita.fecha: "+ moment(cita.fecha).format('HH:mm'));
+	     /* console.log("cita.fecha: "+ moment(cita.fecha).format('HH:mm'));
 		  console.log("hora:" +hora);
 		  console.log("this.calendarioSelecIni: " + this.convertirFechaAEspana(this.calendarioSelecIni))
-		  console.log("cita.fecha.completa: "+ this.convertirFechaAEspana(cita.fecha))
+		  console.log("cita.fecha.completa: "+ this.convertirFechaAEspana(cita.fecha))*/
 	      return true;
 	    }
 	  }
