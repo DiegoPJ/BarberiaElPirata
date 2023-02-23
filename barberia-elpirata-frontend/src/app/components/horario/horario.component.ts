@@ -110,6 +110,17 @@ export class HorarioComponent implements OnInit,OnChanges{
 	}
 	
 	horaReservada(hora: string, citas: Cita[]): boolean {
+		
+		const fechaActual = moment(new Date()).format('YYYY-MM-DD');
+		const calendarioSelecIni = moment(this.calendarioSelecIni).format('YYYY-MM-DD');
+		const fechaActual2 = new Date();
+
+			if (fechaActual === calendarioSelecIni) {
+			  if(hora <= moment(fechaActual2).format('HH:mm')){
+				  return true;
+			  }
+			}
+			
 	  for (const cita of citas) {
 	    if (moment(cita.fecha).format('HH:mm') === hora 
 	    && this.convertirFechaAEspana(this.calendarioSelecIni).getTime()

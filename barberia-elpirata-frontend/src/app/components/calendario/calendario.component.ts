@@ -50,8 +50,12 @@ constructor(
     
 
      writeMonth(month:any){
-		 
+		  let fechaActual = new Date();
+ 
 		
+		console.log("fechaActual : " + fechaActual.getMonth());
+		console.log("this.getTotalDays(month) : " + this.monthNumber);
+
 		for(let i = this.startDay(); i > 0; i--){
 			
 			let div = document.createElement('div');
@@ -64,12 +68,28 @@ constructor(
 			
 
 		for(let i = 1 ; i <= this.getTotalDays(month); i++){
+			if(fechaActual.getMonth() == this.monthNumber){
+				if((i>=fechaActual.getDate())  ){
 				let e = document.createElement('div');
 				e.classList.add("calendar__item");
 				e.textContent = i+"";
 				this.dates.nativeElement.appendChild(e);
 
-		}
+				}else{
+					let e = document.createElement('div');
+					e.classList.add('calendar__item', 'calendar__lastDays');
+					e.textContent = i+"";
+					this.dates.nativeElement.appendChild(e);
+				}
+			}else{
+				let e = document.createElement('div');
+					e.classList.add('calendar__item');
+					e.textContent = i+"";
+					this.dates.nativeElement.appendChild(e);
+			}
+			
+			}
+			
 		  for (let i = 1; i <= 42 - this.getTotalDays(month) - this.startDay(); i++) {
 		    let dayHtml = document.createElement("div");
 			dayHtml.classList.add('calendar__item', 'calendar__startDays');
