@@ -43,4 +43,12 @@ export class UserService {
   getToken(){
 	  return localStorage.getItem('token');
   }
+  
+  logout() {
+    return this.httpClient.post(`${baserUrl}/logout`, {}).toPromise();
+  }
+
+  clearSession() {
+    return this.httpClient.get(`${baserUrl}/clearSession`).toPromise();
+  }
 }

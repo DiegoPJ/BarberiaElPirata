@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Credenciales } from 'src/app/model';
@@ -10,26 +10,33 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  creds: Credenciales = {
+    creds: Credenciales = {
     email:'',password:''
   }
-  error = false;
   
+   error = false;
+   user: boolean = !!localStorage.getItem('credencial');
+
   constructor(
     private userService:UserService,
     private router: Router
-  ) {
-    
-  }
+  ) {}
+
   
   login(form: NgForm) {
     this.userService.login(this.creds).subscribe(
       response => {
-        this.router.navigate(['/']);
+		  this.user = !!localStorage.getItem('credencial');
       },
       error => {
         this.error = true;
       }
     );
+  }
+  logout(){
+	  this.userService.logout();
+	 // localStorage.removeItem('token');
+	  localStorage.removeItem('credencial');
+	  this.user = false;
   }
 }

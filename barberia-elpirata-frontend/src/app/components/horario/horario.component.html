@@ -1,25 +1,25 @@
-<div id="horario">
-	<!-- 	<div class="container">{{calendarioSelecIni}}</div>
- -->
-	<div class="container">
+<div class="horario">
+
+	<div class="horasMa">
 		<h2>Mañana</h2>
-		<Button data-bs-target="#modalPrincipal" data-bs-toggle="modal"
-			*ngFor="let hora of horasMa" class="col-md-2"
-			[disabled]="horaReservada(hora, citas)" (click)="fechaCita($event)">{{hora}}h </Button>
+		<div class="botonesMa">
+			<Button data-bs-target="#modalPrincipal" data-bs-toggle="modal"
+				*ngFor="let hora of horasMa" class="boton-hora"
+				[disabled]="horaReservada(hora, citas)" (click)="fechaCita($event)">{{hora}}h
+			</Button>
+		</div>
 	</div>
 
 
-
-	<div class="container">
+	<div class="horasTa">
 		<h2>Tarde</h2>
+		<div class="botonesTa">
+			<Button data-bs-target="#modalPrincipal" data-bs-toggle="modal"
+				*ngFor="let hora of horasTa" class="boton-hora"
+				[disabled]="horaReservada(hora, citas)" (click)="fechaCita($event)">{{hora}}h</Button>
 
 
-		<Button data-bs-target="#modalPrincipal" data-bs-toggle="modal"
-			*ngFor="let hora of horasTa" class="col-md-2"
-			[disabled]="horaReservada(hora, citas)" (click)="fechaCita($event)">{{hora}}h</Button>
-
+		</div>
 
 	</div>
-	
-	
 </div>

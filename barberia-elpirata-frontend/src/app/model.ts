@@ -61,3 +61,12 @@ export interface Estilo {
 	  imagen: string;
 	  extra: string;
 }
+
+export interface Producto{
+	id:number;
+	cantidad:number;
+	descripcion:string;
+	imagen:string;
+	nombre:string;
+	precio:number;
+}

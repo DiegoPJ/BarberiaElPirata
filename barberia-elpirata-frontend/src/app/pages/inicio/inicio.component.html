@@ -1,27 +1,33 @@
-<div class="row" id="cuerpo">
+<div id="cuerpo">
 
-	<div class="col-md-6 col-sm-12" id="calendario">
-		<h1>Selecciona tu cita</h1>
+	<div id="calendario">
+		<div class="cabeceraCalendario">
+			<h1>Reserva tu cita</h1>
+			<p>No tengo ni zorra de que poner aqui</p>
+		</div>
 		<app-calendario (calendarioSeleccionado)="escuchaCalendario($event)"></app-calendario>
 	</div>
-	<div class="col-md-6 col-sm-12 d-md-block" id="horario">
-		<app-horario #horarioIni [calendarioSelecIni]="calendarioSelecIni"
-			(fechaCitaCompleta)="escuchaCalendario($event)" [citas]="citas"></app-horario>
-		<app-carro-servicio [fechaCitaCompleta]="fechaCitaCompleta" (nuevaCita)="actualizarCitas()"></app-carro-servicio>
-		<div class="contaier">
-
-			<h1>Tus citas:</h1>
-			<div *ngIf="usuario">
-				<p>Bienvenido, {{ usuario.nombre }}!</p>
-				<p>Email: {{ usuario.email }}</p>
-				inicio - {{fechaCitaCompleta}}
-			</div>
-			<table>
+	<div id="horasYcitas">
+	<div class="cabeceraHorario">
+			<h1>Selecciona una hora</h1>
+			<p>Tu sabe primo</p>
+		</div>
+			<app-horario #horarioIni [calendarioSelecIni]="calendarioSelecIni"
+				(fechaCitaCompleta)="escuchaCalendario($event)" [citas]="citas"></app-horario>
+		
+		<div class="cabeceraCitas">
+			<h3>Citas</h3>
+		</div>
+		
+		
+		<div class="cuerpoCitas">
+		<table class="table table-dark table-hover">
 				<thead>
 					<tr>
 						<th>Fecha</th>
 						<th>Hora</th>
 						<th>Descripción</th>
+						<th>Accion</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -29,29 +35,29 @@
 						<td>{{ cita.fecha | date: 'dd/MM/yyyy' }}</td>
 						<td>{{ cita.fecha | date: 'HH:mm' }}</td>
 						<td>
-							<ul>
-								<li *ngFor="let corte of cita.corte">{{ corte.nombre }}</li>
-							</ul>
+
+									<li *ngFor="let corte of cita.corte">{{ corte.nombre }}</li>
+								
+
+								
+									<li *ngFor="let estilo of cita.estilo">{{ estilo.nombre }}</li>
+								
+							
+								
+									<li *ngFor="let servicio of cita.servicio">{{
+										servicio.nombre }}</li>
+		
 						</td>
 						<td>
-							<ul>
-								<li *ngFor="let estilo of cita.estilo">{{ estilo.nombre }}</li>
-							</ul>
-						</td>
-						<td>
-							<ul>
-								<li *ngFor="let servicio of cita.servicio">{{
-									servicio.nombre }}</li>
-							</ul>
-						</td>
-							<button class="btn btn-danger"  (click)="eliminarCita(cita)" > Eliminar Cita </button>
-						<td>
+						<button class="btn btn-danger" (click)="eliminarCita(cita)">
+							X</button>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-
+		<app-carro-servicio [fechaCitaCompleta]="fechaCitaCompleta"
+			(nuevaCita)="actualizarCitas()"></app-carro-servicio>
 	</div>
 
 </div>

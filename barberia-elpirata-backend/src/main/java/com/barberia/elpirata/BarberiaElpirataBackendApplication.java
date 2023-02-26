@@ -21,6 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.barberia.elpirata.entidades.Cita;
 import com.barberia.elpirata.entidades.Horario;
+import com.barberia.elpirata.entidades.Producto;
 import com.barberia.elpirata.entidades.Servicio;
 import com.barberia.elpirata.entidades.Rol;
 import com.barberia.elpirata.entidades.Corte;
@@ -32,6 +33,7 @@ import com.barberia.elpirata.servicios.CitaService;
 import com.barberia.elpirata.servicios.CorteService;
 import com.barberia.elpirata.servicios.EstiloService;
 import com.barberia.elpirata.servicios.HorarioService;
+import com.barberia.elpirata.servicios.ProductoService;
 import com.barberia.elpirata.servicios.ServicioService;
 import com.barberia.elpirata.servicios.UsuarioService;
 import com.barberia.elpirata.servicios.implementaciones.CitasServiceImpl;
@@ -59,7 +61,10 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 
 	@Autowired
 	private EstiloService estiloService;
-
+	
+	@Autowired
+	private ProductoService productoService;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(BarberiaElpirataBackendApplication.class, args);
 
@@ -160,7 +165,6 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 //
 //		usuarioService.guardarUsuario(usuario, usuarioRoles);
 
-
 //		Servicio servicio1 = new Servicio();
 //		servicio1.setNombre("Peluqueria");
 //		servicioService.guardarServicio(servicio1);
@@ -250,5 +254,95 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 //			cita2.setEstilo(estilos2);
 //			citaService.guardarCita(cita2);
 //		}
+//		Producto producto1 = new Producto();
+//		producto1.setNombre("Gel Canonico");
+//		producto1.setCantidad(20);
+//		producto1.setDescripcion(
+//				"Gel refrescante de alta calidad con aroma a menta, ideal para aliviar dolores"
+//				+ " musculares y fatiga en cualquier momento del día.");
+//		producto1.setPrecio(25.2);
+//		producto1.setImagen("");
+//		productoService.guardarProducto(producto1);
+//		
+//		Producto producto2 = new Producto();
+//		producto2.setNombre("Champu Gay");
+//		producto2.setCantidad(20);
+//		producto2.setDescripcion(
+//				"Champu refrescante de alta calidad con aroma a menta, ideal para aliviar dolores"
+//				+ " musculares y fatiga en cualquier momento del día.");
+//		producto2.setPrecio(25.2);
+//		producto2.setImagen("");
+//		productoService.guardarProducto(producto2);
+//
+//		Producto producto3 = new Producto();
+//		producto3.setNombre("Peine X");
+//		producto3.setCantidad(20);
+//		producto3.setDescripcion(
+//				"peine refrescante de alta calidad con aroma a menta, ideal para aliviar dolores"
+//				+ " musculares y fatiga en cualquier momento del día.");
+//		producto3.setPrecio(25.2);
+//		producto3.setImagen("");
+//		productoService.guardarProducto(producto3);
+//
+//		Producto producto4 = new Producto();
+//		producto4.setNombre("Paprica Lindo");
+//		producto4.setCantidad(20);
+//		producto4.setDescripcion(
+//				"PapricaPapricaPapricaPapricaPapricaPapricaPapricaPapricaPapri"
+//				+ "caPapricaPapricaPapricaPapricaPapricaPapricaPapricaPapricaPapricaPapricaPapricaPapricaPapricaPapricaPaprica");
+//		producto4.setPrecio(25.2);
+//		producto4.setImagen("");
+//		productoService.guardarProducto(producto4);
+//
+//		Producto producto5 = new Producto();
+//		producto5.setNombre("Cerbeza con b");
+//		producto5.setCantidad(20);
+//		producto5.setDescripcion(
+//				"cerbeza refrescante de alta calidad con aroma a menta, ideal para aliviar dolores"
+//				+ " musculares y fatiga en cualquier momento del día.");
+//		producto5.setPrecio(25.2);
+//		producto5.setImagen("");
+//		productoService.guardarProducto(producto5);
+//
+//		Producto producto6 = new Producto();
+//		producto6.setNombre("Ole tu");
+//		producto6.setCantidad(20);
+//		producto6.setDescripcion(
+//				"ÑAÑAÑAÑÑAÑAÑAÑAÑÑAÑAÑAÑAÑÑAÑAÑAÑAÑÑAÑAÑAÑAÑÑAÑAÑAÑAÑÑAÑAÑAÑAÑÑAÑAÑAÑAÑÑAÑAÑA"
+//				+ "ÑAÑÑAÑAÑAÑAÑÑAÑAÑAÑAÑÑAÑAÑAÑAÑÑAÑAÑAÑAÑÑAÑAÑAÑAÑÑAÑAÑAÑAÑÑAÑAÑAÑAÑÑAÑAÑAÑAÑÑAÑAÑAÑAÑÑAÑAÑAÑAÑÑAÑAÑAÑAÑÑA");
+//		producto6.setPrecio(25.2);
+//		producto6.setImagen("");
+//		productoService.guardarProducto(producto6);
+//
+//		Producto producto7 = new Producto();
+//		producto7.setNombre("Cafe");
+//		producto7.setCantidad(20);
+//		producto7.setDescripcion(
+//				"Gel refrescante de alta calidad con aroma a menta, ideal para aliviar dolores"
+//				+ " musculares y fatiga en cualquier momento del día.");
+//		producto7.setPrecio(25.2);
+//		producto7.setImagen("");
+//		productoService.guardarProducto(producto7);
+//
+//		Producto producto8 = new Producto();
+//		producto8.setNombre("Jazmin");
+//		producto8.setCantidad(20);
+//		producto8.setDescripcion(
+//				"Gel refrescante de alta calidad con aroma a menta, ideal para aliviar dolores"
+//				+ " musculares y fatiga en cualquier momento del día.");
+//		producto8.setPrecio(25.2);
+//		producto8.setImagen("");
+//		productoService.guardarProducto(producto8);
+//
+//		Producto producto9 = new Producto();
+//		producto9.setNombre("Rinoceronte");
+//		producto9.setCantidad(20);
+//		producto9.setDescripcion(
+//				"Rino refrescante de alta calidad con aroma a menta, ideal para aliviar dolores"
+//				+ " musculares y fatiga en cualquier momento del día.");
+//		producto9.setPrecio(25.2);
+//		producto9.setImagen("");
+//		productoService.guardarProducto(producto9);
+
 	}
 }

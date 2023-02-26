@@ -18,7 +18,7 @@ export class InicioComponent implements OnInit,AfterViewInit{
 	credenciales:String | null;
 	@Input() fechaCitaCompleta : Date;
 	@ViewChild('horarioIni') horarioIni: HorarioComponent;
-
+	horarioOcarga : boolean = false;
 constructor(	
 	private userService:UserService,private citaService:CitaService
 ){
@@ -69,8 +69,10 @@ constructor(
 		  });
 	}
     escuchaCalendario(event:any) {
+		
 	  this.calendarioSelecIni = event;
 	  this.fechaCitaCompleta = event;
+	  this.horarioOcarga = true;
 	}
 	eliminarCita(cita: Cita) {
   this.citaService.deleteCita(cita).subscribe(

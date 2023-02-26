@@ -1,27 +1,87 @@
-#cuerpo {
-	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)), url("/assets/img/hoscuro.jpg");
-	background-size: 100%;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	min-height:100vh;
-	color: white;
-	font-family: PiratesBay;
-	display: flex;
-  	align-items: center;
-  	flex-direction:column;
-  	z-index:0;
-  	
-  }
+.cuerpo {
+  position: relative;
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url("/assets/img/hoscuro.jpg");
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  color: white;
+  font-family: PiratesBay;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  z-index: 0;
+  transition: background-color 2s;
+  background-color:red;
+}
 
+.cuerpo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), #000000);
+  z-index: -1;
+  transition: opacity 2s;
+}
 
+.cuerpoLuz {
+  position: relative;
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url("/assets/img/hoscuro.jpg");
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  color: white;
+  font-family: PiratesBay;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  z-index: 1;
+  transition: background-color 2s;
+  background-color:red;
+}
+
+.cuerpoLuz::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), #000000);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 2s;
+}
+.login.hidden {
+  opacity: 0;
+  display:none;
+  height: 0;
+  transition: opacity 2s ease;
+}
+
+.login{
+  opacity: 1;	
+  transition: opacity 0.5s ease;
+}
 .form {
   width: 350px;
 }
 #formLoggin{
+	display:flex;
+	align-items:center;
+	justify-content:center;
 	margin:20px;
 }
-
+#formLoggin a{
+	display: block;
+	text-align: center;
+}
 #cabecera {
 	animation: fadein 10s;
 	margin-top:20px;
@@ -90,4 +150,12 @@ a:hover{
     to {
         opacity:1;
     }
+}
+.tienda img{
+	margin-top:10px;
+	width:50px;
+	filter: invert(100%);
+}
+.tienda img:hover{
+	cursor:pointer;
 }

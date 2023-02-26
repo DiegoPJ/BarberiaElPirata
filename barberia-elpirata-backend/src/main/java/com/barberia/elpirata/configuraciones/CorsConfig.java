@@ -21,6 +21,10 @@ public class CorsConfig {
 				registry.addMapping("/api/**")  
 				.allowedOrigins("http://localhost:4200")
 				.allowedMethods("*");
+				
+				registry.addMapping("/logout")  
+				.allowedOrigins("http://localhost:4200")
+				.allowedMethods("*");
 			}
 		};
 	}

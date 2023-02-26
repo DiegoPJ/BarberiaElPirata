@@ -2,8 +2,8 @@ import { Component,EventEmitter,Input,OnChanges,OnInit, Output, SimpleChanges } 
 import { Cita, Horario } from 'src/app/model';
 import { HorarioService } from 'src/app/services/horario.service';
 import { DatePipe } from '@angular/common';
-import * as moment from 'moment';
 import { CitaService } from 'src/app/services/cita.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-horario',
@@ -83,8 +83,8 @@ export class HorarioComponent implements OnInit,OnChanges{
   
   generarHoras(apertura_mañana:any,cierre_mañana:any
   				,apertura_tarde:any,cierre_tarde:any): void {
-		
-	  let hora_mañana: moment.Moment = moment(apertura_mañana, 'HH:mm');
+					  
+	let hora_mañana: moment.Moment = moment(apertura_mañana, 'HH:mm');
 	  while (hora_mañana.format('HH:mm') !== cierre_mañana) {
 	    this.horasMa.push(hora_mañana.format('HH:mm'));
 	    hora_mañana = hora_mañana.add(30, 'minutes');

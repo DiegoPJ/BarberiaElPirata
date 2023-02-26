@@ -1,8 +1,38 @@
-#horario{
+.horario {
 	font-family: PiratesBay;
-	padding:2em;
-	display:flex;
 	justify-content: center;
-	align-item: center;
-	width:90%;
+	display: flex;
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 20px;
+	margin:2rem;
+	margin-top: 4rem;
+	flex-wrap:wrap;
 }
+
+.horasMa, .horasTa {
+	margin: 1rem;
+	width: 40%;
+}
+
+.botonesMa, .botonesTa {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+    grid-auto-flow: dense;	
+    gap:5px;
+}
+
+.boton-hora {
+	border-radius: 20px;
+	cursor: pointer;
+	background: #2A3B5D;
+	color:white;
+	width:100%;
+}
+.boton-hora:hover {
+	border-radius: 20px;
+	background:#40588A;	
+}
+.boton-hora:disabled {
+		background:#C4C4C4;	
+		opacity:.4;
+	}

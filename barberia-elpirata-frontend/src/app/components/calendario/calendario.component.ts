@@ -115,10 +115,12 @@ constructor(
 			this.eventClickHandler = (event:any) => {
 				if (!event.target.classList.contains("calendar__lastDays") &&
 					!event.target.classList.contains("calendar__startDays")) {
+						if (event.target.classList.contains("calendar__item")) {
+						
 					let fecha = new Date(this.currentYear, this.monthNumber, event.target.textContent);
 					
 					this.calendarioSeleccionado.emit(fecha);
-					
+					}
 				}
 			};
 			this.dates.nativeElement.addEventListener('click', this.eventClickHandler);

@@ -1,43 +1,61 @@
- #cuerpo {
-	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)),
+#cuerpo {
+	 background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)),
 		url("/assets/img/mapapeque.jpg");
 	background-size: 100%;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	min-height: 100vh;
+	min-height: 100vh; 
 	color: white;
 	font-family: PiratesBay;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	font-family: piratesBay;
+	width:100%;
+}
+
+.cabeceraHorario, .cabeceraCalendario {
+	background-color: #2E2E2E;
+	padding:1rem;
+}
+li{
+	  list-style: none;
+	  fon-size:.2rem;
+}
+table{
+	text-align: center;
+	width: 90%;
+}
+
+.cuerpoCitas{
+	font-size: .9rem;
+	text-align: center;
+}
+
+.cuerpoCitas button,.cuerpoCitas li{
+		font-size: .7rem;
 	
 }
-
-#calendario{
-	text-align:center;
-	margin-top:30px;
-	padding-left:4em;
-	padding-top:1em;
-}
-#horario{
-	text-align:center;
-	margin-top:30px;
-	padding-top:1em;
+#calendario {
+	
+	text-align: center;
 }
 
-@media (min-width: 768px) and (max-width: 991.98px) {
-  #calendario {
-    margin-top: 30px;
-    padding-left: 100px;
-    padding-top: 20px;
-  }
+#horasYcitas {
+
+	text-align: center;
 }
 
-@media (max-width: 767.98px) {
-  #cuerpo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
+
+
+
+@media (max-width: 767px){
+	#cuerpo{
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+	li{
+	  list-style: none;
+	  fon-size:.2rem;
 }
- 
+}

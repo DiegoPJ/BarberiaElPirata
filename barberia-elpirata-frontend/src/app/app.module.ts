@@ -20,6 +20,7 @@ import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { AlertComponent } from './components/alert/alert.component';
 import { CarroServicioComponent } from './components/carro-servicio/carro-servicio.component';
+import { CarroProductosComponent } from './pages/carro-productos/carro-productos.component';
 
 
 const appRoutes:Routes =[
@@ -32,6 +33,10 @@ const appRoutes:Routes =[
 	{
 		path:'login',
 		 component:LoginComponent
+	},
+	{
+		path:'carro',
+		 component:CarroProductosComponent
 	}
 ]
 
@@ -47,6 +52,7 @@ const appRoutes:Routes =[
     HorarioComponent,
     AlertComponent,
     CarroServicioComponent,
+    CarroProductosComponent,
   ],
   imports: [
     BrowserModule,

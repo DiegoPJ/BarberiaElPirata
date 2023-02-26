@@ -19,6 +19,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.barberia.elpirata.seguridad.JWTAuthenticationFilter;
 import com.barberia.elpirata.seguridad.JWTAuthorizationFilter;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 
 @Configuration
 public class WebSecurityConfig   {
@@ -57,6 +59,12 @@ public class WebSecurityConfig   {
 			.and()
 			.addFilter(jwtAuthenticationFilter)
 			.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
+			.logout(logout -> logout
+				      .logoutUrl("/logout")
+				      .clearAuthentication(true)
+				      .invalidateHttpSession(true)
+				      .deleteCookies("JSESSIONID", "Authorization")
+				      .logoutSuccessHandler((req, res, auth) -> res.setStatus(HttpServletResponse.SC_OK)))
 			.build();
 	}
 	
