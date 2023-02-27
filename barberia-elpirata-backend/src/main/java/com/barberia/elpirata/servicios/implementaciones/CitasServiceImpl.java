@@ -42,7 +42,7 @@ public class CitasServiceImpl implements CitaService{
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 		
-	
+	 
 	@Override
 	@Transactional
 	public Cita guardarCita(Cita cita) throws Exception {

@@ -46,8 +46,9 @@ public class Cita {
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Estilo> estilo = new ArrayList<>();
 	
-	private Timestamp fecha;	
-	
+	private Timestamp fechaInicio;	
+	private Timestamp fechaFin;	
+
 	@Override
 	public boolean equals(Object o) {
 	    if (this == o) return true;

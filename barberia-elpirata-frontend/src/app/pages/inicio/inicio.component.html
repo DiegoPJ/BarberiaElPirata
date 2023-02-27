@@ -52,10 +52,11 @@
 			</div>
 			<div class="card" *ngFor="let cita of citas">
 				<div class="titulo">
-					<p >{{ cita.fecha | date: 'HH:mm' }}h</p>
-					<p >{{ cita.fecha | date: 'EEEE' |
-						slice:0:1 | uppercase }}{{ cita.fecha | date: 'EEEE' | slice:1 }}</p>
-					<p >{{ cita.fecha | date:
+					
+					<p >{{ cita.fechaInicio | date: 'HH:mm' }}h</p>
+					<p >{{ cita.fechaInicio | date: 'EEEE' |
+						slice:0:1 | uppercase }}{{ cita.fechaInicio | date: 'EEEE' | slice:1 }}</p>
+					<p >{{ cita.fechaInicio | date:
 						'dd/MM/yyyy' }}</p>
 					<p>{{cita.precio}}€
 					<button class="btn btn-danger" (click)="eliminarCita(cita)">
@@ -88,7 +89,7 @@
 			</div>
 
 			<app-carro-servicio [fechaCitaCompleta]="fechaCitaCompleta"
-				(nuevaCita)="actualizarCitas()"></app-carro-servicio>
+				(nuevaCita)="actualizarCitas()" [citas]="citas"></app-carro-servicio>
 		</div>
 
 	</div>

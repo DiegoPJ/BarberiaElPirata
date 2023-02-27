@@ -130,7 +130,6 @@ export class HorarioComponent implements OnInit,OnChanges{
 		let horaMinuto = event.target.textContent.split(':');
 		fechaCita.setHours(parseInt(horaMinuto[0]), parseInt(horaMinuto[1]));
 		this.fechaCitaCompleta.emit(fechaCita);
-
 	}
 	
 	horaReservada(hora: string, citas: Cita[]): boolean {
@@ -138,7 +137,6 @@ export class HorarioComponent implements OnInit,OnChanges{
 		const fechaActual = moment(new Date()).format('YYYY-MM-DD');
 		const calendarioSelecIni = moment(this.calendarioSelecIni).format('YYYY-MM-DD');
 		const fechaActual2 = new Date();
-
 			if (fechaActual === calendarioSelecIni) {
 			  if(hora <= moment(fechaActual2).format('HH:mm')){
 				  return true;
@@ -146,9 +144,13 @@ export class HorarioComponent implements OnInit,OnChanges{
 			}
 			
 	  for (const cita of citas) {
-	    if (moment(cita.fecha).format('HH:mm') === hora 
+	    if ((moment(cita.fechaInicio).format('HH:mm') === hora 
 	    && this.convertirFechaAEspana(this.calendarioSelecIni).getTime()
-	     == this.convertirFechaAEspana(cita.fecha).getTime()) {
+	     == this.convertirFechaAEspana(cita.fechaInicio).getTime())
+	     ||
+	       (moment(cita.fechaFin).format('HH:mm') === hora 
+	    && this.convertirFechaAEspana(this.calendarioSelecIni).getTime()
+	     == this.convertirFechaAEspana(cita.fechaFin).getTime())) {
 	     /* console.log("cita.fecha: "+ moment(cita.fecha).format('HH:mm'));
 		  console.log("hora:" +hora);
 		  console.log("this.calendarioSelecIni: " + this.convertirFechaAEspana(this.calendarioSelecIni))

@@ -54,6 +54,7 @@ constructor(
 	console.log(localStorage.getItem("credencial"))*/
 
     }
+    
     actualizarCitas(){
 		this.credenciales = localStorage.getItem("credencial");
 		this.userService.obtenerEmail(this.credenciales)

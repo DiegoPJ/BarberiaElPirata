@@ -34,4 +34,6 @@ public class Estilo {
     private String imagen;
     
     private String suplemento;
+    
+    private int tiempo;
 }

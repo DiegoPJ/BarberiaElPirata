@@ -38,6 +38,8 @@ public class Corte {
     
     private String suplemento;
     
+    private int tiempo;
+    
     @OneToMany(mappedBy = "corte", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Estilo> estilos;

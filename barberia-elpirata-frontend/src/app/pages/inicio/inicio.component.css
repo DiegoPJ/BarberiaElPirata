@@ -1,19 +1,19 @@
 #cuerpo {
-	background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)),
-			url("/assets/img/mapapeque.jpg");
-		background-attachment: fixed;
-		animation: wave 60s linear infinite;
-
-	background-size: cover;
-	background-position: center;
-	color: white;
-	font-family: PiratesBay;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	font-family: piratesBay;
-	width: 100%;
-	height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)),
+    url("/assets/img/mapapeque.jpg");
+  background-attachment: fixed;
+  animation: wave 60s linear infinite;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  font-family: PiratesBay;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-family: piratesBay;
+  width: 100%;
+  min-height: 100vh; /* Use min-height instead of height */
 }
+
 				
 
 .card-vacio{

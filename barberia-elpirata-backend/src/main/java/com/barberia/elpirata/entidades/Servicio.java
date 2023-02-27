@@ -27,7 +27,8 @@ public class Servicio{
 	private int precio;
 	private String imagen;
 	private String extra;
-	  
+	
+	 private int tiempo;
 	@OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List <Corte> cortes;

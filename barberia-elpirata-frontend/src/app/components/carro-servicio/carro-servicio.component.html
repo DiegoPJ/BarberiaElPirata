@@ -9,11 +9,10 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<div class="modal-title" id="exampleModalToggleLabel">
-					<p>fecha: {{fechaCitaCompleta | date: 'dd/MM/yyyy'}}</p>
-					<p>{{fechaCitaCompleta | date: 'HH:mm'}}h</p>
-					<p>fecha: {{fechaCitaCompleta | date: 'EEEE'}}</p>
+					<p>Fecha: {{fechaCitaCompleta | date: 'dd/MM/yyyy'}}</p>
+					<p>Hora: {{fechaCitaCompleta | date: 'HH:mm'}}h</p>
 				</div>
-
+<!-- <p> {{fechaCitaCompleta | date: 'EEEE'}}</p> -->
 
 
 				<button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -21,6 +20,7 @@
 			</div>
 			<div class="modal-body">
 				<div *ngFor="let servicio of servicios" class="d-inline-block m-4">
+					
 					<div>
 						<button class="btn btn-secondary"
 							(click)="seleccionarServicio(servicio)">+</button>
@@ -30,6 +30,7 @@
 							(click)="modalCortes(servicio)" data-bs-toggle="modal">ver
 							mas</button>
 					</div>
+					<img [src]="'../assets/img/pelaos/'+ servicio.imagen" width="50px">
 					{{ servicio.nombre }}
 				</div>
 			</div>
@@ -74,6 +75,7 @@
 							mas</button>
 					</div>
 					{{ corte.nombre }}
+					<img [src]="'../assets/img/pelaos/'+ corte.imagen" width="50px">
 
 				</div>
 			</div>
@@ -115,6 +117,8 @@
 				<div *ngFor="let estilo of estilos" class="d-inline-block m-4">
 
 					{{ estilo.nombre }}
+										<img [src]="'../assets/img/pelaos/'+ estilo.imagen" width="50px">
+					
 					<button class="btn btn-secondary"
 						(click)="seleccionarServicio(estilo)">+</button>
 					<br>
