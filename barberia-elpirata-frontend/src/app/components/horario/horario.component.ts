@@ -42,7 +42,7 @@ export class HorarioComponent implements OnInit,OnChanges{
 	
     ngOnInit(): void {
         this.horarioService.todosLosHorarios().subscribe(horarios => {
-      	this.horarios = horarios;    	      				 
+      	this.horarios = horarios;    
     	});
     	
     	this.citaService.todosLasCitas().subscribe(citas => {
@@ -51,10 +51,34 @@ export class HorarioComponent implements OnInit,OnChanges{
     	});
     }
 	escribirHoras(){
-		console.log("ENTRO EN ESCRIBIR HORAS")
 				if(this.isDateValid(this.calendarioSelecIni)){
-					this.myDate = new Date(this.calendarioSelecIni);
-					this.diaSemanaDatePiPe = this.datePipe.transform(this.myDate, 'EEEE', 'es'); 
+					let nombreDia = this.calendarioSelecIni.toLocaleDateString('en-US', { weekday: 'long' });
+					console.log(nombreDia);
+					
+						switch(nombreDia) {
+						  case 'Sunday':
+						    nombreDia = 'domingo';
+						    break;
+						  case 'Monday':
+						    nombreDia = 'lunes';
+						    break;
+						  case 'Tuesday':
+						    nombreDia = 'martes';
+						    break;
+						  case 'Wednesday':
+						    nombreDia = 'miércoles';
+						    break;
+						  case 'Thursday':
+						    nombreDia = 'jueves';
+						    break;
+						  case 'Friday':
+						    nombreDia = 'viernes';
+						    break;
+						  case 'Saturday':
+						    nombreDia = 'sábado';
+						    break;
+						}
+
 					this.horasMa = [];
 					this.horasTa = [];
 				
@@ -63,9 +87,8 @@ export class HorarioComponent implements OnInit,OnChanges{
 							/*console.log(i);
 							console.log("dia semana:" + this.horarios[i].diaSemana.toLowerCase());
 							console.log("pipe: "+ this.diaSemanaDatePiPe.toLowerCase())*/
-						if(this.diaSemanaDatePiPe.toLowerCase() == 
+						if(nombreDia == 
 						this.horarios[i].diaSemana.toLowerCase()){
-							
 							this.generarHoras(this.horarios[i].hora_apertura_mañana
 											,this.horarios[i].hora_cierre_mañana
 											,this.horarios[i].hora_apertura_tarde
@@ -102,7 +125,8 @@ export class HorarioComponent implements OnInit,OnChanges{
 }
 
 	fechaCita(event:any){
-		let fechaCita = new Date(this.calendarioSelecIni);
+/*		event.classList.add("selected");
+*/		let fechaCita = new Date(this.calendarioSelecIni);
 		let horaMinuto = event.target.textContent.split(':');
 		fechaCita.setHours(parseInt(horaMinuto[0]), parseInt(horaMinuto[1]));
 		this.fechaCitaCompleta.emit(fechaCita);

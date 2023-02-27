@@ -1,63 +1,95 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="#"> <img
+			src="../assets/img/LOGOTOTAL.png" width="50px" alt="Logo">
+
+			Servicios
+		</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+			data-bs-target="#navbarNav" aria-controls="navbarNav"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav ms-auto">
+				<li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Tienda</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Acerca de</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+
+<hr class="separator">
+
 <div id="cuerpo">
 
-	<div id="calendario">
-		<div class="cabeceraCalendario">
-			<h1>Reserva tu cita</h1>
-			<p>No tengo ni zorra de que poner aqui</p>
+	<div id="izquierda">
+		<div class="cabeceraIzquierda">
+			<p>Reserva tu cita</p>
 		</div>
 		<app-calendario (calendarioSeleccionado)="escuchaCalendario($event)"></app-calendario>
+		<app-horario #horarioIni [calendarioSelecIni]="calendarioSelecIni"
+			(fechaCitaCompleta)="escuchaCalendario($event)" [citas]="citas"></app-horario>
 	</div>
-	<div id="horasYcitas">
-	<div class="cabeceraHorario">
-			<h1>Selecciona una hora</h1>
-			<p>Tu sabe primo</p>
+	<div id="derecha">
+		<div class="cabeceraDerecha">
+			<p>Citas</p>
 		</div>
-			<app-horario #horarioIni [calendarioSelecIni]="calendarioSelecIni"
-				(fechaCitaCompleta)="escuchaCalendario($event)" [citas]="citas"></app-horario>
-		
-		<div class="cabeceraCitas">
-			<h3>Citas</h3>
-		</div>
-		
-		
+
+
 		<div class="cuerpoCitas">
-		<table class="table table-dark table-hover">
-				<thead>
-					<tr>
-						<th>Fecha</th>
-						<th>Hora</th>
-						<th>Descripción</th>
-						<th>Accion</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr *ngFor="let cita of citas">
-						<td>{{ cita.fecha | date: 'dd/MM/yyyy' }}</td>
-						<td>{{ cita.fecha | date: 'HH:mm' }}</td>
-						<td>
-
-									<li *ngFor="let corte of cita.corte">{{ corte.nombre }}</li>
-								
-
-								
-									<li *ngFor="let estilo of cita.estilo">{{ estilo.nombre }}</li>
-								
-							
-								
-									<li *ngFor="let servicio of cita.servicio">{{
-										servicio.nombre }}</li>
 		
-						</td>
-						<td>
-						<button class="btn btn-danger" (click)="eliminarCita(cita)">
-							X</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<app-carro-servicio [fechaCitaCompleta]="fechaCitaCompleta"
-			(nuevaCita)="actualizarCitas()"></app-carro-servicio>
-	</div>
+			<div class="card-vacio" *ngIf="citas.length == 0" >
+				<h1>Selecciona una fecha del calendario</h1>
+				<h2>Escoge una hora que te interese</h2> 
+				<h3>los servicios que te gusten</h3>
+				<div class="spinner-border" role="status" >
+					<span class="visually-hidden">Loading...</span>
+				</div>
+			</div>
+			<div class="card" *ngFor="let cita of citas">
+				<div class="titulo">
+					<p >{{ cita.fecha | date: 'HH:mm' }}h</p>
+					<p >{{ cita.fecha | date: 'EEEE' |
+						slice:0:1 | uppercase }}{{ cita.fecha | date: 'EEEE' | slice:1 }}</p>
+					<p >{{ cita.fecha | date:
+						'dd/MM/yyyy' }}</p>
+					<p>{{cita.precio}}€
+					<button class="btn btn-danger" (click)="eliminarCita(cita)">
+					X</button>
+				</div>
 
+				
+				<div class="card-header">
+					<img *ngFor="let corte of cita.corte"
+						[src]="'../assets/img/pelaos/'+ corte.imagen"> <img
+						*ngFor="let estilo of cita.estilo"
+						[src]="'../assets/img/pelaos/'+ estilo.imagen"> <img
+						*ngFor="let servicio of cita.servicio"
+						[src]="'../assets/img/pelaos/'+ servicio.imagen">
+				</div>
+
+
+				<div class="card-body">
+					<p class="card-text1" *ngFor="let corte of cita.corte">{{
+						corte.nombre }}</p>
+					<p class="card-text2" *ngFor="let estilo of cita.estilo">{{estilo.nombre
+						}}</p>
+					<p class="card-text3" *ngFor="let servicio of cita.servicio">{{servicio.nombre
+						}}</p>
+				</div>
+				<div class="card-footer bg-transparent border-secondary">
+
+					<small>Las imagenes y los precios son orientativos </small>
+				</div>
+			</div>
+
+			<app-carro-servicio [fechaCitaCompleta]="fechaCitaCompleta"
+				(nuevaCita)="actualizarCitas()"></app-carro-servicio>
+		</div>
+
+	</div>
 </div>

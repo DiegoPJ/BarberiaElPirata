@@ -19,8 +19,10 @@ export class InicioComponent implements OnInit,AfterViewInit{
 	@Input() fechaCitaCompleta : Date;
 	@ViewChild('horarioIni') horarioIni: HorarioComponent;
 	horarioOcarga : boolean = false;
+	 isLoggedIn: boolean = false;
+ 
 constructor(	
-	private userService:UserService,private citaService:CitaService
+	private userService:UserService,private citaService:CitaService,
 ){
 	
 }
@@ -37,7 +39,7 @@ constructor(
 		  .subscribe(citas => {
 		    this.citas = citas;
 		  });
-    	
+    	console.log("CITAAASSS: "+this.citas);
     }
     ngOnInit(): void {
 
@@ -88,6 +90,12 @@ constructor(
     }
   );
 }
+  logout(){
+	  this.userService.logout();
+	 // localStorage.removeItem('token');
+	  localStorage.removeItem('credencial');
+	      this.isLoggedIn = false;
+  }
    
 }
 

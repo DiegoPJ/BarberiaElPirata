@@ -24,6 +24,7 @@
   border-color: #c3e6cb;
 }
 .calendar__info {
+	color:#DCDADA;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	align-items: center;
@@ -34,8 +35,9 @@
 	
 }
 .calendar__month, .calendar__year {
+	
 	padding: .5em 1em;
-	font-size:1.3em;
+	font-size:1em;
 /* 	text-shadow: 1px 1px 0px #333,
 2px 2px 0px #333,
 3px 3px 0px #333,
@@ -45,15 +47,33 @@
 7px 7px 0px #333,
 8px 8px 0px #333,
 9px 9px 0px #333,
-11px 11px 10px #000; */
+11px 11px 10px #000; 
 
 
 }
 
 .calendar__prev, .calendar__next {
-	color: white;
+	
+	color:#DCDADA;
 	cursor: pointer;
-	font-size: 2em;
+	font-size:1.1em;
+	padding: .1em;
+	margin-right: auto;
+	margin-left:auto;
+	/* text-shadow: black 1em 0.1em 0.2em;
+	text-shadow:
+    -1px -1px 20px #999,
+    0 0 1px darkblue,
+    1px 1px 1px black,
+    2px 2px 1px #555,
+    3px 3px 1px #222,
+    4px 4px 20px #fff; */
+}
+.calendar__prev:hover, .calendar__next:hover {
+	
+	color:white;
+	cursor: pointer;
+	font-size: 1.5em;
 	padding: .1em;
 	margin-right: auto;
 	margin-left:auto;
@@ -67,7 +87,6 @@
     4px 4px 20px #fff; */
 }
 
-
 .calendar__week, .calendar__dates {
 	display: grid;
 	grid-template-columns: repeat(7, 1fr);
@@ -76,8 +95,9 @@
      	 box-shadow: 0px 0px 30px #ffffff;	   
 }
 .calendar__week{
-	padding:30px;
-	font-size: 20px;
+	color:#DAD8D8;
+	padding:20px;
+	font-size: 16px;
 }
 .calendar__weekItem{
 	text-shadow: black 1em 0.1em 0.2em;
@@ -85,7 +105,7 @@
 justify-content: center;	
 }
 .calendar__dates{
-	padding:50px;
+	padding:45px;
 }
 ::ng-deep .calendar__item.calendar__lastDays{
 	opacity:.2;
@@ -98,7 +118,7 @@ justify-content: center;
 
 .calendar__item, .calendar__dates {
 	display:grid;
-	grid-gap:20px;
+	grid-gap:5px;
 	text-align: center;
     font-size:1.2em; 
     text-shadow:
@@ -109,20 +129,27 @@ justify-content: center;
     3px 3px 1px #222,
     4px 4px 20px #fff;     	
 	}
-      	 
+	 
  ::ng-deep .calendar__item.selected{
 
 
 	text-shadow: 0 0 30px #fff;
   box-shadow: 0 0 20px #4f9;
 } 
-
-::ng-deep .calendar__item:hover{
-
-	text-shadow: 0 0 30px #fff;
-  	box-shadow: 0 0 20px #6C8DCF;
+	
+::ng-deep .calendar__item {
+  transform: scale(1);
+  transition: transform 2s ease-in-out, box-shadow 2s ease-in-out, background-color 2s ease-in-out;
+  box-shadow: none;
+  background: transparent;
 }
 
+::ng-deep .calendar__item:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 20px #6C8DCF;
+  transition: transform 2s ease-in-out, box-shadow 2s ease-in-out, background-color 2s ease-in-out;
+  background-color: black;
+}
 
 
 

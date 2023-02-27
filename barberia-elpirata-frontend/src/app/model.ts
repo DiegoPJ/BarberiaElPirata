@@ -30,6 +30,7 @@ export interface Cita {
 	corte:Corte[]
 	estilo:Estilo[]
 	servicio:Servicio[]
+	precio:number
 }
 
 export interface Servicio {

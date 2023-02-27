@@ -2,37 +2,50 @@
 	font-family: PiratesBay;
 	justify-content: center;
 	display: flex;
-	background-color: rgba(0, 0, 0, 0.5);
-	border-radius: 20px;
-	margin:2rem;
-	margin-top: 4rem;
-	flex-wrap:wrap;
+/* 	background-color: rgba(0, 0, 0, 0.5);
+ */	border-radius: 20px;
+	flex-wrap: wrap;
 }
 
 .horasMa, .horasTa {
 	margin: 1rem;
-	width: 40%;
 }
 
 .botonesMa, .botonesTa {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-    grid-auto-flow: dense;	
-    gap:5px;
+	grid-template-columns: repeat(5, 1fr);
+	grid-auto-flow: dense;
+	gap: 5px;
 }
 
 .boton-hora {
-	border-radius: 20px;
+	color: #2C2C2C;
 	cursor: pointer;
-	background: #2A3B5D;
-	color:white;
-	width:100%;
+	transform: scale(1);
+	transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out,
+		background-color 0.5s ease-in-out, color 0.5s ease-in-out;;
+	box-shadow: none;
+	background: #DCDADA;
+	border-radius: 10px;
 }
+
 .boton-hora:hover {
-	border-radius: 20px;
-	background:#40588A;	
+	transform: scale(1.2);
+	box-shadow: 0 0 20px #6C8DCF;
+	transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out,
+		background-color 0.5s ease-in-out, color 0.5s ease-in-out;;
+	background-color: white;
+	color: black;
+}
+.boton-hora.selected {
+	transform: scale(1.2);
+	box-shadow: 0 0 20px #6C8DCF;
+	transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out,
+		background-color 0.5s ease-in-out, color 0.5s ease-in-out;;
+	background-color: white;
+	color: black;
 }
 .boton-hora:disabled {
-		background:#C4C4C4;	
-		opacity:.4;
-	}
+	background: #C4C4C4;
+	opacity: .4;
+}

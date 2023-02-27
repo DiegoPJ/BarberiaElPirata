@@ -53,7 +53,8 @@ constructor(private listaServiciosService:ListaServiciosService,
 			usuario: { id: 0,nombre:"0",email:"0",telefono:"0",password:"0" },
 			corte: [],
 			estilo: [],
-			servicio: []
+			servicio: [],
+			precio: 0
 		};
 		
 		
@@ -132,7 +133,7 @@ constructor(private listaServiciosService:ListaServiciosService,
 	this.cita.corte = corte;
 	this.cita.estilo = estilo;
 	this.cita.usuario = this.usuario;
-	
+	this.cita.precio = this.totalPrecio;
 	this.citaService.añadirCita(this.cita).subscribe(
 			(data) => {
 				this.nuevaCita.emit(this.cita);

@@ -35,7 +35,8 @@ public class Cita {
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
-
+	private double precio;
+	
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Servicio> servicio = new ArrayList<>();
 	
