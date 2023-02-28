@@ -1,148 +1,181 @@
 
 
 <!--  1º Anidacion -- PRINCIPAL-->
- <app-alert #alert></app-alert>
+<app-alert #alert></app-alert>
 
 <div class="modal fade" id="modalPrincipal" aria-hidden="true"
 	aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-	<div class="modal-dialog modal-dialog-centered">
+	<div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
 		<div class="modal-content">
 			<div class="modal-header">
 				<div class="modal-title" id="exampleModalToggleLabel">
 					<p>Fecha: {{fechaCitaCompleta | date: 'dd/MM/yyyy'}}</p>
 					<p>Hora: {{fechaCitaCompleta | date: 'HH:mm'}}h</p>
 				</div>
-<!-- <p> {{fechaCitaCompleta | date: 'EEEE'}}</p> -->
+				<!-- <p> {{fechaCitaCompleta | date: 'EEEE'}}</p> -->
 
 
 				<button type="button" class="btn-close" data-bs-dismiss="modal"
 					aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				<div *ngFor="let servicio of servicios" class="d-inline-block m-4">
-					
-					<div>
-						<button class="btn btn-secondary"
-							(click)="seleccionarServicio(servicio)">+</button>
+
+				<div class="servicios" *ngFor="let servicio of servicios">
+					<p>{{ servicio.nombre }}</p>
+					<button class="button-pirata"
+						(click)="seleccionarServicio(servicio)">+</button>
+					<img [src]="'../assets/img/pelaos/'+ servicio.imagen">
+
+
+
+					<div class="verMas" *ngIf="servicio.cortes.length > 0">
+						<button class="btn btn-outline-dark" style=""
+							data-bs-target="#modalCorte" (click)="modalCortes(servicio)" style="color:white"
+							data-bs-toggle="modal">Ver Mas</button>
 					</div>
-					<div *ngIf="servicio.cortes.length > 0">
-						<button class="btn btn-primary" data-bs-target="#modalCorte"
-							(click)="modalCortes(servicio)" data-bs-toggle="modal">ver
-							mas</button>
-					</div>
-					<img [src]="'../assets/img/pelaos/'+ servicio.imagen" width="50px">
-					{{ servicio.nombre }}
 				</div>
 			</div>
 			<div class="modal-footer">
-				<div class="container">
-					<p>Servicios seleccionados:</p>
-					<ul *ngFor="let servicio of serviciosSeleccionados">
-						<li>{{servicio.nombre }}
-							<button class="btn btn-primary"
-								(click)="quitarServicio(servicio)">-</button>
-						</li>
-					</ul>
+				<p>Servicios seleccionados:</p>
+				<div class="servicios-seleccionados">
+
+
+					<div class="servicioSelect"
+						*ngFor="let servicio of serviciosSeleccionados">
+						<button class="btn btn-danger" (click)="quitarServicio(servicio)"
+							style="font-size: 0.5rem;">&#10008;</button>
+						<p>{{servicio.nombre }}</p>
+
+
+					</div>
 				</div>
 				<button class="btn btn-success" data-bs-target="#modalFinalizar"
-					data-bs-toggle="modal" [disabled]="serviciosSeleccionados.length === 0" (click)="finalizarCompra()">Finalizar</button>
+					data-bs-toggle="modal"
+					[disabled]="serviciosSeleccionados.length === 0"
+					(click)="finalizarCompra()">Finalizar</button>
 			</div>
 		</div>
 	</div>
 </div>
 
 <!--  2º Anidacion -->
-
 <div class="modal fade" id="modalCorte" aria-hidden="true"
-	aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-	<div class="modal-dialog modal-dialog-centered">
+	aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Titulo:
-					- {{tituloSeleccionado}}</h1>
+				<h1 class="modal-title fs-5" id="exampleModalToggleLabel2">
+					{{tituloSeleccionado}}</h1>
 				<button type="button" class="btn-close" data-bs-dismiss="modal"
 					aria-label="Close"></button>
 			</div>
+			
+			
 			<div class="modal-body">
-				<div *ngFor="let corte of cortes" class="d-inline-block m-4">
-					<div>
-						<button class="btn btn-secondary"
-							(click)="seleccionarServicio(corte)">+</button>
+				<div class="cortes" *ngFor="let corte of cortes">
+					<p>{{ corte.nombre }}</p>
+					<button class="button-pirata"
+						(click)="seleccionarServicio(corte)">+</button>
+					<img [src]="'../assets/img/pelaos/'+ corte.imagen">
+					<div class="verMas" *ngIf="corte.estilos.length > 0">
+						<button class="btn btn-outline-dark" style=""
+							data-bs-target="#modalEstilo" (click)="modalEstilos(corte)"
+							data-bs-toggle="modal" style="color:white">Ver Mas</button>
 					</div>
-					<div *ngIf="corte.estilos.length > 0">
-						<button class="btn btn-primary"  data-bs-target="#modalEstilo"
-							(click)="modalEstilos(corte)" data-bs-toggle="modal">ver
-							mas</button>
-					</div>
-					{{ corte.nombre }}
-					<img [src]="'../assets/img/pelaos/'+ corte.imagen" width="50px">
-
 				</div>
 			</div>
+			
+
+			
 			<div class="modal-footer">
+				<p>Servicios seleccionados:</p>
+				<div class="servicios-seleccionados">
 
-				<div class="container">
-					<p>Servicios seleccionados:</p>
-					<ul *ngFor="let servicio of serviciosSeleccionados">
-						<li>{{servicio.nombre }}
-							<button class="btn btn-primary"
-								(click)="quitarServicio(servicio)">-</button>
-						</li>
-					</ul>
+
+					<div class="servicioSelect"
+						*ngFor="let servicio of serviciosSeleccionados">
+						<button class="btn btn-danger" (click)="quitarServicio(servicio)"
+							style="font-size: 0.5rem;">&#10008;</button>
+						<p>{{servicio.nombre }}</p>
+
+
+					</div>
 				</div>
-
 				<button class="btn btn-primary" data-bs-target="#modalPrincipal"
 					data-bs-toggle="modal">Atras</button>
 				<button class="btn btn-success" data-bs-target="#modalFinalizar"
-					data-bs-toggle="modal" [disabled]="serviciosSeleccionados.length === 0">Finalizar</button>
+					data-bs-toggle="modal"
+					[disabled]="serviciosSeleccionados.length === 0"
+					(click)="finalizarCompra()">Finalizar</button>
 			</div>
+			
+
 		</div>
 	</div>
 </div>
+	
 
 
 <!--  3º Anidacion -->
 
+
 <div class="modal fade" id="modalEstilo" aria-hidden="true"
-	aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-	<div class="modal-dialog modal-dialog-centered">
+	aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Titulo:
-					- {{tituloSeleccionado}}</h1>
+				<h1 class="modal-title fs-5" id="exampleModalToggleLabel2">
+					 {{tituloSeleccionado}}</h1>
 				<button type="button" class="btn-close" data-bs-dismiss="modal"
 					aria-label="Close"></button>
 			</div>
+			
+			
 			<div class="modal-body">
-				<div *ngFor="let estilo of estilos" class="d-inline-block m-4">
-
-					{{ estilo.nombre }}
-										<img [src]="'../assets/img/pelaos/'+ estilo.imagen" width="50px">
-					
-					<button class="btn btn-secondary"
+				<div class="estilos" *ngFor="let estilo of estilos">
+					<p>{{ estilo.nombre }}</p>
+					<button class="button-pirata"
 						(click)="seleccionarServicio(estilo)">+</button>
-					<br>
+					<img [src]="'../assets/img/pelaos/'+ estilo.imagen">
+					
 				</div>
 			</div>
-			<div class="modal-footer">
-				<div class="container">
-					<p>Servicios seleccionados:</p>
-					<ul *ngFor="let servicio of serviciosSeleccionados">
-						<li>{{servicio.nombre }}
-							<button class="btn btn-primary"
-								(click)="quitarServicio(servicio)">-</button>
-						</li>
-					</ul>
-				</div>
+			
 
+			
+			<div class="modal-footer">
+				<p>Servicios seleccionados:</p>
+				<div class="servicios-seleccionados">
+
+
+					<div class="servicioSelect"
+						*ngFor="let servicio of serviciosSeleccionados">
+						<button class="btn btn-danger" (click)="quitarServicio(servicio)"
+							style="font-size: 0.5rem;">&#10008;</button>
+						<p>{{servicio.nombre }}</p>
+
+
+					</div>
+				</div>
 				<button class="btn btn-primary" data-bs-target="#modalCorte"
 					data-bs-toggle="modal">Atras</button>
 				<button class="btn btn-success" data-bs-target="#modalFinalizar"
-					data-bs-toggle="modal"[disabled]="serviciosSeleccionados.length === 0" (click)="finalizarCompra()">Finalizar</button>
+					data-bs-toggle="modal"
+					[disabled]="serviciosSeleccionados.length === 0"
+					(click)="finalizarCompra()">Finalizar</button>
 			</div>
+			
+
 		</div>
 	</div>
 </div>
+
+
+------
+
+
+
+
 
 <!--  FINALIZAR -->
 <div class="modal fade" id="modalFinalizar" aria-hidden="true"
@@ -150,55 +183,45 @@
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
-				<p>fecha: {{fechaCitaCompleta | date: 'dd/MM/yyyy'}}</p>
-				<p>{{fechaCitaCompleta | date: 'HH:mm'}}h</p>
+				<div class="modal-title" id="exampleModalToggleLabel">
+					<p>Fecha: {{fechaCitaCompleta | date: 'dd/MM/yyyy'}}</p>
+					<p>Hora: {{fechaCitaCompleta | date: 'HH:mm'}}h</p>
+				</div>
+				<!-- <p> {{fechaCitaCompleta | date: 'EEEE'}}</p> -->
 				<button type="button" class="btn-close" data-bs-dismiss="modal"
 					aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				<p>Servicios seleccionados:</p>
-				<ul *ngFor="let servicio of serviciosSeleccionados">
-					<li>{{servicio.nombre }} -- {{servicio.precio}}€
-						<button class="btn btn-primary" (click)="quitarServicio(servicio)">-</button>
-					</li>
-				</ul>
+				<div class="finalizados" *ngFor="let servicio of serviciosSeleccionados" style="justify-content: center;">
+					<p style="margin-bottom:20px">{{ servicio.nombre }} </p>
+				
+					<img [src]="'../assets/img/pelaos/'+ servicio.imagen" style="box-shadow: 0px 2px 8px 2px rgba(255,255,255,1);
+					">
+				</div>
 			</div>
+			
 			<div class="modal-footer">
-				<div class="container">Total : {{totalPrecio}}€</div>
-					<button type="button" class="btn btn-danger"
-						data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
+				Total : {{totalPrecio}}€
+				<div class="servicios-seleccionados" style="margin:5px;">
+
+
+					<div class="servicioSelect"
+						*ngFor="let servicio of serviciosSeleccionados">
+						<button class="btn btn-danger" (click)="quitarServicio(servicio)"
+							style="font-size: 0.5rem;">&#10008;</button>
+						<p>{{servicio.nombre }}</p>
+					</div>
+				</div>
+				<button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+					aria-label="Close">Cancelar</button>
 				<button class="btn btn-primary" data-bs-target="#modalPrincipal"
 					data-bs-toggle="modal">Atras</button>
 				<button type="button" class="btn btn-success"
-						data-bs-dismiss="modal" aria-label="Close" (click)="guardarCita()">Reservar Cita</button>
-
+					data-bs-dismiss="modal" aria-label="Close" (click)="guardarCita()">Reservar
+					Cita</button>
 			</div>
+			
 		</div>
 	</div>
 </div>
 
-
-<!--  PAGO -->
-<div class="modal fade" id="modalPago" aria-hidden="true"
-	aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-body">
-				<div class="container">
-					Reserva la cita y paga en efectivo
-					
-
-				</div>
-				<div class="container">
-					Reserva la cita, añadelo al carrito y paga por internet
-					<button class="btn btn-primary" data-bs-target="#modalPrincipal"
-						data-bs-toggle="modal">Añadir del carrito</button>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger"
-						data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>

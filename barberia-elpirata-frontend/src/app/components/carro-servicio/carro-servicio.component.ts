@@ -151,8 +151,8 @@ compararFechaCompletaConHoras(fechaCompleta: Date, horasMinutos: String[]) {
   const [horaTarde, minTarde] = horasMinutos[1].split(':');
   const horaLimiteManana = new Date(fechaCompleta.getFullYear(), fechaCompleta.getMonth(), fechaCompleta.getDate(), Number(horaManana), Number(minManana), 0, 0);
   const horaLimiteTarde = new Date(fechaCompleta.getFullYear(), fechaCompleta.getMonth(), fechaCompleta.getDate(), Number(horaTarde), Number(minTarde), 0, 0);
-
-				if (fechaCompleta.getHours() <= 15 && fechaCompleta.getMinutes() < 30){
+				
+				if (fechaCompleta.getHours() <= 15 && fechaCompleta.getMinutes() <= 30){
 					//mañana
 					if(fechaCompleta.getTime() > horaLimiteManana.getTime()){
 						return true;
@@ -162,7 +162,7 @@ compararFechaCompletaConHoras(fechaCompleta: Date, horasMinutos: String[]) {
 					//tarde
 
 					if(fechaCompleta.getTime() > horaLimiteTarde.getTime()){
-
+						
 						return true;
 					}
 					return false;
@@ -273,6 +273,7 @@ compararFechaCompletaConHoras(fechaCompleta: Date, horasMinutos: String[]) {
 			 	 this.totalTiempo = 0;
 			 	 this.serviciosSeleccionados.splice(0, this.serviciosSeleccionados.length);
 			 	 this.actualizarNumCitas();
+			 	 this.alert.show("success","Reserva realizada con exito");
 			},(error) => {
 				console.log(error);
 				this.totalPrecio = 0;

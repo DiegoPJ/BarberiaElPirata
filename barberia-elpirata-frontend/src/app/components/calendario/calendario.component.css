@@ -38,19 +38,8 @@
 	
 	padding: .5em 1em;
 	font-size:1em;
-/* 	text-shadow: 1px 1px 0px #333,
-2px 2px 0px #333,
-3px 3px 0px #333,
-4px 4px 0px #333,
-5px 5px 0px #333,
-6px 6px 0px #333,
-7px 7px 0px #333,
-8px 8px 0px #333,
-9px 9px 0px #333,
-11px 11px 10px #000; 
-
-
 }
+
 
 .calendar__prev, .calendar__next {
 	
@@ -60,6 +49,8 @@
 	padding: .1em;
 	margin-right: auto;
 	margin-left:auto;
+	transition: font-size 0.5s;
+	
 	/* text-shadow: black 1em 0.1em 0.2em;
 	text-shadow:
     -1px -1px 20px #999,
@@ -146,10 +137,10 @@ justify-content: center;
 
 ::ng-deep .calendar__item:hover {
   transform: scale(1.2);
-  box-shadow: 0 0 20px #6C8DCF;
+  box-shadow: 0 0 20px #ffffff;
   transition: transform 2s ease-in-out, box-shadow 2s ease-in-out, background-color 2s ease-in-out;
-  background-color: black;
-}
+/*   background-color: black;
+ */}
 
 
 
