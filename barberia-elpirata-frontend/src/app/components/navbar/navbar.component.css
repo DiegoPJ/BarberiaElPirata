@@ -1,0 +1,20 @@
+
+.navbar-toggler-icon {
+	width: 22px;
+	margin-bottom: 4px;
+	transition: transform 1s ease-in-out;
+}
+
+.navbar-toggler:hover .navbar-toggler-icon:first-child {
+	transform: rotate(45deg);
+	top: 5px;
+}
+
+.navbar-toggler:hover .navbar-toggler-icon:nth-child(2) {
+	opacity: 0;
+}
+
+.navbar-toggler:hover .navbar-toggler-icon:last-child {
+	transform: rotate(-180deg);
+	top: -5px;
+}

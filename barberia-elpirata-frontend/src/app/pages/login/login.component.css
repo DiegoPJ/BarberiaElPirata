@@ -1,10 +1,6 @@
 .cuerpo {
   position: relative;
-  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url("/assets/img/hoscuro.jpg");
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+
   min-height: 100vh;
   color: white;
   font-family: PiratesBay;
@@ -12,10 +8,8 @@
   align-items: center;
   justify-content:center;
   z-index: 0;
-  transition: background-color 2s;
-  background-color:red;
+  transition: background-color 3s;
 }
-
 .cuerpo::before {
   content: "";
   position: absolute;
@@ -23,28 +17,15 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), #000000);
+  background:#000000;
+  opacity:0.8;
   z-index: -1;
-  transition: opacity 2s;
+transition: opacity 2s, background-color 3s;
+
+  
 }
 
-.cuerpoLuz {
-  position: relative;
-  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url("/assets/img/hoscuro.jpg");
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 100vh;
-  color: white;
-  font-family: PiratesBay;
-  display: flex;
-  align-items: center;
-  justify-content:center;
-  z-index: 1;
-  transition: background-color 2s;
-  background-color:red;
-}
+
 
 .cuerpoLuz::before {
   content: "";
@@ -53,21 +34,29 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), #000000);
-  opacity: 0;
+  background: #000000;
+  opacity: 0.2;
   z-index: -1;
-  transition: opacity 2s;
+transition: opacity 2s, background-color 3s;
 }
-.login.hidden {
-  opacity: 0;
-  display:none;
-  height: 0;
-  transition: opacity 2s ease;
+video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index:-2;
+}
+.login.hidden,.logueado.hidden {
+	 overflow: hidden;  /* Hide the element content, while height = 0 */
+    height: 0;
+    opacity: 0;
+    transition: height 0ms 3s, opacity 3s 0ms;
 }
 
-.login{
-  opacity: 1;	
-  transition: opacity 0.5s ease;
+.login,.logueado{
+  height: auto; opacity: 1;
+    transition: height 0ms 3ms, opacity 3s 0ms;
 }
 .form {
   width: 350px;
@@ -158,4 +147,102 @@ a:hover{
 }
 .tienda img:hover{
 	cursor:pointer;
+}
+
+-------
+.cuerpoLuz {
+  position: relative;
+  min-height: 100vh;
+  color: white;
+  font-family: PiratesBay;
+  display: flex;
+  z-index: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.logueado {
+  position: absolute;
+  top: 54%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80%;
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.estructura {
+  display: grid;
+  grid-template-columns: 420px auto;
+  grid-template-rows: 100px 500px;
+  grid-template-areas:
+   "header header header"
+   "cajaIzquierda cajaIzquierda cajaDerecha";
+   height: 100%;
+}
+.titulo{
+	grid-area:header;
+	
+    text-align: center;
+}
+.titulo > h1{
+	margin-top:20px;
+	font-size:40px;
+	font-family:Caribbean;
+   text-shadow:
+    -1px -1px 20px #999,
+    0 0 1px darkblue,
+    1px 1px 1px black,
+    2px 2px 1px #555,
+    3px 3px 1px #222,
+    4px 4px 20px #fff;
+    color:white;
+}
+.titulo button{
+	position:absolute;
+	top:0px;
+	right:0;
+}
+.cajaIzquierda {
+  grid-area:cajaIzquierda;
+	
+  background: red;
+}
+
+.cajaDerecha {
+  grid-area:cajaDerecha;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 20px;
+  background: black;
+}
+
+.textoRuben {
+  background: yellow;
+  grid-column: 1 ;
+  grid-row: 1;
+  font-size:1rem;
+  
+}
+
+.fotos1 {
+  background: orange;
+  grid-column: 2 ;
+  grid-row: 1;
+}
+
+.textoTiendaCita {
+  background: purple;
+   grid-column: 2 ;
+  grid-row: 2;
+  font-size:1rem;
+  
+}
+
+.fotos2 {
+  background: pink;
+   grid-column: 1 ;
+  	grid-row: 2;
 }

@@ -1,86 +1,138 @@
 
 <div class="cuerpo" [ngClass]="{'cuerpoLuz': user,'cuerpo': !user}">
-	
- <div class="content"><!-- es el ::before esto -->
-	<div class="login" [ngClass]="{ 'hidden': user }" >
- 
-		<app-lista-precios></app-lista-precios>
-		<div id="cabecera">
-			<img src="../assets/img/LOGOTOTAL.png" id="logo" width="250px">
-			<h1>BARBERIA EL PIRATA</h1>
-		</div>
-		<div id="formLoggin">
-			<form action="#" class="form" #form="ngForm" (ngSubmit)="login(form)">
-				<div class="form-group mt-2">
-					<input type="email" name="email" id="email" class="form-control"
-						placeholder="Introduce tu email"  [(ngModel)]="creds.email">
-				</div>
-				<div class="form-group mt-2">
-					<input type="password" name="password" id="password" 
-						class="form-control" placeholder="Introduce tu contraseña"
-						[(ngModel)]="creds.password">
-					<div *ngIf="error" class="text-danger mt-2">Email o
-						contraseña incorrectos.</div>
-				</div>
+	<app-lista-precios></app-lista-precios>
 
-				<button type="submit" class="btn btn-primary" href=""
-					id="iniciarSesion">Iniciar Sesion</button>
-					
+	<div class="content">
+		<!-- es el ::before esto -->
+		<video autoplay loop [muted]="'muted'" [controls]="'false'">
+			<source src="../assets/img/video.mp4" type="video/mp4">
+		</video>
+		<!-- 	<div class="logueado" [ngClass]="{'logueado.hidden': user,'hidden': !user}">
+ -->
+		<div class="login" [ngClass]="{ 'hidden': user }">
+			<app-signup></app-signup>
+
+			<div id="cabecera">
+				<img src="../assets/img/LOGOTOTAL.png" id="logo" width="250px">
+				<h1>BARBERIA EL PIRATA</h1>
+			</div>
+			<div id="formLoggin">
+				<form action="#" class="form" #form="ngForm"
+					(ngSubmit)="login(form)">
+					<div class="form-group mt-2">
+						<input type="email" name="email" id="email" class="form-control"
+							placeholder="Introduce tu email" [(ngModel)]="creds.email">
+					</div>
+					<div class="form-group mt-2">
+						<input type="password" name="password" id="password"
+							class="form-control" placeholder="Introduce tu contraseña"
+							[(ngModel)]="creds.password">
+						<div *ngIf="error" class="text-danger mt-2">Email o
+							contraseña incorrectos.</div>
+					</div>
+
+					<button type="submit" class="btn btn-primary" href=""
+						id="iniciarSesion">Iniciar Sesion</button>
+
 					<a id="crearCuenta" data-bs-toggle="modal"
-			data-bs-target="#modalCrearCuenta">Crear Cuenta</a> <a href=""
-			id="noLogin" data-bs-toggle="modal" data-bs-target="#exampleModal">¿No
-			puedes iniciar sesión?</a>
-			</form>
-		</div>
-
-		
+						data-bs-target="#modalCrearCuenta">Crear Cuenta</a> <a href=""
+						id="noLogin" data-bs-toggle="modal" data-bs-target="#exampleModal">¿No
+						puedes iniciar sesión?</a>
+				</form>
+			</div>
 
 
 
-		<!-- CREAR CUENTA -->
-		<app-signup></app-signup>
-		<!-- OLVIDAR CONTRASEÑA -->
 
-		<div class="modal fade" id="exampleModal" tabindex="-1"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h1 class="modal-title fs-5" id="exampleModalLabel">¿Olvidastes
-							la contraseña?</h1>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						Ingresa tu Email y te enviaremos al correo tus credenciales
-						<div class="m-3">
-							<input type="text" class="form-control" id="recipient-name">
+
+			<!-- CREAR CUENTA -->
+			<!-- OLVIDAR CONTRASEÑA -->
+
+			<div class="modal fade" id="exampleModal" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="exampleModalLabel">¿Olvidastes
+								la contraseña?</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
 						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-bs-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Enviar
-							Correo</button>
+						<div class="modal-body">
+							Ingresa tu Email y te enviaremos al correo tus credenciales
+							<div class="m-3">
+								<input type="text" class="form-control" id="recipient-name">
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-bs-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Enviar
+								Correo</button>
+						</div>
 					</div>
 				</div>
 			</div>
+
+			<div class="tienda">
+				<img routerLink="/carro" class="carrito"
+					src="../assets/img/productos/carrito.png">
+			</div>
 		</div>
-		
-		<div class="tienda">
-			<img routerLink="/carro" class="carrito"
-				src="../assets/img/productos/carrito.png">
+		<!--  LOGIN -->
+		<!-- LOGEADO INICIO -->
+		<div class="logueado" [ngClass]="{ 'hidden': !user }">
+
+			<div class="estructura">
+				<div class=titulo>
+					<h1>BARBERIA EL PIRATA</h1>
+					<button (click)="logout()">Cerrar Sesión</button>
+				</div>
+				<div class="cajaIzquierda">
+					<div id="carouselExampleSlidesOnly" class="carousel slide"
+						data-bs-ride="carousel">
+						<div class="carousel-inner">
+							<div class="carousel-item active">
+								<img width="100px" alt="..."
+									src="../../assets/img/ancla.png">
+							</div>
+							<div class="carousel-item">
+								<img width="100px" alt="..."
+									src="../assets/img/botellaarena.jpg">
+							</div>
+							<div class="carousel-item">
+								<img width="100px" alt="..."
+									src="../assets/img/vfuerte.jpg">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="cajaDerecha">
+					<div class="textoRuben">
+						<p>La barberia el pirata es una barberia colosal, llueva y que
+							llueva y nadie mas, ovi ovi ova cada dia te quiero mas nanoniano</p>
+					</div>
+					<div class="fotos1">
+						1s <img width="200px" alt="..." src="../assets/img/mapapeque.jpg">
+					</div>
+					<div class="textoTiendaCita">
+						<p>Coge tu cita</p>
+						<a class="nav-link" routerLink="/cita">Cita</a>
+						<p>ve a tienda compa</p>
+						<a class="nav-link" routerLink="/carro">Tienda</a>
+					</div>
+					<div class="fotos2">
+						<img alt="..." src="../assets/img/hrelax.jpg" width="200px;">
+					</div>
+				</div>
+
+			</div>
 		</div>
-	</div>
-<!--  LOGIN -->	
-<!-- LOGEADO INICIO -->
-	<div class="container" *ngIf="user">
-			 <button (click)="logout()">Logout</button>
-	</div>
-	
-	
-	
-	
-	<router-outlet></router-outlet>
+
+
+
+
+		<router-outlet></router-outlet>
 	</div>
 </div>

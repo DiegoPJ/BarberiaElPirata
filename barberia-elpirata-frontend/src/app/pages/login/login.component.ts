@@ -1,4 +1,4 @@
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, SimpleChanges ,OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Credenciales } from 'src/app/model';
@@ -9,11 +9,11 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
     creds: Credenciales = {
     email:'',password:''
   }
-  
+
    error = false;
    user: boolean = !!localStorage.getItem('credencial');
 
@@ -21,6 +21,9 @@ export class LoginComponent {
     private userService:UserService,
     private router: Router
   ) {}
+    ngOnInit(): void {
+
+    }
 
   
   login(form: NgForm) {

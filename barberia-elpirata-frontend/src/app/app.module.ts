@@ -21,17 +21,18 @@ import localeEs from '@angular/common/locales/es';
 import { AlertComponent } from './components/alert/alert.component';
 import { CarroServicioComponent } from './components/carro-servicio/carro-servicio.component';
 import { CarroProductosComponent } from './pages/carro-productos/carro-productos.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 const appRoutes:Routes =[
 	
 	{
-		path:'',
+		path:'cita',
 		 component:InicioComponent,
 		 canActivate:[AuthGuard]
 	},
 	{
-		path:'login',
+		path:'',
 		 component:LoginComponent
 	},
 	{
@@ -53,6 +54,7 @@ const appRoutes:Routes =[
     AlertComponent,
     CarroServicioComponent,
     CarroProductosComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
