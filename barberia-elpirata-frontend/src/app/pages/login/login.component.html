@@ -1,7 +1,7 @@
-
+<app-navbar *ngIf="user" (logout)="onLogout()"></app-navbar>
 <div class="cuerpo" [ngClass]="{'cuerpoLuz': user,'cuerpo': !user}">
-	<app-lista-precios></app-lista-precios>
-
+	<!-- 	<app-lista-precios></app-lista-precios>
+ -->
 	<div class="content">
 		<!-- es el ::before esto -->
 		<video autoplay loop [muted]="'muted'" [controls]="'false'">
@@ -74,65 +74,49 @@
 				</div>
 			</div>
 
-			<div class="tienda">
-				<img routerLink="/carro" class="carrito"
-					src="../assets/img/productos/carrito.png">
-			</div>
+
 		</div>
 		<!--  LOGIN -->
 		<!-- LOGEADO INICIO -->
 		<div class="logueado" [ngClass]="{ 'hidden': !user }">
+			<div id="cabecera2">
 
-			<div class="estructura">
-				<div class=titulo>
-					<h1>BARBERIA EL PIRATA</h1>
-					<button (click)="logout()">Cerrar Sesión</button>
-				</div>
-				<div class="cajaIzquierda">
-					<div id="carouselExampleSlidesOnly" class="carousel slide"
-						data-bs-ride="carousel">
-						<div class="carousel-inner">
-							<div class="carousel-item active">
-								<img width="100px" alt="..."
-									src="../../assets/img/ancla.png">
-							</div>
-							<div class="carousel-item">
-								<img width="100px" alt="..."
-									src="../assets/img/botellaarena.jpg">
-							</div>
-							<div class="carousel-item">
-								<img width="100px" alt="..."
-									src="../assets/img/vfuerte.jpg">
-							</div>
-						</div>
-					</div>
-				</div>
+				<h1 style="color: white">
+					<img src="../assets/img/iconos/candelabro.png" width="40px">
+					BARBERIA EL PIRATA
+<!-- 					<img src="../assets/img/iconos/candelabro.png" width="40px" style="  transform: scaleX(-1);
+ -->					">
+				</h1>
 
-				<div class="cajaDerecha">
-					<div class="textoRuben">
-						<p>La barberia el pirata es una barberia colosal, llueva y que
-							llueva y nadie mas, ovi ovi ova cada dia te quiero mas nanoniano</p>
-					</div>
-					<div class="fotos1">
-						1s <img width="200px" alt="..." src="../assets/img/mapapeque.jpg">
-					</div>
-					<div class="textoTiendaCita">
-						<p>Coge tu cita</p>
-						<a class="nav-link" routerLink="/cita">Cita</a>
-						<p>ve a tienda compa</p>
-						<a class="nav-link" routerLink="/carro">Tienda</a>
-					</div>
-					<div class="fotos2">
-						<img alt="..." src="../assets/img/hrelax.jpg" width="200px;">
-					</div>
+				<div class="peluqueros">
+					<img class="carrito" src="/assets/img/ruben/ruben1.jpg"> <img
+						class="carrito" src="/assets/img/ruben/ruben1.jpg"> <img
+						class="carrito" src="/assets/img/ruben/ruben1.jpg">
 				</div>
-
 			</div>
+			<div class="textoTiendaCita">
+				<div class="cita">
+
+					<h5>RESERVA TU CITA</h5>
+					<img routerLink="/cita" width="60px"
+						src="../assets/img/iconos/reserva.png">
+				</div>
+				<div class="contacto">
+					<h5>INFORMACIÓN</h5>
+					<span style="font-size: 15px">C/Francisco Pene nº23 </span> <span
+						style="font-size: 15px">04131 Almeria/Retamar</span> <span
+						style="font-size: 15px">+34 666555444</span>
+
+				</div>
+				<div class="tienda2">
+					<h5>VISITA LA TIENDA</h5>
+					<img routerLink="/carro" width="40px"
+						src="../assets/img/iconos/carrito.png">
+				</div>
+			</div>
+
 		</div>
-
-
-
-
 		<router-outlet></router-outlet>
 	</div>
 </div>
+

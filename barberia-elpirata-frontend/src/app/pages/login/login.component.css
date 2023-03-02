@@ -1,248 +1,302 @@
 .cuerpo {
-  position: relative;
-
-  min-height: 100vh;
-  color: white;
-  font-family: PiratesBay;
-  display: flex;
-  align-items: center;
-  justify-content:center;
-  z-index: 0;
-  transition: background-color 3s;
+	position: relative;
+	min-height: 100vh;
+	color: white;
+	font-family: PiratesBay;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 0;
+	transition: background-color 3s;
+	flex-direction: column;
 }
+
 .cuerpo::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background:#000000;
-  opacity:0.8;
-  z-index: -1;
-transition: opacity 2s, background-color 3s;
-
-  
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #000000;
+	opacity: 0.8;
+	z-index: -1;
+	transition: opacity 2s, background-color 3s;
 }
-
-
 
 .cuerpoLuz::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #000000;
-  opacity: 0.2;
-  z-index: -1;
-transition: opacity 2s, background-color 3s;
-}
-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  min-height: 100%;
-  z-index:-2;
-}
-.login.hidden,.logueado.hidden {
-	 overflow: hidden;  /* Hide the element content, while height = 0 */
-    height: 0;
-    opacity: 0;
-    transition: height 0ms 3s, opacity 3s 0ms;
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #000000;
+	opacity: 0.2;
+	z-index: -1;
+	transition: opacity 2s, background-color 3s;
 }
 
-.login,.logueado{
-  height: auto; opacity: 1;
-    transition: height 0ms 3ms, opacity 3s 0ms;
+video {
+	position: fixed;
+	top: 0;
+	left: 0;
+	min-width: 100%;
+	min-height: 100%;
+	z-index: -2;
 }
+
+.login.hidden, .logueado.hidden {
+	overflow: hidden; /* Hide the element content, while height = 0 */
+	height: 0;
+	opacity: 0;
+	transition: height 0ms 3s, opacity 3s 0ms;
+}
+
+.login, .logueado {
+	height: auto;
+	opacity: 1;
+	transition: height 0ms 3ms, opacity 3s 0ms;
+}
+
 .form {
-  width: 350px;
+	width: 350px;
 }
-#formLoggin{
-	display:flex;
-	align-items:center;
-	justify-content:center;
-	margin:20px;
+
+#formLoggin {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 20px;
 }
-#formLoggin a{
+
+#formLoggin a {
 	display: block;
 	text-align: center;
 }
+
 #cabecera {
 	animation: fadein 10s;
-	margin-top:20px;
-	font-size:60px;
-	font-family:Caribbean;
-    text-shadow:
-    -1px -1px 20px #999,
-    0 0 1px darkblue,
-    1px 1px 1px black,
-    2px 2px 1px #555,
-    3px 3px 1px #222,
-    4px 4px 20px #fff;
-    text-align: center;
+	margin-top: 20px;
+	font-size: 60px;
+	font-family: Caribbean;
+	text-shadow: -1px -1px 20px #999, 0 0 1px darkblue, 1px 1px 1px black,
+		2px 2px 1px #555, 3px 3px 1px #222, 4px 4px 20px #fff;
+	text-align: center;
 }
-#logo{
-	margin:10px;
-	margin-top:25px;
-	opacity:0.7;
+
+#logo {
+	margin: 10px;
+	margin-top: 25px;
+	opacity: 0.7;
 }
-#email{
-	color:white;
+
+#email {
+	color: white;
 	background-color: rgba(0, 0, 0, .5);
 }
-#password{
+
+#password {
 	
 }
-.botones{
-		display: flex;
-    justify-content: center;
-    margin-top:5px;
+
+.botones {
+	display: flex;
+	justify-content: center;
+	margin-top: 5px;
 }
-#iniciarSesion{
-	margin-top:20px;
-	margin-bottom:20px;
-	width:100%;
+
+#iniciarSesion {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 100%;
 	background: linear-gradient(180deg, #275f87 0%, #306485 100%);
-	border:0;
+	border: 0;
 }
-#iniciarSesion:hover{
+
+#iniciarSesion:hover {
 	background: linear-gradient(180deg, #227bba 0%, #275f87 100%);
 }
 
-#crearCuenta{
-	margin:5px;
+#crearCuenta {
+	margin: 5px;
 }
-a{
-	text-decoration :none;
-	color:#227bba !important;
+
+a {
+	text-decoration: none;
+	color: #227bba !important;
 }
-a:hover{
-	color:#275f87 !important;
+
+a:hover {
+	color: #275f87 !important;
 }
-<!--  -->
-.modal-dialog,.modal-content,.modal-header,#exampleModalLabel,#modal-body,.modal-footer{
+
+<!--
+-->
+.modal-dialog, .modal-content, .modal-header, #exampleModalLabel,
+	#modal-body, .modal-footer {
 	text-align: center;
 	justify-content: center;
 	background-color: black;
-	color:gray;
-		font-family: PiratesBay;
+	color: gray;
+	font-family: PiratesBay;
+}
+
+@keyframes fadein {from { opacity:1;
 	
 }
-@keyframes fadein {
-    from {
-        opacity:1;
-    }
-    to {
-        opacity:1;
-    }
+
+to {
+	opacity: 1;
 }
-.tienda img{
-	margin-top:10px;
-	width:50px;
+
+}
+.tienda img {
+	margin-top: 10px;
+	width: 50px;
 	filter: invert(100%);
 }
-.tienda img:hover{
-	cursor:pointer;
+
+.tienda img:hover {
+	cursor: pointer;
 }
 
 -------
+
+
 .cuerpoLuz {
-  position: relative;
-  min-height: 100vh;
-  color: white;
-  font-family: PiratesBay;
-  display: flex;
-  z-index: 0;
-  align-items: center;
-  justify-content: center;
+	position: relative;
+	min-height: 100vh;
+	color: white;
+	font-family: PiratesBay;
+	display: flex;
+	z-index: 0;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+.logueado{
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+#cabecera2 {
+	animation: fadein 10s;
+	font-size: 70px;
+	font-family: Caribbean;
+	text-shadow: -1px -1px 20px #999, 0 0 1px darkblue, 1px 1px 1px black,
+		2px 2px 1px #555, 3px 3px 1px #222, 4px 4px 20px #fff;
+	text-align: center;
+	color:white;
+	display:flex;
+	flex-direction:column;
+	justify-content: center;
+	align-items: center;
 }
 
-.logueado {
-  position: absolute;
-  top: 54%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: 80%;
-  width: 70%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.peluqueros{
+	display:flex;
+	width: 400px;
+	height: 320px;
+	margin-bottom: 20px;
+	box-shadow: 7px 7px 15px #000000; 
 }
-.estructura {
-  display: grid;
-  grid-template-columns: 420px auto;
-  grid-template-rows: 100px 500px;
-  grid-template-areas:
-   "header header header"
-   "cajaIzquierda cajaIzquierda cajaDerecha";
-   height: 100%;
+.peluqueros img{
+	width:0;
+	flex-grow: 1;
+	object-fit:cover;
+	opacity:.8;
+	transition: width .5s ease, opacity .5s ease, filter .5s ease; 
 }
-.titulo{
-	grid-area:header;
-	
-    text-align: center;
-}
-.titulo > h1{
-	margin-top:20px;
-	font-size:40px;
-	font-family:Caribbean;
-   text-shadow:
-    -1px -1px 20px #999,
-    0 0 1px darkblue,
-    1px 1px 1px black,
-    2px 2px 1px #555,
-    3px 3px 1px #222,
-    4px 4px 20px #fff;
-    color:white;
-}
-.titulo button{
-	position:absolute;
-	top:0px;
-	right:0;
-}
-.cajaIzquierda {
-  grid-area:cajaIzquierda;
-	
-  background: red;
+.peluqueros img:hover{
+	cursor:crosshair;
+	width:300px;
+	opacity:1;
+	filter:contrast(120%);
 }
 
-.cajaDerecha {
-  grid-area:cajaDerecha;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-gap: 20px;
-  background: black;
+
+
+
+
+.botones{
+	position: absolute;
+	top: 0px;
+	right: 50px;
+	gap:20px;
+	width:50px;
+	height: 50px;
 }
 
-.textoRuben {
-  background: yellow;
-  grid-column: 1 ;
-  grid-row: 1;
-  font-size:1rem;
-  
-}
 
-.fotos1 {
-  background: orange;
-  grid-column: 2 ;
-  grid-row: 1;
-}
+
+
 
 .textoTiendaCita {
-  background: purple;
-   grid-column: 2 ;
-  grid-row: 2;
-  font-size:1rem;
-  
+	margin:12px;
+	font-size: 1.2rem;
+	display: flex;
+	box-shadow: 7px 7px 15px #000000; 
+	background-size: 110% 110%;
+	background-position:center;
+	background-color: rgba(0, 0,0, .7);
+	color: #FFFFFF;
+	text-shadow: -3px 2px 3px rgba(0,0,0,1);
+	font-family: piratesBay;
+	border-radius:10px;
+	border-bottom-left-radius: 100px;
+border-bottom-right-radius: 100px;
+	width: 60%;
+	height: auto;
+	padding-bottom: 5px;
+}
+.textoTiendaCita .tienda2,.textoTiendaCita .cita{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	flex-grow: 1;
+	height: 100%;
+}
+.textoTiendaCita .contacto{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	flex-grow: 1;
+	height: 100%;
+}
+.textoTiendaCita h5{
+		margin:18px;
+		font-family:caribbean;
+		font-size: 14px;
+}
+.textoTiendaCita img {
+    filter: invert(100%);
 }
 
-.fotos2 {
-  background: pink;
-   grid-column: 1 ;
-  	grid-row: 2;
+.textoTiendaCita img:hover {
+    filter: invert(0);
+    cursor:pointer;
 }
+
+@media (max-width: 1000px) {  /* Cambiar a flex dirección de columna en dispositivos de ancho máximo de 768px */
+  .textoTiendaCita {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* opcional, para centrar los elementos horizontalmente */
+    width: 90%;
+    height: auto;
+    padding:20px;
+    gap:25px;
+  }
+  .textoTiendaCita h5{
+  padding:11px;
+  font-size: 18px;
+  }
+  .textoTiendaCita span{
+  font-family: piratesBay
+  }
+}
+
+
+

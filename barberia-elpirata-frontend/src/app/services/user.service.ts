@@ -43,7 +43,9 @@ export class UserService {
   getToken(){
 	  return localStorage.getItem('token');
   }
-  
+  getCredencial(){
+	  return localStorage.getItem('credencial');
+  }
   logout() {
     return this.httpClient.post(`${baserUrl}/logout`, {}).toPromise();
   }

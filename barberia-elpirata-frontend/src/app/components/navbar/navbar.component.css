@@ -1,10 +1,22 @@
+.navbar {
+	z-index: 1;
+	font-family: caribbean;
+}
+
+.titulo-navbar {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
 .navbar-toggler-icon {
 	width: 22px;
 	margin-bottom: 4px;
 	transition: transform 1s ease-in-out;
 }
-
+.menu-item {
+  margin-right: 20px;
+}
 .navbar-toggler:hover .navbar-toggler-icon:first-child {
 	transform: rotate(45deg);
 	top: 5px;
@@ -17,4 +29,62 @@
 .navbar-toggler:hover .navbar-toggler-icon:last-child {
 	transform: rotate(-180deg);
 	top: -5px;
+}
+
+.container-fluid {
+	position: relative;
+}
+
+.carrito img {
+	position: absolute;
+	filter: invert(100%);
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 40px;
+}
+
+.textoTiendaCita img {
+	position: absolute;
+	filter: invert(100%);
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.textoTiendaCita img:hover {
+	filter: invert(0);
+	cursor: pointer;
+}
+.subida{
+	position:relative;
+	top:.5rem;
+	width:25px;
+	margin: 0 20px 0 20px;
+	filter: invert(50%);	
+}
+.cerrar-sesion {
+	top:.2rem;
+	position:relative;
+	border-radius: 20px;
+	color: gray;
+	background-color: black;
+	animation: pulse 5s ease infinite;
+	transition: background-color 0.5s ease, box-shadow 0.5s ease,color 0.5s ease;
+	border: 3px solid gray;
+}
+.cerrar-sesion:hover{
+	background-color: #000000;
+	color:white;
+	box-shadow: 0px 0px 5px 3px rgba(255,255,255,1);
+}
+.separator {
+	border: 0;
+	height: 1px;
+	background-color: #e0e0e0;
+	margin-top: 0;
+	margin-bottom: 0;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
 }

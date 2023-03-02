@@ -202,16 +202,7 @@ li {
 	filter: contrast(130%);
 }
 
-.separator {
-	border: 0;
-	height: 1px;
-	background-color: #e0e0e0;
-	margin-top: 0;
-	margin-bottom: 0;
-	width: 90%;
-	margin-left: auto;
-	margin-right: auto;
-}
+
 .card-footer{
 	padding:0;
 	margin: 0;

@@ -8,7 +8,7 @@ import { CarroService } from 'src/app/services/carro.service';
   styleUrls: ['./carro-productos.component.css']
 })
 export class CarroProductosComponent implements OnInit{
-	
+
 	productos : Producto[] = [];
 	@ViewChild('contenedor') contenedor : ElementRef;
 	@ViewChild('header') header : ElementRef;
@@ -27,7 +27,8 @@ constructor(private carroService: CarroService) {
 			      // Se ejecuta cuando ocurre un error
 			      console.log(error);
 			    }
-			  );		
+			  );
+			   	
     }
 	 		@HostListener('window:scroll', ['$event']) onScroll() {
 			if (this.contenedor.nativeElement.getBoundingClientRect().top < 10) {
