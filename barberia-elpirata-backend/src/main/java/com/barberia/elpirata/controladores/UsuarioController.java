@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.barberia.elpirata.entidades.Rol;
 import com.barberia.elpirata.entidades.Usuario;
-import com.barberia.elpirata.entidades.UsuarioRol;
 import com.barberia.elpirata.repositorios.UsuarioRepository;
 import com.barberia.elpirata.servicios.UsuarioService;
 
@@ -32,29 +31,11 @@ public class UsuarioController {
     @Autowired 
     private UsuarioRepository usuarioRepository;
     
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+   
     
-    @PostMapping("/")
+    @PostMapping("/guardarUsuario")
     public Usuario guardarUsuario(@RequestBody Usuario usuario) throws Exception{
-    	
-        usuario.setFoto("default.png");
-        String password = usuario.getContraseña();
-        String encodedPassword = passwordEncoder.encode(password);
-        usuario.setContraseña(encodedPassword);
-        
-        Set<UsuarioRol> usuarioRoles = new HashSet<>();
-
-        Rol rol = new Rol();
-        rol.setRolId(2L);
-        rol.setNombre("USUARIO");
-
-        UsuarioRol usuarioRol = new UsuarioRol();
-        usuarioRol.setUsuario(usuario);
-        usuarioRol.setRol(rol);
-
-        usuarioRoles.add(usuarioRol);
-        return usuarioService.guardarUsuario(usuario,usuarioRoles);
+        return usuarioService.guardarUsuario(usuario);
     }
 
     @GetMapping("/todosLosUsuarios")

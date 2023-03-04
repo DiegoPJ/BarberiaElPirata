@@ -1,59 +1,27 @@
 package com.barberia.elpirata.entidades;
 
-import java.util.HashSet;
-import java.util.Set;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data @AllArgsConstructor @NoArgsConstructor
 @Table(name= "roles")
 public class Rol {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long rolId;
-	private String nombre;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "rol_usuRol")
-	private Set<UsuarioRol> usuarioRoles = new HashSet<>();
-
+	@Enumerated(EnumType.STRING)
+	private AuthorityName nombre;
 	
-	public Rol() {
-	}
-	public Rol(Long rolId, String nombre, Set<UsuarioRol> usuarioRoles) {
-		super();
-		this.rolId = rolId;
-		this.nombre = nombre;
-		this.usuarioRoles = usuarioRoles;
-	}
-
-	public Long getRolId() {
-		return rolId;
-	}
-
-	public void setRolId(Long rolId) {
-		this.rolId = rolId;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public Set<UsuarioRol> getUsuarioRoles() {
-		return usuarioRoles;
-	}
-
-	public void setUsuarioRoles(Set<UsuarioRol> usuarioRoles) {
-		this.usuarioRoles = usuarioRoles;
-	}
 }

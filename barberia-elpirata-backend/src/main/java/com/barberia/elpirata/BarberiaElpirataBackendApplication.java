@@ -27,7 +27,6 @@ import com.barberia.elpirata.entidades.Rol;
 import com.barberia.elpirata.entidades.Corte;
 import com.barberia.elpirata.entidades.Estilo;
 import com.barberia.elpirata.entidades.Usuario;
-import com.barberia.elpirata.entidades.UsuarioRol;
 import com.barberia.elpirata.repositorios.UsuarioRepository;
 import com.barberia.elpirata.servicios.CitaService;
 import com.barberia.elpirata.servicios.CorteService;

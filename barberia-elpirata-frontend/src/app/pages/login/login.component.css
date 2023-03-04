@@ -238,15 +238,16 @@ to {
 	font-size: 1.2rem;
 	display: flex;
 	box-shadow: 7px 7px 15px #000000; 
-	background-size: 110% 110%;
-	background-position:center;
-	background-color: rgba(0, 0,0, .7);
+	background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4)),
+    url("/assets/img/fondomadera.jpg");
+	  background-position: center;
 	color: #FFFFFF;
 	text-shadow: -3px 2px 3px rgba(0,0,0,1);
 	font-family: piratesBay;
+	border: 2px solid black;
 	border-radius:10px;
 	border-bottom-left-radius: 100px;
-border-bottom-right-radius: 100px;
+	border-bottom-right-radius: 100px;
 	width: 60%;
 	height: auto;
 	padding-bottom: 5px;
@@ -258,7 +259,7 @@ border-bottom-right-radius: 100px;
 	flex-grow: 1;
 	height: 100%;
 }
-.textoTiendaCita .contacto{
+.textoTiendaCita .informacion{
 	display:flex;
 	flex-direction:column;
 	align-items:center;
@@ -266,16 +267,23 @@ border-bottom-right-radius: 100px;
 	height: 100%;
 }
 .textoTiendaCita h5{
-		margin:18px;
+		margin:16px;
 		font-family:caribbean;
 		font-size: 14px;
 }
-.textoTiendaCita img {
+.textoTiendaCita .carroImg {
     filter: invert(100%);
 }
+.textoTiendaCita .reservaImg {
+    filter: contrast(50%);
+}
 
-.textoTiendaCita img:hover {
+.textoTiendaCita .carroImg:hover {
     filter: invert(0);
+    cursor:pointer;
+}
+.textoTiendaCita .reservaImg:hover {
+    filter: contrast(200%);
     cursor:pointer;
 }
 

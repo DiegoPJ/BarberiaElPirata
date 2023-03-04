@@ -2,26 +2,31 @@ package com.barberia.elpirata.seguridad;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.barberia.elpirata.entidades.AuthorityName;
+import com.barberia.elpirata.entidades.Rol;
 import com.barberia.elpirata.entidades.Usuario;
 
 public class UserDetailsImpl implements UserDetails {
 
 	
 	private  Usuario usuario;
+	private  List<Rol> roles;
 	
-	public UserDetailsImpl(Usuario usuario) {
+	public UserDetailsImpl(Usuario usuario, List<Rol> roles) {
 		super();
 		this.usuario = usuario;
+		this.roles = roles;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		
-		return Collections.emptyList();
+		return usuario.getRoles().stream().map(SecurityAuthority::new).toList();
 	}
 
 	@Override

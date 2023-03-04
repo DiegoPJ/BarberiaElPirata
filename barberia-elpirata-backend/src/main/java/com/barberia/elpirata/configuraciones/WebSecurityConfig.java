@@ -45,8 +45,8 @@ public class WebSecurityConfig   {
 			.and()
 			.csrf().disable()
 			.authorizeHttpRequests()
-			.requestMatchers("/api/usuarios/").permitAll()
-		    .requestMatchers("/api/servicios").permitAll()
+			.requestMatchers("/api/usuarios").permitAll()
+		    .requestMatchers("/api/servicios").hasAuthority("ADMIN")
 		    .requestMatchers("/api/estilos").permitAll()
 		    .requestMatchers("/api/cortes").permitAll()
 		    .requestMatchers("/api/guardarCita").permitAll()
@@ -73,10 +73,10 @@ public class WebSecurityConfig   {
 //		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
 //		manager.createUser(User.withUsername("admin")
 //				.password(passwordEncoder().encode("admin"))
-//				.roles()
+//				.roles("ADMIN")
 //				.build());
 //		return manager;
-//	}
+//	} 
 	
 	@Bean
 	AuthenticationManager authManager(HttpSecurity http) throws Exception {
