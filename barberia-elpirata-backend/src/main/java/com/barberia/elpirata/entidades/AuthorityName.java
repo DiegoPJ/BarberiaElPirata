@@ -1,5 +1,6 @@
 package com.barberia.elpirata.entidades;
 
 public enum AuthorityName {
-	USUARIO,PELUQUERO,PELUQUERODIOS,ADMIN
+	ROLE_USUARIO,ROLE_PELUQUERO,ROLE_PELUQUERODIOS,ROLE_ADMIN
 }
+ 

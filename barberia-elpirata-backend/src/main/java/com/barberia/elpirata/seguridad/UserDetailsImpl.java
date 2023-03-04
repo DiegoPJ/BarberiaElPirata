@@ -3,11 +3,12 @@ package com.barberia.elpirata.seguridad;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.barberia.elpirata.entidades.AuthorityName;
 import com.barberia.elpirata.entidades.Rol;
 import com.barberia.elpirata.entidades.Usuario;
 
@@ -15,12 +16,14 @@ public class UserDetailsImpl implements UserDetails {
 
 	
 	private  Usuario usuario;
-	private  List<Rol> roles;
+    private List<GrantedAuthority> authorities;
 	
 	public UserDetailsImpl(Usuario usuario, List<Rol> roles) {
 		super();
 		this.usuario = usuario;
-		this.roles = roles;
+		this.authorities = roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role+""))
+                .collect(Collectors.toList());
 	}
 
 	@Override
