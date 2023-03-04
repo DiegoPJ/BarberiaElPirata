@@ -11,6 +11,7 @@ import { HorarioComponent } from 'src/app/components/horario/horario.component';
 })
 
 export class InicioComponent implements OnInit,AfterViewInit{
+	roles: string[] = [] ; 
 	usuario:any;
 	usuarios?: Usuario[];
 	calendarioSelecIni:Date;
@@ -43,7 +44,7 @@ constructor(
     }
     ngOnInit(): void {
 
-	/*
+	
 	
 	
 	
@@ -51,8 +52,9 @@ constructor(
 	.subscribe(usuarios => {
 		this.usuarios = usuarios;
 	})
-	console.log(localStorage.getItem("credencial"))*/
-
+		this.roles = JSON.parse(localStorage.getItem('roles') || '[]');
+		console.log("ROLEEESS"+this.roles)
+		console.log("ROLEEESS"+localStorage.getItem('roles'))
     }
     
     actualizarCitas(){

@@ -51,4 +51,7 @@ export class LoginComponent implements OnInit{
   onLogout() {
   this.user = false;
 }
+ clearError() {
+        this.error = false;
+    }
 }

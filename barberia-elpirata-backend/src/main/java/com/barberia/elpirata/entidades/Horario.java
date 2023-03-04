@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data @NoArgsConstructor
-@Table(name = "horario")
+@Table(name = "horarios")
 public class Horario {
 	
 	

@@ -3,6 +3,7 @@ import {HttpClient, HttpResponse} from '@angular/common/http';
 import baserUrl from './helper';
 import { map, Observable } from 'rxjs';
 import { Credenciales, Usuario } from '../model';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class UserService {
   constructor(private httpClient :HttpClient) { }
   
   public añadirUsuario(user:any){
-	  return this.httpClient.post(`${baserUrl}/api/usuarios/`,user);
+	  return this.httpClient.post(`${baserUrl}/api/usuarios/guardarUsuario`,user);
   }
    
    public obtenerEmail(email:any){
@@ -21,7 +22,9 @@ export class UserService {
   public todosLosUsuarios(): Observable<Usuario[]>{
 	  	  return this.httpClient.get<Usuario[]>(`${baserUrl}/api/usuarios/todosLosUsuarios`);
   }
-  
+  public todosLosUsuariosConCitas(): Observable<Usuario[]>{
+	  	  return this.httpClient.get<Usuario[]>(`${baserUrl}/api/usuarios/todosLosUsuariosConCitas`);
+  }
   
   login(credenciales : Credenciales){
 	  
@@ -33,9 +36,12 @@ export class UserService {
 		  
 		  const bearerToken = headers.get('Authorization')!;
 		  const token = bearerToken?.replace('Bearer ','');
-		  
-		  localStorage.setItem('token',token);
-		   localStorage.setItem('credencial',credenciales.email);
+		  const tokenData = jwt_decode(token) as any;
+		  const roles = tokenData.roles;
+		  const credencial = tokenData.sub
+		   localStorage.setItem('token',token);
+			localStorage.setItem('roles', JSON.stringify(roles));
+		   localStorage.setItem('credencial',credencial);
 		  return body;
 	  })); 
   }
@@ -45,6 +51,9 @@ export class UserService {
   }
   getCredencial(){
 	  return localStorage.getItem('credencial');
+  }
+  getRoles(){
+	  return localStorage.getItem('roles');
   }
   logout() {
     return this.httpClient.post(`${baserUrl}/logout`, {}).toPromise();

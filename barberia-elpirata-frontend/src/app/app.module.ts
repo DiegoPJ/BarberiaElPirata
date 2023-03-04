@@ -22,6 +22,7 @@ import { AlertComponent } from './components/alert/alert.component';
 import { CarroServicioComponent } from './components/carro-servicio/carro-servicio.component';
 import { CarroProductosComponent } from './pages/carro-productos/carro-productos.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 
 const appRoutes:Routes =[
@@ -38,6 +39,10 @@ const appRoutes:Routes =[
 	{
 		path:'carro',
 		 component:CarroProductosComponent
+	},
+	{
+		path:'admin',
+		 component:AdminComponent
 	}
 ]
 
@@ -55,6 +60,7 @@ const appRoutes:Routes =[
     CarroServicioComponent,
     CarroProductosComponent,
     NavbarComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

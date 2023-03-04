@@ -10,6 +10,8 @@ export interface Usuario {
 	email:String;
 	telefono:String;
 	password:String;
+	roles: { rolId: number, nombre: string }[];
+	citas: Cita[]
 }	
 
 export interface Horario {

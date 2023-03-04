@@ -4,7 +4,6 @@ import { Servicio, Corte, Estilo, Cita, Usuario, Horario } from 'src/app/model';
 import { ListaServiciosService } from 'src/app/services/lista-servicios.service';
 import { CitaService } from 'src/app/services/cita.service';
 import { UserService } from 'src/app/services/user.service';
-import * as moment from 'moment';
 import { AlertComponent } from 'src/app/components/alert/alert.component';
 import { HorarioService } from 'src/app/services/horario.service';
 
@@ -34,6 +33,7 @@ export class CarroServicioComponent implements OnInit {
 	 mañanaFin: Date = new Date();
 	 tardeFin: Date = new Date();
 	 numCitas: number;
+	 
 constructor(private listaServiciosService:ListaServiciosService,
 			private citaService:CitaService,
 			private userService:UserService,
@@ -57,7 +57,7 @@ constructor(private listaServiciosService:ListaServiciosService,
 			id: 0,
 			fechaInicio: new Date(),
 			fechaFin:new Date(),
-			usuario: { id: 0,nombre:"0",email:"0",telefono:"0",password:"0" },
+			usuario: { id: 0,nombre:"0",email:"0",telefono:"0",password:"0", roles: [{ rolId: 0, nombre: "0" }],citas: []},
 			corte: [],
 			estilo: [],
 			servicio: [],

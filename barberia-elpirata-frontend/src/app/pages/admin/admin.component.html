@@ -1,0 +1,64 @@
+<div class="cuerpo">
+	<div class="usuarios">
+		<h2>Lista de usuarios</h2>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nombre</th>
+					<th>Email</th>
+					<th>Teléfono</th>
+					<th>Rol</th>
+					<th>Citas</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let usuario of usuarios">
+					<td>{{ usuario.id }}</td>
+					<td>{{ usuario.nombre }}</td>
+					<td>{{ usuario.email }}</td>
+					<td>{{ usuario.telefono }}</td>
+					<td>
+						<ul>
+							<li *ngFor="let rol of usuario.roles">{{ rol.nombre.slice(5)
+								}}</li>
+						</ul>
+					</td>
+					<td>
+						<ul>
+							<li *ngFor="let cita of usuario.citas">
+								<table>
+									<tr>
+										<td>Fecha de inicio:</td>
+										<td>{{ cita.fechaInicio | date: 'dd/MM/yyyy' }} {{
+											cita.fechaInicio | date: 'HH:mm' }}</td>
+									</tr>
+									<tr>
+										<td>Fecha de fin:</td>
+										<td>{{ cita.fechaFin | date: 'dd/MM/yyyy' }} {{
+											cita.fechaFin | date: 'HH:mm' }}</td>
+									</tr>
+									<tr>
+										<td></td>
+										<td>
+											<button class="btn btn-danger">Eliminar</button>
+										</td>
+									</tr>
+								</table>
+							</li>
+						</ul>
+					</td>
+					<td><button class="btn btn-primary">Editar</button></td>
+					<td><button class="btn btn-danger">Borrar</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="barberia">
+		<div class="servicios"></div>
+		<div class="cortes"></div>
+		<div class="estilos"></div>
+	</div>
+</div>

@@ -24,7 +24,7 @@ import lombok.ToString;
 
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor
-@Table(name = "cita")
+@Table(name = "citas")
 public class Cita {
 	
 	@Id

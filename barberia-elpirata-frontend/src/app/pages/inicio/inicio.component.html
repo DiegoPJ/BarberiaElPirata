@@ -12,7 +12,7 @@
 		<app-horario #horarioIni [calendarioSelecIni]="calendarioSelecIni"
 			(fechaCitaCompleta)="escuchaCalendario($event)" [citas]="citas"></app-horario>
 	</div>
-	<div id="derecha">
+	<div id="derecha" ><!-- *ngIf="roles.includes('ROLE_ADMIN')" -->
 		<div class="cabeceraDerecha">
 			<p>Citas</p>
 		</div>

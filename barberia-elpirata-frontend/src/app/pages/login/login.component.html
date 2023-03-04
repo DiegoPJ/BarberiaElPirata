@@ -21,12 +21,12 @@
 					(ngSubmit)="login(form)">
 					<div class="form-group mt-2">
 						<input type="email" name="email" id="email" class="form-control"
-							placeholder="Introduce tu email" [(ngModel)]="creds.email">
+							placeholder="Introduce tu email" [(ngModel)]="creds.email" (ngModelChange)="clearError()">
 					</div>
 					<div class="form-group mt-2">
 						<input type="password" name="password" id="password"
 							class="form-control" placeholder="Introduce tu contraseña"
-							[(ngModel)]="creds.password">
+							[(ngModel)]="creds.password" (ngModelChange)="clearError()">
 						<div *ngIf="error" class="text-danger mt-2">Email o
 							contraseña incorrectos.</div>
 					</div>
@@ -106,7 +106,7 @@
 					<span style="font-size: 15px"><img class="carrito" width="20px" style="margin-right:5px" src="/assets/img/iconos/instagram.png">RubenNH</span>
 					<span style="font-size: 15px">C/Francisco Pene nº23 </span> <span
 						style="font-size: 15px">04131 Almeria/Retamar</span> <span
-						style="font-size: 15px">+34 666555444</span>
+						style="font-size: 15px; margin-bottom:10px">+34 666555444</span>
 
 				</div>
 				<div class="tienda2">

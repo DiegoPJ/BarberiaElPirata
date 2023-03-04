@@ -141,29 +141,7 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 //
 //		horarioService.guardarHorario(horario7);
 //
-//		// creas usuario
-//		Usuario usuario = new Usuario();
-//		usuario.setNombre("Diego");
-//		usuario.setEmail("d@d.com");
-//		usuario.setUsername("emca");
-//		usuario.setContraseña("0000");
-//		usuario.setTelefono("222");
 //
-//		// creas rol
-//		Rol rol = new Rol();
-//		rol.setRolId(1L);
-//		rol.setNombre("admin");
-//
-//		// creas mapa
-//		Set<UsuarioRol> usuarioRoles = new HashSet<>();
-//		// crear la asociacion entre los dos
-//		UsuarioRol usuarioRol = new UsuarioRol();
-//		usuarioRol.setRol(rol);
-//		usuarioRol.setUsuario(usuario);
-//		usuarioRoles.add(usuarioRol);
-//
-//		usuarioService.guardarUsuario(usuario, usuarioRoles);
-
 //		Servicio servicio1 = new Servicio();
 //		servicio1.setNombre("Peluqueria");
 //		servicioService.guardarServicio(servicio1);
@@ -215,44 +193,7 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 //		estilo1.setCorte(corte2);
 //		estiloService.guardarEstilo(estilo1);
 //
-//	
-//		Optional<Usuario> optionalUsuario = Optional.ofNullable(usuarioRepository.findByEmail("d@d.com"));
-//		if (optionalUsuario.isPresent()) {
-//			
-//			Usuario usuario2 = optionalUsuario.get();
-//			SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//			Date date = formato.parse("2023-02-19 12:00:00");
-//			Cita cita = new Cita();
-//			List<Corte> cortes = new ArrayList();
-//			cortes.add(corte3);
-//			cortes.add(corte4);
-//			
-//			List<Servicio> servicios = new ArrayList();;
-//			servicios.add(servicio2);
-//			
-//			cita.setUsuario(usuario2);
-//			cita.setFecha(new Timestamp(date.getTime()));
-//			cita.setCorte(cortes);
-//			cita.setServicio(servicios);
-//			citaService.guardarCita(cita);
 //
-//			
-//			Date date2 = formato.parse("2023-02-19 18:00:00");
-//			Cita cita2 = new Cita();
-//			
-//			List<Servicio> servicios2 = new ArrayList();;
-//			servicios2.add(servicio3);
-//			servicios2.add(servicio2);
-//					
-//			List<Estilo> estilos2 = new ArrayList();;
-//			estilos2.add(estilo1);
-//			
-//			cita2.setUsuario(usuario2);
-//			cita2.setFecha(new Timestamp(date2.getTime()));
-//			cita2.setServicio(servicios2);
-//			cita2.setEstilo(estilos2);
-//			citaService.guardarCita(cita2);
-//		}
 //		Producto producto1 = new Producto();
 //		producto1.setNombre("Gel Canonico");
 //		producto1.setCantidad(20);

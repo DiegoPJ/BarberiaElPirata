@@ -1,19 +1,20 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 	<div class="container-fluid">
-		<img routerLink="/" src="../assets/img/LOGOTOTAL.png" width="50px" style="cursor:pointer" alt="Logo">
-		
-		<a *ngIf="getScreenWidth() > 768 && currentRoute == '/carro'" class="navbar-brand"
-   style="font-size: 26px !important" href="#">Tienda</a> <a
-			*ngIf="currentRoute == '/cita'" class="navbar-brand"
+		<img routerLink="/" src="../assets/img/LOGOTOTAL.png" width="50px"
+			style="cursor: pointer" alt="Logo"> <a
+			*ngIf="getScreenWidth() > 768 && currentRoute == '/carro'"
+			class="navbar-brand" style="font-size: 26px !important" href="#">Tienda</a>
+		<a *ngIf="currentRoute == '/cita'" class="navbar-brand"
 			style="font-size: 26px !important" href="#">Cita</a> <a
 			*ngIf="currentRoute == '/'" class="navbar-brand"
-			style="font-size: 26px !important" href="#">Ruben NH</a>
-			 
+			style="font-size: 26px !important" href="#">Ruben NH</a> <a
+			*ngIf="currentRoute == '/admin'" class="navbar-brand"
+			style="font-size: 26px !important" href="#">Configuración</a>
 		<div *ngIf="currentRoute == '/carro'" class="carrito">
 			<img class="carrito" src="/assets/img/iconos/carrito.png">
 		</div>
-	
-		
+
+
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 			data-bs-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -22,7 +23,9 @@
 
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav ms-auto">
-<li class="nav-item menu-item" *ngIf="currentRoute != '/'"><a
+				<li class="nav-item menu-item" *ngIf="currentRoute != '/admin'"><a
+					class="nav-link " routerLink="/admin">Configuración</a></li>
+				<li class="nav-item menu-item" *ngIf="currentRoute != '/'"><a
 					class="nav-link " routerLink="/">Inicio</a></li>
 				<li class="nav-item menu-item" *ngIf="currentRoute != '/carro'"><a
 					class="nav-link" routerLink="/carro">Tienda</a></li>
@@ -32,8 +35,7 @@
 					<button class="cerrar-sesion" (click)="onlogout()">Cerrar
 						Sesión</button>
 				</li>
-				<li class="nav-item menu-item">
-				</li>
+				<li class="nav-item menu-item"></li>
 			</ul>
 		</div>
 	</div>

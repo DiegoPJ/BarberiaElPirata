@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor
-@Table(name = "servicio")
+@Table(name = "servicios")
 public class Servicio{
 	  
 	@Id
@@ -27,9 +27,15 @@ public class Servicio{
 	private int precio;
 	private String imagen;
 	private String extra;
+	private int tiempo;
 	
-	 private int tiempo;
 	@OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List <Corte> cortes;
+	
+	@Override
+	public String toString() {
+		return "Servicio [id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", imagen=" + imagen + ", extra="
+				+ extra + ", tiempo=" + tiempo + ", cortes=" + cortes + "]";
+	}
 }

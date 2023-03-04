@@ -30,6 +30,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public Usuario guardarUsuario(Usuario usuario) throws Exception {
 		Usuario usuarioLocal = usuarioRepository.findByEmail(usuario.getEmail());
+		
 		if (usuarioLocal != null) {
 			System.out.println("El usuario ya existe");
 			throw new Exception("El usuario ya existe");
@@ -37,11 +38,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 			String password = usuario.getContraseña();
 			String encodedPassword = passwordEncoder.encode(password);
 			usuario.setContraseña(encodedPassword);
-//			Rol rol = new Rol();
-//			rol.setNombre(AuthorityName.USUARIO);
-//			List<Rol> roles = new ArrayList<>();
-//			roles.add(rol);
-//			usuario.setRoles(roles);
+			if (usuario.getRoles() == null || usuario.getRoles().isEmpty()) {
+	            Rol rolUsuario = new Rol();
+	            rolUsuario.setNombre(AuthorityName.ROLE_USUARIO);
+				List<Rol> roles = new ArrayList<>();
+				roles.add(rolUsuario);
+	            usuario.setRoles(roles);
+	        }
+
 			usuarioLocal = usuarioRepository.save(usuario);
 		}
 		return usuarioLocal;

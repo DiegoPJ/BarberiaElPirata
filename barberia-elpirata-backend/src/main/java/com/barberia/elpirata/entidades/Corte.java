@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor
-@Table(name = "corte")
+@Table(name = "cortes")
 public class Corte {
 	
 	@Id

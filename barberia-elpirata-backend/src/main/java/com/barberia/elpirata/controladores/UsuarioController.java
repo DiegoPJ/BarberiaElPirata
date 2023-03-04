@@ -1,11 +1,8 @@
 package com.barberia.elpirata.controladores;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.barberia.elpirata.entidades.Rol;
 import com.barberia.elpirata.entidades.Usuario;
 import com.barberia.elpirata.repositorios.UsuarioRepository;
 import com.barberia.elpirata.servicios.UsuarioService;
@@ -43,6 +39,12 @@ public class UsuarioController {
     		List<Usuario> x = usuarioRepository.findAll();
         return x;
     }
+    @GetMapping("/todosLosUsuariosConCitas")
+    public List<Usuario> obtenerUsuariosConCitas(){
+		List<Usuario> x = usuarioRepository.findAllWithCitas();
+    return x;
+}
+    
     @GetMapping("/{email}")
     public Usuario obtenerEmail(@PathVariable String email){
         return usuarioService.obtenerEmail(email);

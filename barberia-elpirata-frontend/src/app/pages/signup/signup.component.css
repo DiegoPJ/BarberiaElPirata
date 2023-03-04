@@ -1,6 +1,8 @@
 <!-- -->
 #modalCrearCuenta{
+	  z-index: 1050;
 	
+
   }
 #modalEstilos{
 	background:black;
