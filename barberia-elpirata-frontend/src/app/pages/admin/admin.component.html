@@ -4,7 +4,6 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>ID</th>
 					<th>Nombre</th>
 					<th>Email</th>
 					<th>Teléfono</th>
@@ -12,30 +11,40 @@
 					<th>Citas</th>
 					<th></th>
 					<th></th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr *ngFor="let usuario of usuarios">
-					<td>{{ usuario.id }}</td>
 					<td>{{ usuario.nombre }}</td>
 					<td>{{ usuario.email }}</td>
 					<td>{{ usuario.telefono }}</td>
 					<td>
 						<ul>
-							<li *ngFor="let rol of usuario.roles">{{ rol.nombre.slice(5)
-								}}</li>
+							<li style="list-style: none" *ngFor="let rol of usuario.roles">{{
+								rol.nombre.slice(5) }}</li>
 						</ul>
 					</td>
 					<td>
+					<button class="btn btn-secondary" (click)="toggleCitas()">Mostrar citas</button>
+						<div *ngIf="mostrarCitas">
 						<ul>
-							<li *ngFor="let cita of usuario.citas">
+							<li style="list-style: none" *ngFor="let cita of usuario.citas">
+								<hr style="border-width: 5px;">
 								<table>
-									<tr>
+									<tr *ngIf="cita.fechaInicio == cita.fechaFin">
+										<td>Fecha:</td>
+										<td>{{ cita.fechaInicio | date: 'dd/MM/yyyy' }} {{
+											cita.fechaInicio | date: 'HH:mm' }}</td>
+									</tr>
+
+
+									<tr *ngIf="cita.fechaInicio != cita.fechaFin">
 										<td>Fecha de inicio:</td>
 										<td>{{ cita.fechaInicio | date: 'dd/MM/yyyy' }} {{
 											cita.fechaInicio | date: 'HH:mm' }}</td>
 									</tr>
-									<tr>
+									<tr *ngIf="cita.fechaInicio != cita.fechaFin">
 										<td>Fecha de fin:</td>
 										<td>{{ cita.fechaFin | date: 'dd/MM/yyyy' }} {{
 											cita.fechaFin | date: 'HH:mm' }}</td>
@@ -43,14 +52,17 @@
 									<tr>
 										<td></td>
 										<td>
-											<button class="btn btn-danger">Eliminar</button>
+											<button class="btn btn-danger" (click)="deleteCita(cita)">Eliminar</button>
 										</td>
 									</tr>
 								</table>
+
 							</li>
 						</ul>
+						</div>
 					</td>
 					<td><button class="btn btn-primary">Editar</button></td>
+					<td><button class="btn btn-danger">Bloquear</button></td>
 					<td><button class="btn btn-danger">Borrar</button></td>
 				</tr>
 			</tbody>
@@ -62,3 +74,4 @@
 		<div class="estilos"></div>
 	</div>
 </div>
+<app-alert></app-alert>
