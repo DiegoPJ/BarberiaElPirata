@@ -53,7 +53,7 @@ public class TokenUtils {
 					.getBody();
 			
 			String username = claims.getSubject();
-			 List<String> roles = claims.get("roles", List.class);
+			List<String> roles = claims.get("roles", List.class);
 		        List<GrantedAuthority> authorities = roles.stream()
 		                .map(role -> new SimpleGrantedAuthority(""+ role))
 		                .collect(Collectors.toList());

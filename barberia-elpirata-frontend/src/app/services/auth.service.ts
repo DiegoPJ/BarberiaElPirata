@@ -18,4 +18,12 @@ export class AuthService {
     this.isAuthenticated = false;
     this.authChange.emit(false);
   }
+
+	getUserRoles(): Array<string> {
+	  const roles = localStorage.getItem('roles');
+	  if (roles) {
+	    return JSON.parse(roles);
+	  }
+	  return [];
+	}
 }

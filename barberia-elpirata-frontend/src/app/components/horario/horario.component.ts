@@ -4,15 +4,20 @@ import { HorarioService } from 'src/app/services/horario.service';
 import { DatePipe } from '@angular/common';
 import { CitaService } from 'src/app/services/cita.service';
 import * as moment from 'moment';
+import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-horario',
   templateUrl: './horario.component.html',
-  styleUrls: ['./horario.component.css']
+  styleUrls: ['./horario.component.css'],
+    providers: [UserService]
+
 })
 
 export class HorarioComponent implements OnInit,OnChanges{
-	
+  userRoles: string[];
+
 	@Output() fechaCitaCompleta =  new EventEmitter <Date | null>();
 	public horasMa: string[] = [];
 	public horasTa: string[] = [];
@@ -25,9 +30,11 @@ export class HorarioComponent implements OnInit,OnChanges{
 	constructor(		
 		private horarioService:HorarioService,
 		private datePipe: DatePipe,
-		private citaService:CitaService
+		private citaService:CitaService,
+		private authService: AuthService
 	)
-	{  
+	{      
+
 }
     ngOnChanges(changes: SimpleChanges): void {
 		
@@ -49,7 +56,10 @@ export class HorarioComponent implements OnInit,OnChanges{
       	this.citas = citas;  
       	console.log(citas);  	      				 
     	});
+    	     this.userRoles = this.authService.getUserRoles();
+
     }
+
 	escribirHoras(){
 				if(this.isDateValid(this.calendarioSelecIni)){
 					let nombreDia = this.calendarioSelecIni.toLocaleDateString('en-US', { weekday: 'long' });

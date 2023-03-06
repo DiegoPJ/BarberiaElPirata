@@ -25,7 +25,9 @@ export class UserService {
   public todosLosUsuariosConCitas(): Observable<Usuario[]>{
 	  	  return this.httpClient.get<Usuario[]>(`${baserUrl}/api/usuarios/todosLosUsuariosConCitas`);
   }
-  
+  public logout() {
+    return this.httpClient.post(`${baserUrl}/logout`, {}).toPromise();
+  }
   login(credenciales : Credenciales){
 	  
 	  return this.httpClient.post(`${baserUrl}/login` , credenciales,  {
@@ -46,19 +48,6 @@ export class UserService {
 	  })); 
   }
   
-  getToken(){
-	  return localStorage.getItem('token');
-  }
-  getCredencial(){
-	  return localStorage.getItem('credencial');
-  }
-  getRoles(){
-	  return localStorage.getItem('roles');
-  }
-  logout() {
-    return this.httpClient.post(`${baserUrl}/logout`, {}).toPromise();
-  }
-
   clearSession() {
     return this.httpClient.get(`${baserUrl}/clearSession`).toPromise();
   }

@@ -9,8 +9,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  isAuthenticated = false;
-	@Output() logout = new EventEmitter<void>();
+  	isAuthenticated = false;
+	@Output() logout = new EventEmitter<boolean>();
 		  screenWidth: number;
 
   currentRoute: string = '';
@@ -20,7 +20,11 @@ export class NavbarComponent implements OnInit {
 ) { }
 
   ngOnInit(): void {
-	   // Suscribirse al evento de cambio de autenticación
+	   const credencial = localStorage.getItem('credencial');
+	 	 if (credencial) {
+	    this.isAuthenticated = true;
+	  	}
+	// Suscribirse al evento de cambio de autenticación
     this.authService.authChange.subscribe(isAuthenticated => {
       this.isAuthenticated = isAuthenticated;
     });
@@ -40,14 +44,15 @@ export class NavbarComponent implements OnInit {
     });	
   }
 onlogout(){
-  this.userService.logout();
-  localStorage.removeItem('credencial');
-  this.user = false;
-        this.logout.emit();
-
-    if (this.currentRoute === '/cita' || this.currentRoute === '/carro') {
-    // Redirigir a la página de inicio
-    this.router.navigateByUrl('/');
+		this.isAuthenticated = false;
+  		this.logout.emit(this.isAuthenticated);
+	  	localStorage.removeItem('credencial');
+	  	localStorage.removeItem('token');
+	  	localStorage.removeItem('roles');
+	  	this.userService.logout();
+    	if (this.currentRoute != '/') {
+    	// Redirigir a la página de inicio
+    	this.router.navigateByUrl('/');
   }
 }
 getScreenWidth(): number {

@@ -1,8 +1,6 @@
 import { Component, OnChanges, SimpleChanges ,OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Credenciales } from 'src/app/model';
-import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -11,47 +9,39 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit{
-    creds: Credenciales = {
+	creds: Credenciales = 
+	{
     email:'',password:''
-  }
-	  isAuthenticated = false;
+	}
+	
+	isAuthenticated = !!localStorage.getItem('credencial');
 
-   error = false;
-   user: boolean = !!localStorage.getItem('credencial');
+	error = false;
 
   constructor(
     private userService:UserService,
-    private router: Router,
-    private authService: AuthService
-  ) {}
+  	) {}
     ngOnInit(): void {
-// Suscribirse al evento de cambio de autenticación
-    this.authService.authChange.subscribe(isAuthenticated => {
-      this.isAuthenticated = isAuthenticated;
-    });
+		
     }
 
   
-  login(form: NgForm) {
+  	login(form: NgForm) {
     this.userService.login(this.creds).subscribe(
       response => {
-		  this.user = !!localStorage.getItem('credencial');
+		  this.isAuthenticated = true;
       },
       error => {
         this.error = true;
       }
-    );
-  }
-  logout(){
-	  this.userService.logout();
-	 // localStorage.removeItem('token');
-	  localStorage.removeItem('credencial');
-	  this.user = false;
-  }
-  onLogout() {
-  this.user = false;
-}
- clearError() {
+   	 );
+ 	 }
+
+  	onLogout(event : any) {
+	  this.isAuthenticated = event;
+
+	}
+ 	clearError() {
         this.error = false;
     }
 }

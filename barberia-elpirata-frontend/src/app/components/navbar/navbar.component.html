@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 	<div class="container-fluid">
+	
 		<img routerLink="/" src="../assets/img/LOGOTOTAL.png" width="50px"
 			style="cursor: pointer" alt="Logo"> <a
 			*ngIf="getScreenWidth() > 768 && currentRoute == '/carro'"
@@ -7,7 +8,8 @@
 		<a *ngIf="currentRoute == '/cita'" class="navbar-brand"
 			style="font-size: 26px !important" href="#">Cita</a> <a
 			*ngIf="currentRoute == '/'" class="navbar-brand"
-			style="font-size: 26px !important" href="#">Ruben NH</a> <a
+			style="font-size: 26px !important" href="#">Ruben NH
+			</a> <a
 			*ngIf="currentRoute == '/admin'" class="navbar-brand"
 			style="font-size: 26px !important" href="#">Configuración</a>
 		<div *ngIf="currentRoute == '/carro'" class="carrito">

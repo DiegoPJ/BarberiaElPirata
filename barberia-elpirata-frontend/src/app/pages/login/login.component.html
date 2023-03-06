@@ -1,5 +1,5 @@
-<app-navbar *ngIf="user" (logout)="onLogout()"></app-navbar>
-<div class="cuerpo" [ngClass]="{'cuerpoLuz': user,'cuerpo': !user}">
+<app-navbar *ngIf="isAuthenticated" (logout)="onLogout($event)"></app-navbar>
+<div class="cuerpo" [ngClass]="{'cuerpoLuz': isAuthenticated,'cuerpo': !isAuthenticated}">
 	<!-- 	<app-lista-precios></app-lista-precios>
  -->
 	<div class="content">
@@ -7,11 +7,8 @@
 		<video autoplay loop [muted]="'muted'" [controls]="'false'">
 			<source src="../assets/img/video.mp4" type="video/mp4">
 		</video>
-		<!-- 	<div class="logueado" [ngClass]="{'logueado.hidden': user,'hidden': !user}">
- -->
-		<div class="login" [ngClass]="{ 'hidden': user }">
+		<div class="login" [ngClass]="{ 'hidden': isAuthenticated }">
 			<app-signup></app-signup>
-
 			<div id="cabecera">
 				<img src="../assets/img/LOGOTOTAL.png" id="logo" width="250px">
 				<h1>BARBERIA EL PIRATA</h1>
@@ -78,7 +75,7 @@
 		</div>
 		<!--  LOGIN -->
 		<!-- LOGEADO INICIO -->
-		<div class="logueado" [ngClass]="{ 'hidden': !user }">
+		<div class="logueado" [ngClass]="{ 'hidden': !isAuthenticated }">
 			<div id="cabecera2">
 
 				<h1 style="color: white">

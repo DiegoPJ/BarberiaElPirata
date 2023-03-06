@@ -3,12 +3,12 @@
 	<div class="horasMa">
 		<div class="botonesMa">
 			<Button data-bs-target="#modalPrincipal" data-bs-toggle="modal"
-				*ngFor="let hora of horasMa" class="boton-hora"
-				[disabled]="horaReservada(hora, citas)" (click)="fechaCita($event)">{{hora}}h
-			</Button>
+				*ngFor="let hora of horasMa" class="boton-hora" class="boton-hora"
+				(click)="fechaCita($event)">{{hora}}h</Button>
 		</div>
 	</div>
-
+<!--     			[ngClass]="{'boton-desabilitado': horaReservada(hora, citas), 'boton-Admin': esAdmin}" 
+ -->
 
 	<div class="horasTa">
 		<div class="botonesTa">

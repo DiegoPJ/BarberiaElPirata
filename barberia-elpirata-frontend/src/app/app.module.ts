@@ -23,6 +23,7 @@ import { CarroServicioComponent } from './components/carro-servicio/carro-servic
 import { CarroProductosComponent } from './pages/carro-productos/carro-productos.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { RoleGuard } from './helpers/role.guard';
 
 
 const appRoutes:Routes =[
@@ -42,7 +43,9 @@ const appRoutes:Routes =[
 	},
 	{
 		path:'admin',
-		 component:AdminComponent
+		 component:AdminComponent,
+		 canActivate: [RoleGuard],
+		  data: { expectedRoles: ['ROLE_ADMIN'] }
 	}
 ]
 
