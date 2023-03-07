@@ -36,6 +36,7 @@ public class Cita {
 	private Usuario usuario;
 
 	private double precio;
+	private String nombre;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Servicio> servicio = new ArrayList<>();

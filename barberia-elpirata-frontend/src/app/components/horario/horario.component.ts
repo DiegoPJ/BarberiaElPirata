@@ -1,11 +1,11 @@
-import { Component,EventEmitter,Input,OnChanges,OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component,EventEmitter,Input,OnChanges,OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Cita, Horario } from 'src/app/model';
 import { HorarioService } from 'src/app/services/horario.service';
-import { DatePipe } from '@angular/common';
 import { CitaService } from 'src/app/services/cita.service';
-import * as moment from 'moment';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { forkJoin, map, mergeMap } from 'rxjs';
+import { AlertComponent } from '../alert/alert.component';
 
 @Component({
   selector: 'app-horario',
@@ -16,31 +16,34 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 
 export class HorarioComponent implements OnInit,OnChanges{
-  userRoles: string[];
-
+	
+  	userRoles: string[];
+  	@ViewChild(AlertComponent) alert: AlertComponent;
 	@Output() fechaCitaCompleta =  new EventEmitter <Date | null>();
 	public horasMa: string[] = [];
 	public horasTa: string[] = [];
-
+	todasLasCitas : Cita[];
   	horarios: Horario[];
-  	@Input() citas: Cita[];
   	@Input() calendarioSelecIni: Date;
   	myDate:Date;
   	diaSemanaDatePiPe:any;
+  	horaReservadaManana: { [key: string]: number } = {};
+  	horaReservadaTarde: { [key: string]: number } = {};
+
 	constructor(		
 		private horarioService:HorarioService,
-		private datePipe: DatePipe,
 		private citaService:CitaService,
-		private authService: AuthService
+		private authService: AuthService,
+		private userService: UserService
 	)
 	{      
 
 }
     ngOnChanges(changes: SimpleChanges): void {
 		
-	
+			
 		    if(this.calendarioSelecIni != null){
-				      	this.escribirHoras();
+				  this.escribirHoras();
 			}else{
 				this.horasMa = [];
 				this.horasTa = [];
@@ -48,18 +51,58 @@ export class HorarioComponent implements OnInit,OnChanges{
     }
 	
     ngOnInit(): void {
+			
+		this.userService.todosLosUsuarios().pipe(
+ 		 mergeMap(usuarios => {
+	    const citasObservables = usuarios.map(usuario => {
+	      return this.citaService.getCitasByUsuario(usuario.id).pipe(
+	        map(citas => {
+	          return citas.map(cita => {
+	            return { ...cita, usuarioNombre: usuario.nombre };
+	          });
+	        })
+	      );
+	    });
+	    return forkJoin(citasObservables);
+	  }),
+	  map(citasPorUsuario => {
+	    return citasPorUsuario.reduce((accumulator, currentValue) => {
+	      return accumulator.concat(currentValue);
+	    }, []);
+	  }),
+	  map(todasLasCitas => {
+	    return todasLasCitas.sort((a, b) => new Date(a.fechaInicio).getTime() - new Date(b.fechaInicio).getTime());
+	  })
+	).subscribe(todasLasCitas => {
+	  this.todasLasCitas = todasLasCitas;
+	});
+    		
+      	this.citaService.escucharTodasLasCitas();
+   		this.citaService.suscribirseATodasLasCitas().subscribe(citas => {
+      	this.todasLasCitas = citas;
+      	this.escribirHoras();
+
+      // aquí puedes hacer cualquier cosa que necesites con las citas
+   		});
+    
         this.horarioService.todosLosHorarios().subscribe(horarios => {
       	this.horarios = horarios;    
     	});
     	
-    	this.citaService.todosLasCitas().subscribe(citas => {
-      	this.citas = citas;  
-      	console.log(citas);  	      				 
-    	});
+    	
     	     this.userRoles = this.authService.getUserRoles();
 
     }
+deleteCita(cita: Cita){
+	  	this.citaService.deleteCita(cita).subscribe(() => {
 
+	    this.alert.show("success","La cita ha sido eliminada correctamente");
+		
+		}, error => {
+	    console.error(error);
+	    this.alert.show("error","Ha ocurrido un error al eliminar la cita");
+	  });
+	}
 	escribirHoras(){
 				if(this.isDateValid(this.calendarioSelecIni)){
 					let nombreDia = this.calendarioSelecIni.toLocaleDateString('en-US', { weekday: 'long' });
@@ -99,10 +142,10 @@ export class HorarioComponent implements OnInit,OnChanges{
 							console.log("pipe: "+ this.diaSemanaDatePiPe.toLowerCase())*/
 						if(nombreDia == 
 						this.horarios[i].diaSemana.toLowerCase()){
-							this.generarHoras(this.horarios[i].hora_apertura_mañana
-											,this.horarios[i].hora_cierre_mañana
-											,this.horarios[i].hora_apertura_tarde
-											,this.horarios[i].hora_cierre_tarde);
+							this.generarHoras(this.horarios[i].hora_apertura_mañana.toString()
+											,this.horarios[i].hora_cierre_mañana.toString()
+											,this.horarios[i].hora_apertura_tarde.toString()
+											,this.horarios[i].hora_cierre_tarde.toString());
 							
 							
 						}
@@ -114,27 +157,38 @@ export class HorarioComponent implements OnInit,OnChanges{
     return !isNaN(Date.parse(fecha));
   } 
   
-  generarHoras(apertura_mañana:any,cierre_mañana:any
-  				,apertura_tarde:any,cierre_tarde:any): void {
-					  
-	let hora_mañana: moment.Moment = moment(apertura_mañana, 'HH:mm');
-	  while (hora_mañana.format('HH:mm') !== cierre_mañana) {
-	    this.horasMa.push(hora_mañana.format('HH:mm'));
-	    hora_mañana = hora_mañana.add(30, 'minutes');
-	  }
-
-  	this.horasMa.push(cierre_mañana);
-  	
-  	 let hora_tarde: moment.Moment = moment(apertura_tarde, 'HH:mm');
-	  while (hora_tarde.format('HH:mm') !== cierre_tarde) {
-	    this.horasTa.push(hora_tarde.format('HH:mm'));
-	    hora_tarde = hora_tarde.add(30, 'minutes');
-	  }
-
-  	this.horasTa.push(cierre_tarde);
+  generarHoras(aperturaManana: string, cierre_mañana: string, apertura_tarde: string, cierre_tarde: string): void {
+  let hora_mañana = new Date('1970-01-01T' + aperturaManana + ':00');
+  let cierre_mañana_date = new Date('1970-01-01T' + cierre_mañana + ':00');
+  while (hora_mañana.getTime() !== cierre_mañana_date.getTime()) {
+    this.horasMa.push(this.formatTime(hora_mañana));
+    hora_mañana.setMinutes(hora_mañana.getMinutes() + 5);
+  }
+  this.horasMa.push(cierre_mañana);
+  for (const hora of this.horasMa) {
+    this.horaReservadaManana[hora] = this.horaReservada(hora, this.todasLasCitas);
+  }
+  let hora_tarde = new Date('1970-01-01T' + apertura_tarde + ':00');
+  let cierre_tarde_date = new Date('1970-01-01T' + cierre_tarde + ':00');
+  while (hora_tarde.getTime() !== cierre_tarde_date.getTime()) {
+    this.horasTa.push(this.formatTime(hora_tarde));
+    hora_tarde.setMinutes(hora_tarde.getMinutes() + 5);
+  }
+  this.horasTa.push(cierre_tarde);
+  for (const hora of this.horasTa) {
+    this.horaReservadaTarde[hora] = this.horaReservada(hora, this.todasLasCitas);
+  }
 }
 
-	fechaCita(event:any){
+
+  formatTime(date: Date): string {
+    let hours = date.getHours().toString().padStart(2, '0');
+    let minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
+  }
+
+
+	fechaCita(event:any){console.log(event.target.textContent)
 /*		event.classList.add("selected");
 */		let fechaCita = new Date(this.calendarioSelecIni);
 		let horaMinuto = event.target.textContent.split(':');
@@ -142,53 +196,49 @@ export class HorarioComponent implements OnInit,OnChanges{
 		this.fechaCitaCompleta.emit(fechaCita);
 	}
 	
-	horaReservada(hora: string, citas: Cita[]): boolean {
-		
-		const fechaActual = moment(new Date()).format('YYYY-MM-DD');
-		const calendarioSelecIni = moment(this.calendarioSelecIni).format('YYYY-MM-DD');
-		const fechaActual2 = new Date();
-			if (fechaActual === calendarioSelecIni) {
-			  if(hora <= moment(fechaActual2).format('HH:mm')){
-				  return true;
-			  }
+horaReservada(hora: string, todasLasCitas: Cita[]): number {
+    const fechaActual = new Date();
+    const calendarioSelecIni = this.calendarioSelecIni;
+    const fechaActualStr = fechaActual.getFullYear() + '-' + (fechaActual.getMonth() + 1).toString().padStart(2, '0') + '-' + fechaActual.getDate().toString().padStart(2, '0');
+    const calendarioSelecIniStr = calendarioSelecIni.getFullYear() + '-' + (calendarioSelecIni.getMonth() + 1).toString().padStart(2, '0') + '-' + calendarioSelecIni.getDate().toString().padStart(2, '0');
+    const fechaActual2 = new Date();
+
+    if (fechaActualStr === calendarioSelecIniStr) {
+        const horaActualStr = fechaActual2.getHours().toString().padStart(2, '0') + ':' + fechaActual2.getMinutes().toString().padStart(2, '0');
+
+        if (hora <= horaActualStr) {
+			//hora que ya ha pasado
+            return -1;
+        }
+    }
+
+    for (const cita of todasLasCitas) {
+        const citaFechaInicio = new Date(cita.fechaInicio);
+        const citaFechaFin = new Date(cita.fechaFin);
+        const citaHoraInicio = citaFechaInicio.getHours().toString().padStart(2, '0') + ':' + citaFechaInicio.getMinutes().toString().padStart(2, '0');
+        const citaHoraFin = citaFechaFin.getHours().toString().padStart(2, '0') + ':' + citaFechaFin.getMinutes().toString().padStart(2, '0');
+        const citaFechaInicioStr = citaFechaInicio.getFullYear() + '-' + (citaFechaInicio.getMonth() + 1).toString().padStart(2, '0') + '-' + citaFechaInicio.getDate().toString().padStart(2, '0');
+        const citaFechaFinStr = citaFechaFin.getFullYear() + '-' + (citaFechaFin.getMonth() + 1).toString().padStart(2, '0') + '-' + citaFechaFin.getDate().toString().padStart(2, '0');
+
+        if ((citaHoraInicio <= hora && citaHoraFin >= hora && calendarioSelecIniStr == citaFechaInicioStr)){
+            
+            if(citaHoraInicio == hora){
+				//hora justa de incio de cita
+				return 1
+			}else{
+				if(citaHoraFin == hora){
+					return 0
+				}else{
+					//resto de hora de cita
+				return 2
+				}
+				
 			}
-			
-	  for (const cita of citas) {
-	    if ((moment(cita.fechaInicio).format('HH:mm') === hora 
-	    && this.convertirFechaAEspana(this.calendarioSelecIni).getTime()
-	     == this.convertirFechaAEspana(cita.fechaInicio).getTime())
-	     ||
-	       (moment(cita.fechaFin).format('HH:mm') === hora 
-	    && this.convertirFechaAEspana(this.calendarioSelecIni).getTime()
-	     == this.convertirFechaAEspana(cita.fechaFin).getTime())) {
-	     /* console.log("cita.fecha: "+ moment(cita.fecha).format('HH:mm'));
-		  console.log("hora:" +hora);
-		  console.log("this.calendarioSelecIni: " + this.convertirFechaAEspana(this.calendarioSelecIni))
-		  console.log("cita.fecha.completa: "+ this.convertirFechaAEspana(cita.fecha))*/
-	      return true;
-	    }
-	  }
-	  return false;
-	}
-
-convertirFechaAEspana(fecha:Date) {
-  // Crear un objeto de tipo Date a partir de la fecha dada
-  const date = new Date(fecha);
-
-  // Obtener la fecha solo con año, mes y día en la zona horaria de España
-  const fechaEspaña = new Date(
-    Date.UTC(
-      date.getFullYear(),
-      date.getMonth(),
-      date.getDate(),
-      0, // hora
-      0, // minutos
-      0, // segundos
-      0 // milisegundos
-    )
-  );
-  fechaEspaña.setTime(fechaEspaña.getTime() + (60 * 60 * 1000)); // Ajustar una hora para España
-
-  return fechaEspaña;
+        	}
+    	}
+    	//no reservada
+    return 0;
 }
+
+
 }

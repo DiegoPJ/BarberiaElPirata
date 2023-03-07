@@ -27,6 +27,7 @@ export interface Horario {
 export interface Cita {
 	
 	id:number;
+	nombre:string | null;
 	fechaInicio:Date;
 	fechaFin:Date;
 	usuario:Usuario;

@@ -10,7 +10,9 @@
 		</div>
 		<app-calendario (calendarioSeleccionado)="escuchaCalendario($event)"></app-calendario>
 		<app-horario #horarioIni [calendarioSelecIni]="calendarioSelecIni"
-			(fechaCitaCompleta)="escuchaCalendario($event)" [citas]="citas"></app-horario>
+			(fechaCitaCompleta)="escuchaCalendario($event)" ></app-horario>
+			<app-carro-servicio [fechaCitaCompleta]="fechaCitaCompleta"
+				></app-carro-servicio>
 	</div>
 	<div id="derecha" ><!-- *ngIf="roles.includes('ROLE_ADMIN')" -->
 		<div class="cabeceraDerecha">
@@ -20,7 +22,7 @@
 
 		<div class="cuerpoCitas">
 		
-			<div class="card-vacio" *ngIf="citas.length == 0" >
+			<div class="card-vacio" *ngIf="todasLasCitas.length == 0" >
 				<h1>Selecciona una fecha del calendario</h1>
 				<h2>Escoge una hora que te interese</h2> 
 				<h3>Esperando a que reserves tu cita ...</h3>
@@ -28,7 +30,7 @@
 					<span class="visually-hidden">Loading...</span>
 				</div>
 			</div>
-			<div class="card" *ngFor="let cita of citas">
+			<div class="card" *ngFor="let cita of todasLasCitas">
 				<div class="titulo">
 					
 					<p >{{ cita.fechaInicio | date: 'HH:mm' }}h</p>
@@ -66,8 +68,7 @@
 				</div>
 			</div>
 
-			<app-carro-servicio [fechaCitaCompleta]="fechaCitaCompleta"
-				(nuevaCita)="actualizarCitas()" [citas]="citas"></app-carro-servicio>
+			
 		</div>
 
 	</div>

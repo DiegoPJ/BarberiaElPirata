@@ -15,7 +15,7 @@ export class InicioComponent implements OnInit,AfterViewInit{
 	usuario:any;
 	usuarios?: Usuario[];
 	calendarioSelecIni:Date;
-	@Input() citas:Cita[] = [];
+	 todasLasCitas:Cita[] = [];
 	credenciales:String | null;
 	@Input() fechaCitaCompleta : Date;
 	@ViewChild('horarioIni') horarioIni: HorarioComponent;
@@ -38,13 +38,17 @@ constructor(
 		    })
 		  )
 		  .subscribe(citas => {
-		    this.citas = citas;
+		    this.todasLasCitas = citas;
 		  });
-    	console.log("CITAAASSS: "+this.citas);
     }
     ngOnInit(): void {
 
-	
+		this.citaService.escucharTodasLasCitas();
+   		this.citaService.suscribirseATodasLasCitas().subscribe(citas => {
+      	this.todasLasCitas = citas;
+
+      // aquí puedes hacer cualquier cosa que necesites con las citas
+   		});
 	
 	
 	
@@ -57,22 +61,7 @@ constructor(
 		console.log("ROLEEESS"+localStorage.getItem('roles'))
     }
     
-    actualizarCitas(){
-		this.credenciales = localStorage.getItem("credencial");
-		this.userService.obtenerEmail(this.credenciales)
-		  .pipe(
-		    switchMap(usuario => {
-		      this.usuario = usuario;
-		      return this.citaService.getCitasByUsuario(this.usuario.id);
-		    })
-		  )
-		  .subscribe(citas => {
-		    this.citas = citas;
-		    this.horarioIni.escribirHoras();
-
-		    console.log("se ha actualizado")
-		  });
-	}
+    
     escuchaCalendario(event:any) {
 		
 	  this.calendarioSelecIni = event;
@@ -82,14 +71,11 @@ constructor(
 	eliminarCita(cita: Cita) {
   this.citaService.deleteCita(cita).subscribe(
     (response: any) => {
-      console.log(response); // imprimir la respuesta del servidor en la consola
-      this.actualizarCitas()
+
     },
     (error: any) => {
       console.log(error); // imprimir el error en la consola
       //this.alert.show('error', 'No puedes coger citas anteriores');
-      this.actualizarCitas()
-
     }
   );
 }

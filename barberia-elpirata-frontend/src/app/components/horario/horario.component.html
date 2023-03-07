@@ -3,21 +3,60 @@
 	<div class="horasMa">
 		<div class="botonesMa">
 			<Button data-bs-target="#modalPrincipal" data-bs-toggle="modal"
-				*ngFor="let hora of horasMa" class="boton-hora" class="boton-hora"
+				*ngFor="let hora of horasMa" class="boton-hora"
+				[ngClass]="{'boton-reservadaIni': horaReservadaManana[hora] === 1 && userRoles.includes('ROLE_ADMIN'),
+							'boton-reservada-medio': horaReservadaManana[hora] === 2  && userRoles.includes('ROLE_ADMIN')}"
+				[disabled]="horaReservadaManana[hora] === -1 ||  
+				horaReservadaManana[hora] === 1 && !userRoles.includes('ROLE_ADMIN') ||
+				horaReservadaManana[hora] === 2 && !userRoles.includes('ROLE_ADMIN')"
 				(click)="fechaCita($event)">{{hora}}h</Button>
 		</div>
 	</div>
-<!--     			[ngClass]="{'boton-desabilitado': horaReservada(hora, citas), 'boton-Admin': esAdmin}" 
- -->
 
 	<div class="horasTa">
 		<div class="botonesTa">
 			<Button data-bs-target="#modalPrincipal" data-bs-toggle="modal"
 				*ngFor="let hora of horasTa" class="boton-hora"
-				[disabled]="horaReservada(hora, citas)" (click)="fechaCita($event)">{{hora}}h</Button>
-
-
+				[ngClass]="{'boton-reservadaIni': horaReservadaTarde[hora] === 1 && userRoles.includes('ROLE_ADMIN'),
+							'boton-reservada-medio': horaReservadaTarde[hora] === 2  && userRoles.includes('ROLE_ADMIN'),
+							'boton-reservada-Fin': horaReservadaTarde[hora] === 3  && userRoles.includes('ROLE_ADMIN')}"
+				[disabled]="horaReservadaTarde[hora] === -1 ||  
+				horaReservadaTarde[hora] === 1 && !userRoles.includes('ROLE_ADMIN') ||
+				horaReservadaTarde[hora] === 2 && !userRoles.includes('ROLE_ADMIN')"
+				(click)="fechaCita($event)">{{hora}}h</Button>
 		</div>
 
 	</div>
+
 </div>
+<div *ngIf="userRoles.includes('ROLE_ADMIN')" class="admin">
+	<div class="citas">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th colspan="2">Fechas</th>
+					<th >telefono</th>
+					<th >Borrar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let cita of todasLasCitas">
+					<td >{{ cita.id }}</td>
+			
+					<td *ngIf="cita.nombre">{{ cita.nombre }}</td>
+					<td *ngIf="!cita.nombre">{{ cita.usuario.nombre }}</td>
+					<td colspan="2">{{ cita.fechaInicio | date: 'dd/MM/yyyy HH:mm' }} <span
+						> - {{
+							cita.fechaFin | date: 'dd/MM/yyyy HH:mm' }} </span>
+					</td>
+					<td>{{cita.usuario.telefono}}</td>
+					<td>
+						<button class="btn btn-danger" (click)="deleteCita(cita)">Eliminar</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<app-alert></app-alert>

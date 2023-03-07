@@ -6,6 +6,8 @@ import { CitaService } from 'src/app/services/cita.service';
 import { UserService } from 'src/app/services/user.service';
 import { AlertComponent } from 'src/app/components/alert/alert.component';
 import { HorarioService } from 'src/app/services/horario.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -14,6 +16,9 @@ import { HorarioService } from 'src/app/services/horario.service';
   styleUrls: ['./carro-servicio.component.css']
 })
 export class CarroServicioComponent implements OnInit {
+	  userRoles: string[];
+  formulario: FormGroup;
+
 	totalPrecio: number = 0;
 	totalTiempo: number = 0;
 	serviciosSeleccionados: any[] = [];
@@ -28,20 +33,26 @@ export class CarroServicioComponent implements OnInit {
     @Output() nuevaCita = new EventEmitter<Cita>();
   	@ViewChild(AlertComponent) alert: AlertComponent;
 	horarios : Horario [] = [];
-	@Input() citas: Cita[] = [];
-	 lista: String[];
-	 mañanaFin: Date = new Date();
-	 tardeFin: Date = new Date();
-	 numCitas: number;
+	todasLasCitas: Cita[] = [];
+	lista: String[];
+	mañanaFin: Date = new Date();
+	tardeFin: Date = new Date();
+	numCitas: number;
 	 
 constructor(private listaServiciosService:ListaServiciosService,
 			private citaService:CitaService,
 			private userService:UserService,
-			private horarioService:HorarioService){
-	
+			private horarioService:HorarioService,
+			private authService: AuthService,
+			    private formBuilder: FormBuilder,
+){
+	  this.formulario = this.formBuilder.group({
+      nombre: ['', Validators.required],
+    });
 }
     ngOnInit(): void {
-			
+			    	     this.userRoles = this.authService.getUserRoles();
+
 			this.credenciales = localStorage.getItem("credencial");
 			 this.userService.obtenerEmail(this.credenciales)
 			    .pipe(
@@ -55,6 +66,7 @@ constructor(private listaServiciosService:ListaServiciosService,
 			    });			
 		 	this.cita = {
 			id: 0,
+			nombre:"0",
 			fechaInicio: new Date(),
 			fechaFin:new Date(),
 			usuario: { id: 0,nombre:"0",email:"0",telefono:"0",password:"0", roles: [{ rolId: 0, nombre: "0" }],citas: []},
@@ -214,58 +226,60 @@ compararFechaCompletaConHoras(fechaCompleta: Date, horasMinutos: String[]) {
 
 					}
 				return horarioFin;
-
 	}
 	guardarCita(){
-	if(this.numCitas >= 4){
-		this.alert.show('error','No puedes tener mas de 4 citas asociadas');
-			      this.totalPrecio = 0;
-				  this.totalTiempo = 0;
-				  this.serviciosSeleccionados.splice(0, this.serviciosSeleccionados.length);
-				  return;
+	if (!this.userRoles.includes('ROLE_ADMIN') && this.numCitas >= 4) {
+	  this.alert.show('error', 'No puedes tener más de 4 citas asociadas');
+	  this.totalPrecio = 0;
+	  this.totalTiempo = 0;
+	  this.serviciosSeleccionados.splice(0, this.serviciosSeleccionados.length);
+	  return;
 	}
 	const corte = this.serviciosSeleccionados.filter(s => s.servicio);
 	const estilo = this.serviciosSeleccionados.filter(s => s.corte);
 	const servicio = this.serviciosSeleccionados.filter(s => !s.servicio && !s.corte);
-	if(this.totalTiempo > 30){
-		this.cita.fechaInicio = this.fechaCitaCompleta;
-		let nuevaFecha = new Date(this.fechaCitaCompleta.getTime() + 30 * 60 * 1000); 
-		if(this.compararFechaCompletaConHoras(nuevaFecha,this.horarioFinMañanaYTarde(nuevaFecha))){
-			this.alert.show('error','NNNecesita mas de 30 min para los servicios seleccionados.'+ 
-			    'Seleccione otra hora que tenga espacio para 1 hora o reduzca los servicios');
+			
+		let fechaCitaCompletaFin = new Date(this.fechaCitaCompleta.getTime() + this.totalTiempo * 60000); 
+		let fechaCitaCompletaIni = this.fechaCitaCompleta;
+			console.log("total tiempo" + this.totalTiempo)
+			console.log(this.fechaCitaCompleta);
+			console.log(fechaCitaCompletaFin);
+		if(this.compararFechaCompletaConHoras(fechaCitaCompletaFin,this.horarioFinMañanaYTarde(fechaCitaCompletaFin))){
+			this.alert.show('error','Necesita mas de '+this.totalTiempo + ' minutos para los servicios seleccionados.'+ 
+			    'Seleccione otra hora disponible');
 			      this.totalPrecio = 0;
 				  this.totalTiempo = 0;
 				  this.serviciosSeleccionados.splice(0, this.serviciosSeleccionados.length);
 			return;
 		}		
-		
-			for (let cita of this.citas) {
+				this.citaService.todosLasCitas().subscribe(citas => {
+				  this.todasLasCitas = citas;
+				});		
+
+				for (let cita of this.todasLasCitas) {
+
+				let citaInicio = new Date(cita.fechaInicio)
+				let citaFin = new Date(cita.fechaFin)
 				
-				let fechaInicio = new Date(cita.fechaInicio)
-				let fechaFin = new Date(cita.fechaFin)
-				
-			  if (fechaInicio.getTime()<= nuevaFecha.getTime() &&
-			   fechaFin.getTime() >= nuevaFecha.getTime()) {
-			    this.alert.show('error','Necesita mas de 30 min para los servicios seleccionados.'+ 
-			    'Seleccione otra hora que tenga espacio para 1 hora o reduzca los servicios');
+			  if ((fechaCitaCompletaIni.getTime() >= citaInicio.getTime() && fechaCitaCompletaIni.getTime() < citaFin.getTime()) ||
+			      (fechaCitaCompletaFin.getTime() > citaInicio.getTime() && fechaCitaCompletaFin.getTime() <= citaFin.getTime())) {
+			    this.alert.show('error','Tu tiempo de servicios es '+this.totalTiempo + ' y se superpone con otra cita existente.'+ 
+			    'Seleccione otra hora disponible');
 			    this.totalPrecio = 0;
 			 	 this.totalTiempo = 0;
 			 	 this.serviciosSeleccionados.splice(0, this.serviciosSeleccionados.length);
 			    return;
 			  }
-
 			}
-		this.cita.fechaFin = nuevaFecha;
-
-	}else{
-		this.cita.fechaInicio = this.fechaCitaCompleta;
-		this.cita.fechaFin = this.fechaCitaCompleta;
-	}
+			
+	this.cita.fechaFin = fechaCitaCompletaFin;
+	this.cita.fechaInicio = this.fechaCitaCompleta;
 	this.cita.servicio = servicio;
 	this.cita.corte = corte;
 	this.cita.estilo = estilo;
 	this.cita.usuario = this.usuario;
 	this.cita.precio = this.totalPrecio;
+	this.cita.nombre = this.formulario.get('nombre')?.value;
 	this.citaService.añadirCita(this.cita).subscribe(
 			(data) => {
 				this.nuevaCita.emit(this.cita);

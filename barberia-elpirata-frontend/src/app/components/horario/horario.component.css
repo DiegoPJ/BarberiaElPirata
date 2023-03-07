@@ -6,6 +6,17 @@
  */	border-radius: 20px;
 	flex-wrap: wrap;
 }
+.table{
+	color:white;
+}
+.admin{
+
+	}
+.adminMa,.adminTa{
+	display: grid;
+	grid-template-columns: repeat(5, 2fr);
+	gap: 5px;	
+}
 
 .horasMa, .horasTa {
 	margin: 1rem;
@@ -13,9 +24,8 @@
 
 .botonesMa, .botonesTa {
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(6, 1fr);
 	grid-auto-flow: dense;
-	gap: 5px;
 }
 
 .boton-hora {
@@ -28,20 +38,7 @@
 	background: #DCDADA;
 	border-radius: 10px;
 }
-.boton-desabilitado {
-	color: #2C2C2C;
-	cursor: pointer;
-	transform: scale(1);
-	transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out,
-		background-color 0.5s ease-in-out, color 0.5s ease-in-out;;
-	box-shadow: none;
-	background: gray;
-	border-radius: 10px;
-	pointer-events: none;
-}
-.boton-admin{
-	pointer-events: auto
-}
+
 .boton-hora:hover {
 	transform: scale(1.2);
 	box-shadow: 0 0 20px #6C8DCF;
@@ -61,4 +58,15 @@
 .boton-hora:disabled {
 	background: #C4C4C4;
 	opacity: .4;
+}
+.boton-reservadaIni{
+		background: #C4C4C4;
+		color:red;
+}
+.boton-reservada-medio{
+		color:#ff8080;
+		pointer-events:none;
+}
+.boton-reservada-Fin{
+		color:#ff0080;
 }
