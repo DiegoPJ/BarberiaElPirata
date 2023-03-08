@@ -4,7 +4,7 @@ import { HorarioService } from 'src/app/services/horario.service';
 import { CitaService } from 'src/app/services/cita.service';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { forkJoin, map, mergeMap } from 'rxjs';
+import { forkJoin, interval, map, mergeMap } from 'rxjs';
 import { AlertComponent } from '../alert/alert.component';
 
 @Component({
@@ -77,8 +77,11 @@ export class HorarioComponent implements OnInit,OnChanges{
 	  this.todasLasCitas = todasLasCitas;
 	});
     		
-      	this.citaService.escucharTodasLasCitas();
-   		this.citaService.suscribirseATodasLasCitas().subscribe(citas => {
+		/*interval(5000).subscribe(() => {
+		      this.citaService.escucharTodasLasCitas();
+		    }); */  
+		    	this.citaService.escucharTodasLasCitas();	
+		this.citaService.suscribirseATodasLasCitas().subscribe(citas => {
       	this.todasLasCitas = citas;
       	this.escribirHoras();
 

@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
@@ -12,7 +13,7 @@ export class CitaService {
   private todasLasCitas: BehaviorSubject<Cita[]> = new BehaviorSubject<Cita[]>([]);
 
 
-  constructor(private httpClient :HttpClient) { }
+  constructor(private httpClient :HttpClient,private datePipe: DatePipe) { }
   
 	public deleteCita(cita: Cita) {
 		console.log(cita);
@@ -32,6 +33,20 @@ public añadirCita(cita: Cita): Observable<Cita> {
     })
   );
 }
+
+public getCitaByFecha(fechaInicio: Date): Observable<Cita> {
+const formattedDate = fechaInicio.toLocaleString('es-ES', { timeZone: 'Europe/Madrid', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }).replace(',', '');
+  const url = `${baserUrl}/api/citas/buscarPorFecha`;
+  const params = { fechaInicio: formattedDate };
+  console.log(fechaInicio);
+  console.log("formaaattt :"+formattedDate)
+  return this.httpClient.get<Cita>(url, { params });
+}
+
+
+
+
+
 
 
  /*  

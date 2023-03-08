@@ -1,5 +1,9 @@
 package com.barberia.elpirata.controladores;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.barberia.elpirata.entidades.Cita;
@@ -67,4 +72,14 @@ public class CitaController {
         usuario.setId(usuarioId);
         return citaService.getCitasPorUsuario(usuario);
     }
+	
+	@GetMapping("/citas/buscarPorFecha")
+	public Cita obtenerCitaPorFechaInicio(@RequestParam("fechaInicio") String fechaInicio) throws ParseException {
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		Date fechaDate = formato.parse(fechaInicio);
+		Timestamp timestamp = new Timestamp(fechaDate.getTime());
+		Cita cita = new Cita();
+		cita = citaRepository.findByfechaInicio(timestamp);
+	    return cita;
+	}
 }

@@ -4,10 +4,11 @@
 <app-alert #alert></app-alert>
 
 <div class="modal fade" id="modalPrincipal" aria-hidden="true"
-	aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+	aria-labelledby="exampleModalToggleLabel" tabindex="-1" #modalPrincipal>
 	<div
 		class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
 		<div class="modal-content">
+
 			<div class="modal-header">
 				<div class="modal-title" id="exampleModalToggleLabel">
 					<p>Fecha: {{fechaCitaCompleta | date: 'dd/MM/yyyy'}}</p>
@@ -19,7 +20,21 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal"
 					aria-label="Close"></button>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body"
+				*ngIf="citaAdmin != undefined && userRoles.includes('ROLE_ADMIN')">
+				{{this.citaAdmin.nombre}}
+				<button class="btn btn-danger" (click)="deleteCita(citaAdmin)"
+					 data-bs-dismiss="modal">&#10008;</button>
+			</div>
+			<div class="modal-body" *ngIf="userRoles.includes('ROLE_USUARIO') 
+			&& !userRoles.includes('ROLE_ADMIN') || 
+			citaAdmin == undefined  && userRoles.includes('ROLE_ADMIN')">
+				<div
+					*ngIf="citaAdmin != undefined && userRoles.includes('ROLE_ADMIN')">
+					{{this.citaAdmin.nombre}}
+					<button class="btn btn-danger" (click)="deleteCita(citaAdmin)"
+						style="font-size: 0.5rem;" >&#10008;</button>
+				</div>
 
 				<div class="servicios" *ngFor="let servicio of servicios">
 					<p>{{ servicio.nombre }}</p>

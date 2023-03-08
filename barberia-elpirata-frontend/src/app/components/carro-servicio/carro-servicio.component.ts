@@ -1,4 +1,4 @@
-import { Component,OnInit,Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component,OnInit,AfterViewInit,Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { forkJoin, switchMap } from 'rxjs';
 import { Servicio, Corte, Estilo, Cita, Usuario, Horario } from 'src/app/model';
 import { ListaServiciosService } from 'src/app/services/lista-servicios.service';
@@ -15,9 +15,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './carro-servicio.component.html',
   styleUrls: ['./carro-servicio.component.css']
 })
-export class CarroServicioComponent implements OnInit {
+export class CarroServicioComponent implements OnInit,AfterViewInit {
 	  userRoles: string[];
-  formulario: FormGroup;
+  	formulario: FormGroup;
 
 	totalPrecio: number = 0;
 	totalTiempo: number = 0;
@@ -32,13 +32,15 @@ export class CarroServicioComponent implements OnInit {
     usuario : any;
     @Output() nuevaCita = new EventEmitter<Cita>();
   	@ViewChild(AlertComponent) alert: AlertComponent;
+  	@ViewChild('modalPrincipal') modalPrincipal: ElementRef;
 	horarios : Horario [] = [];
 	todasLasCitas: Cita[] = [];
 	lista: String[];
 	mañanaFin: Date = new Date();
 	tardeFin: Date = new Date();
 	numCitas: number;
-	 
+	citaAdmin : Cita;
+	
 constructor(private listaServiciosService:ListaServiciosService,
 			private citaService:CitaService,
 			private userService:UserService,
@@ -50,6 +52,18 @@ constructor(private listaServiciosService:ListaServiciosService,
       nombre: ['', Validators.required],
     });
 }
+    ngAfterViewInit(): void {
+	this.modalPrincipal.nativeElement.addEventListener('shown.bs.modal', () => {
+          console.log("CITA ADMIN: "+this.fechaCitaCompleta)
+
+			if (this.userRoles.includes('ROLE_ADMIN') && this.fechaCitaCompleta != undefined){
+			this.citaService.getCitaByFecha(this.fechaCitaCompleta).subscribe((cita) => {
+		      this.citaAdmin = cita;
+		      console.log("CITA ADMIN: "+this.citaAdmin)
+		 });    
+		}
+    });    
+    }
     ngOnInit(): void {
 			    	     this.userRoles = this.authService.getUserRoles();
 
@@ -95,8 +109,9 @@ constructor(private listaServiciosService:ListaServiciosService,
      this.horarioService.todosLosHorarios().subscribe(horarios => {
       	this.horarios = horarios;    
     	});
-
-    }
+    				  
+	}
+	
  	actualizarNumCitas(){
 		  this.userService.obtenerEmail(this.credenciales)
 			    .pipe(
@@ -227,7 +242,19 @@ compararFechaCompletaConHoras(fechaCompleta: Date, horasMinutos: String[]) {
 					}
 				return horarioFin;
 	}
+	deleteCita(cita: Cita){
+	  	this.citaService.deleteCita(cita).subscribe(() => {
+
+	    this.alert.show("success","La cita ha sido eliminada correctamente");
+		
+		}, error => {
+	    console.error(error);
+	    this.alert.show("error","Ha ocurrido un error al eliminar la cita");
+	  });
+	}
 	guardarCita(){
+	
+			
 	if (!this.userRoles.includes('ROLE_ADMIN') && this.numCitas >= 4) {
 	  this.alert.show('error', 'No puedes tener más de 4 citas asociadas');
 	  this.totalPrecio = 0;
@@ -277,6 +304,7 @@ compararFechaCompletaConHoras(fechaCompleta: Date, horasMinutos: String[]) {
 	this.cita.servicio = servicio;
 	this.cita.corte = corte;
 	this.cita.estilo = estilo;
+	console.log("USUARIOOOO: "+this.usuario.id)
 	this.cita.usuario = this.usuario;
 	this.cita.precio = this.totalPrecio;
 	this.cita.nombre = this.formulario.get('nombre')?.value;

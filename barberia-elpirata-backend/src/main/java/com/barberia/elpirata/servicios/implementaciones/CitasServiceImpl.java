@@ -47,7 +47,7 @@ public class CitasServiceImpl implements CitaService{
 	@Transactional
 	public Cita guardarCita(Cita cita) throws Exception {
 	    Long usuarioId = cita.getUsuario().getId();
-
+	    
 	    Optional<Usuario> usuarioOptional = usuarioRepository.findById(usuarioId);
 
 	    if (!usuarioOptional.isPresent()) {
@@ -94,7 +94,7 @@ public class CitasServiceImpl implements CitaService{
 
 	        estilos.add(estiloOptional.get());
 	    }
-
+	    cita.setNombre(usuario.getNombre());
 	    cita.setUsuario(usuario);
 	    cita.setServicio(servicios);
 	    cita.setCorte(cortes);
