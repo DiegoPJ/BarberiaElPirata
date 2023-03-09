@@ -26,6 +26,8 @@
 	display: grid;
 	grid-template-columns: repeat(6, 1fr);
 	grid-auto-flow: dense;
+		grid-row-gap: .3rem; /* Espacio vertical entre filas */
+	
 }
 
 .boton-hora {
@@ -36,7 +38,7 @@
 		background-color 0.5s ease-in-out, color 0.5s ease-in-out;;
 	box-shadow: none;
 	background: #DCDADA;
-	border-radius: 10px;
+	border-style: none;
 }
 
 .boton-hora:hover {

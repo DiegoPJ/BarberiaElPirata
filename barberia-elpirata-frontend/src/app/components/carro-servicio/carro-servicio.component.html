@@ -22,19 +22,23 @@
 			</div>
 			<div class="modal-body"
 				*ngIf="citaAdmin != undefined && userRoles.includes('ROLE_ADMIN')">
-				{{this.citaAdmin.nombre}}
-				<button class="btn btn-danger" (click)="deleteCita(citaAdmin)"
-					 data-bs-dismiss="modal">&#10008;</button>
+				
+				<div class="adminBody">
+					<img *ngFor="let corte of citaAdmin.corte"
+						[src]="'../assets/img/pelaos/'+ corte.imagen"> <img
+						*ngFor="let estilo of citaAdmin.estilo"
+						[src]="'../assets/img/pelaos/'+ estilo.imagen"> <img
+						*ngFor="let servicio of citaAdmin.servicio"
+						[src]="'../assets/img/pelaos/'+ servicio.imagen">
+						
+				</div>
+				
 			</div>
-			<div class="modal-body" *ngIf="userRoles.includes('ROLE_USUARIO') 
+			<div class="modal-body"
+				*ngIf="userRoles.includes('ROLE_USUARIO') 
 			&& !userRoles.includes('ROLE_ADMIN') || 
 			citaAdmin == undefined  && userRoles.includes('ROLE_ADMIN')">
-				<div
-					*ngIf="citaAdmin != undefined && userRoles.includes('ROLE_ADMIN')">
-					{{this.citaAdmin.nombre}}
-					<button class="btn btn-danger" (click)="deleteCita(citaAdmin)"
-						style="font-size: 0.5rem;" >&#10008;</button>
-				</div>
+
 
 				<div class="servicios" *ngFor="let servicio of servicios">
 					<p>{{ servicio.nombre }}</p>
@@ -51,7 +55,16 @@
 					</div>
 				</div>
 			</div>
-			<div class="modal-footer">
+			<div class="modal-footer" *ngIf="citaAdmin != undefined && userRoles.includes('ROLE_ADMIN')">
+								<h1>{{this.citaAdmin.nombre}}</h1>
+				
+				<button  class="btn btn-danger" (click)="deleteCita(citaAdmin)"
+					data-bs-dismiss="modal">&#10008;</button>
+			</div>
+			<div class="modal-footer" *ngIf="userRoles.includes('ROLE_USUARIO') 
+			&& !userRoles.includes('ROLE_ADMIN') || 
+			citaAdmin == undefined  && userRoles.includes('ROLE_ADMIN')">
+			
 				<p>Servicios seleccionados:</p>
 				<div class="servicios-seleccionados">
 

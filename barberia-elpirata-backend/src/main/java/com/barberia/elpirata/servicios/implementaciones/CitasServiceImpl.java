@@ -94,7 +94,11 @@ public class CitasServiceImpl implements CitaService{
 
 	        estilos.add(estiloOptional.get());
 	    }
-	    cita.setNombre(usuario.getNombre());
+	    if(cita.getNombre() == null || cita.getNombre().isEmpty()) {
+	        cita.setNombre(usuario.getNombre());
+	    }else {
+		    cita.setNombre(cita.getNombre());
+	    }
 	    cita.setUsuario(usuario);
 	    cita.setServicio(servicios);
 	    cita.setCorte(cortes);

@@ -21,7 +21,7 @@ export class InicioComponent implements OnInit,AfterViewInit{
 	@ViewChild('horarioIni') horarioIni: HorarioComponent;
 	horarioOcarga : boolean = false;
 	 isLoggedIn: boolean = false;
- 
+ 	todasMisCitas : Cita[] = [];
 constructor(	
 	private userService:UserService,private citaService:CitaService,
 ){
@@ -38,7 +38,7 @@ constructor(
 		    })
 		  )
 		  .subscribe(citas => {
-		    this.todasLasCitas = citas;
+		    this.todasMisCitas = citas;
 		  });
     }
     ngOnInit(): void {

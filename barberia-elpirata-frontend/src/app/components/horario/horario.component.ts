@@ -51,31 +51,6 @@ export class HorarioComponent implements OnInit,OnChanges{
     }
 	
     ngOnInit(): void {
-			
-		this.userService.todosLosUsuarios().pipe(
- 		 mergeMap(usuarios => {
-	    const citasObservables = usuarios.map(usuario => {
-	      return this.citaService.getCitasByUsuario(usuario.id).pipe(
-	        map(citas => {
-	          return citas.map(cita => {
-	            return { ...cita, usuarioNombre: usuario.nombre };
-	          });
-	        })
-	      );
-	    });
-	    return forkJoin(citasObservables);
-	  }),
-	  map(citasPorUsuario => {
-	    return citasPorUsuario.reduce((accumulator, currentValue) => {
-	      return accumulator.concat(currentValue);
-	    }, []);
-	  }),
-	  map(todasLasCitas => {
-	    return todasLasCitas.sort((a, b) => new Date(a.fechaInicio).getTime() - new Date(b.fechaInicio).getTime());
-	  })
-	).subscribe(todasLasCitas => {
-	  this.todasLasCitas = todasLasCitas;
-	});
     		
 		/*interval(5000).subscribe(() => {
 		      this.citaService.escucharTodasLasCitas();
@@ -163,12 +138,12 @@ deleteCita(cita: Cita){
   generarHoras(aperturaManana: string, cierre_mañana: string, apertura_tarde: string, cierre_tarde: string): void {
   let hora_mañana = new Date('1970-01-01T' + aperturaManana + ':00');
   let cierre_mañana_date = new Date('1970-01-01T' + cierre_mañana + ':00');
-  while (hora_mañana.getTime() !== cierre_mañana_date.getTime()) {
+  while (hora_mañana.getTime()  !== cierre_mañana_date.getTime()) {
     this.horasMa.push(this.formatTime(hora_mañana));
     hora_mañana.setMinutes(hora_mañana.getMinutes() + 5);
   }
-  this.horasMa.push(cierre_mañana);
-  for (const hora of this.horasMa) {
+/*  Para meter los ultimos 5 minutos  -> this.horasMa.push(cierre_mañana);
+*/  for (const hora of this.horasMa) {
     this.horaReservadaManana[hora] = this.horaReservada(hora, this.todasLasCitas);
   }
   let hora_tarde = new Date('1970-01-01T' + apertura_tarde + ':00');
@@ -177,8 +152,8 @@ deleteCita(cita: Cita){
     this.horasTa.push(this.formatTime(hora_tarde));
     hora_tarde.setMinutes(hora_tarde.getMinutes() + 5);
   }
-  this.horasTa.push(cierre_tarde);
-  for (const hora of this.horasTa) {
+/*  Para meter los ultimos 5 minutos  ->  this.horasTa.push(cierre_tarde);
+*/  for (const hora of this.horasTa) {
     this.horaReservadaTarde[hora] = this.horaReservada(hora, this.todasLasCitas);
   }
 }
@@ -230,7 +205,7 @@ horaReservada(hora: string, todasLasCitas: Cita[]): number {
 				return 1
 			}else{
 				if(citaHoraFin == hora){
-					return 0
+					
 				}else{
 					//resto de hora de cita
 				return 2

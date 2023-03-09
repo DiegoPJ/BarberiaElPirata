@@ -106,10 +106,16 @@ constructor(private listaServiciosService:ListaServiciosService,
         }
       }
     );
+    
      this.horarioService.todosLosHorarios().subscribe(horarios => {
       	this.horarios = horarios;    
-    	});
-    				  
+    	});	
+    	
+    this.citaService.escucharTodasLasCitas();
+   		this.citaService.suscribirseATodasLasCitas().subscribe(citas => {
+      	this.todasLasCitas = citas;
+			});
+    			  
 	}
 	
  	actualizarNumCitas(){
@@ -173,22 +179,21 @@ constructor(private listaServiciosService:ListaServiciosService,
 	  this.tituloSeleccionado = corte.nombre;
 	}
 		
-compararFechaCompletaConHoras(fechaCompleta: Date, horasMinutos: String[]) {
+compararFechaCompletaConHoras(fechaCompletaIni : Date,fechaCompletaFin: Date, horasMinutos: String[]) {
   const [horaManana, minManana] = horasMinutos[0].split(':');
   const [horaTarde, minTarde] = horasMinutos[1].split(':');
-  const horaLimiteManana = new Date(fechaCompleta.getFullYear(), fechaCompleta.getMonth(), fechaCompleta.getDate(), Number(horaManana), Number(minManana), 0, 0);
-  const horaLimiteTarde = new Date(fechaCompleta.getFullYear(), fechaCompleta.getMonth(), fechaCompleta.getDate(), Number(horaTarde), Number(minTarde), 0, 0);
+  const horaLimiteManana = new Date(fechaCompletaIni.getFullYear(), fechaCompletaIni.getMonth(), fechaCompletaIni.getDate(), Number(horaManana), Number(minManana), 0, 0);
+  const horaLimiteTarde = new Date(fechaCompletaIni.getFullYear(), fechaCompletaIni.getMonth(), fechaCompletaIni.getDate(), Number(horaTarde), Number(minTarde), 0, 0);
 				
-				if (fechaCompleta.getHours() <= 15 && fechaCompleta.getMinutes() <= 30){
-					//mañana
-					if(fechaCompleta.getTime() > horaLimiteManana.getTime()){
+				if (fechaCompletaIni.getHours() <= 15 && fechaCompletaIni.getMinutes() <= 30){
+					if(fechaCompletaFin.getTime() > horaLimiteManana.getTime()){
 						return true;
 					}
 					return false;
 				}else{
 					//tarde
 
-					if(fechaCompleta.getTime() > horaLimiteTarde.getTime()){
+					if(fechaCompletaFin.getTime() > horaLimiteTarde.getTime()){
 						
 						return true;
 					}
@@ -268,10 +273,8 @@ compararFechaCompletaConHoras(fechaCompleta: Date, horasMinutos: String[]) {
 			
 		let fechaCitaCompletaFin = new Date(this.fechaCitaCompleta.getTime() + this.totalTiempo * 60000); 
 		let fechaCitaCompletaIni = this.fechaCitaCompleta;
-			console.log("total tiempo" + this.totalTiempo)
-			console.log(this.fechaCitaCompleta);
-			console.log(fechaCitaCompletaFin);
-		if(this.compararFechaCompletaConHoras(fechaCitaCompletaFin,this.horarioFinMañanaYTarde(fechaCitaCompletaFin))){
+
+		if(this.compararFechaCompletaConHoras(fechaCitaCompletaIni,fechaCitaCompletaFin,this.horarioFinMañanaYTarde(fechaCitaCompletaFin))){
 			this.alert.show('error','Necesita mas de '+this.totalTiempo + ' minutos para los servicios seleccionados.'+ 
 			    'Seleccione otra hora disponible');
 			      this.totalPrecio = 0;
@@ -279,18 +282,33 @@ compararFechaCompletaConHoras(fechaCompleta: Date, horasMinutos: String[]) {
 				  this.serviciosSeleccionados.splice(0, this.serviciosSeleccionados.length);
 			return;
 		}		
-				this.citaService.todosLasCitas().subscribe(citas => {
-				  this.todasLasCitas = citas;
-				});		
+					
 
 				for (let cita of this.todasLasCitas) {
 
 				let citaInicio = new Date(cita.fechaInicio)
 				let citaFin = new Date(cita.fechaFin)
-				
-			  if ((fechaCitaCompletaIni.getTime() >= citaInicio.getTime() && fechaCitaCompletaIni.getTime() < citaFin.getTime()) ||
-			      (fechaCitaCompletaFin.getTime() > citaInicio.getTime() && fechaCitaCompletaFin.getTime() <= citaFin.getTime())) {
-			    this.alert.show('error','Tu tiempo de servicios es '+this.totalTiempo + ' y se superpone con otra cita existente.'+ 
+				/*console.log("CitaInicio: "+citaInicio);
+				console.log("fechaCitaCompletaIni: "+fechaCitaCompletaIni)
+				console.log("CitaFin: "+citaFin);
+				console.log("fechaCitaCompletaFin: "+fechaCitaCompletaFin)
+				console.log("CitaInicio.getTime(): "+citaInicio.getTime());
+				console.log("fechaCitaCompletaIni.getTime(): "+fechaCitaCompletaIni.getTime())
+				console.log("CitaFin.getTime(): "+citaFin.getTime());
+				console.log("fechaCitaCompletaFin.getTime(): "+fechaCitaCompletaFin.getTime())
+				console.log("(fechaCitaCompletaIni.getTime() >= citaInicio.getTime() && fechaCitaCompletaIni.getTime() < citaFin.getTime()): "+(fechaCitaCompletaIni.getTime() >= citaInicio.getTime() && fechaCitaCompletaIni.getTime() < citaFin.getTime()))
+			  	console.log("(fechaCitaCompletaFin.getTime() > citaInicio.getTime() && fechaCitaCompletaFin.getTime() <= citaFin.getTime()) : "+(fechaCitaCompletaFin.getTime() > citaInicio.getTime() && fechaCitaCompletaFin.getTime() <= citaFin.getTime()))*/
+			  if ((fechaCitaCompletaIni.getTime() >= citaInicio.getTime() 
+			  	&& fechaCitaCompletaIni.getTime() < citaFin.getTime()) ||
+			  	
+			      (fechaCitaCompletaFin.getTime() > citaInicio.getTime() &&
+			       fechaCitaCompletaFin.getTime() <= citaFin.getTime()) ||
+			       
+			       
+			       (fechaCitaCompletaIni.getTime() < citaInicio.getTime() &&
+			        fechaCitaCompletaFin.getTime() > citaFin.getTime())) {
+						
+			    this.alert.show('error','Tu tiempo de servicios es de '+this.totalTiempo + 'minutos y se superpone con otra cita existente.'+ 
 			    'Seleccione otra hora disponible');
 			    this.totalPrecio = 0;
 			 	 this.totalTiempo = 0;
@@ -304,17 +322,22 @@ compararFechaCompletaConHoras(fechaCompleta: Date, horasMinutos: String[]) {
 	this.cita.servicio = servicio;
 	this.cita.corte = corte;
 	this.cita.estilo = estilo;
-	console.log("USUARIOOOO: "+this.usuario.id)
 	this.cita.usuario = this.usuario;
 	this.cita.precio = this.totalPrecio;
+	console.log(this.formulario.value);
 	this.cita.nombre = this.formulario.get('nombre')?.value;
+	console.log("NOMBREEEE : "+this.cita.nombre)
 	this.citaService.añadirCita(this.cita).subscribe(
 			(data) => {
 				this.nuevaCita.emit(this.cita);
 				this.totalPrecio = 0;
+				this.formulario.get('nombre')?.setValue('');
 			 	 this.totalTiempo = 0;
 			 	 this.serviciosSeleccionados.splice(0, this.serviciosSeleccionados.length);
 			 	 this.actualizarNumCitas();
+			 	 this.citaService.todosLasCitas().subscribe(citas => {
+				  this.todasLasCitas = citas;
+				});	
 			 	 this.alert.show("success","Reserva realizada con exito");
 			},(error) => {
 				console.log(error);
