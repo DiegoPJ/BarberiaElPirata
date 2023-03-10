@@ -46,6 +46,7 @@ public class WebSecurityConfig   {
 			.csrf().disable()
 			.authorizeHttpRequests()
 			.requestMatchers("/api/usuarios/guardarUsuario").permitAll()
+			.requestMatchers("/api/usuarios/olvidarPassword").permitAll()
 //			.requestMatchers("/api/usuarios").permitAll()
 //		    .requestMatchers("/api/servicios").permitAll()
 //		    .requestMatchers("/api/estilos").permitAll()

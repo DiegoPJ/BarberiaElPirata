@@ -38,7 +38,7 @@ public class CitaController {
 	
 	@GetMapping("/citas")
     public List<Cita> obtenerCitas(){
-    		List<Cita> x = citaRepository.findAll();
+    		List<Cita> x = citaRepository.findAllByOrderByFechaInicioAsc();
         return x;
     }
 	

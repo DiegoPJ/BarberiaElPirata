@@ -1,6 +1,9 @@
-<div class="horario">
+<h1 *ngIf="horasMa.length != 0">Horario</h1>
 
+<div class="horario">
 	<div class="horasMa">
+		<h3 *ngIf="horasMa.length != 0" style="margin:15px">Mañana</h3>
+		
 		<div class="botonesMa">
 			<Button data-bs-target="#modalPrincipal" data-bs-toggle="modal"
 				*ngFor="let hora of horasMa" class="boton-hora"
@@ -14,6 +17,8 @@
 	</div>
 
 	<div class="horasTa">
+			<h3 *ngIf="horasTa.length != 0" style="margin:15px">Tarde</h3>
+	
 		<div class="botonesTa">
 			<Button data-bs-target="#modalPrincipal" data-bs-toggle="modal"
 				*ngFor="let hora of horasTa" class="boton-hora"
@@ -29,34 +34,5 @@
 	</div>
 
 </div>
-<div *ngIf="userRoles.includes('ROLE_ADMIN')" class="admin">
-	<div class="citas">
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Nombre</th>
-					<th colspan="2">Fechas</th>
-					<th >telefono</th>
-					<th >Borrar</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngFor="let cita of todasLasCitas">
-					<td >{{ cita.id }}</td>
-			
-					<td *ngIf="cita.nombre">{{ cita.nombre }}</td>
-					<td *ngIf="!cita.nombre">{{ cita.usuario.nombre }}</td>
-					<td colspan="2">{{ cita.fechaInicio | date: 'dd/MM/yyyy HH:mm' }} <span
-						> - {{
-							cita.fechaFin | date: 'dd/MM/yyyy HH:mm' }} </span>
-					</td>
-					<td>{{cita.usuario.telefono}}</td>
-					<td>
-						<button class="btn btn-danger" (click)="deleteCita(cita)">Eliminar</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-</div>
+
 <app-alert></app-alert>

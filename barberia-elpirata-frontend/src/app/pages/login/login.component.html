@@ -1,5 +1,6 @@
 <app-navbar *ngIf="isAuthenticated" (logout)="onLogout($event)"></app-navbar>
-<div class="cuerpo" [ngClass]="{'cuerpoLuz': isAuthenticated,'cuerpo': !isAuthenticated}">
+<div class="cuerpo"
+	[ngClass]="{'cuerpoLuz': isAuthenticated,'cuerpo': !isAuthenticated}">
 	<!-- 	<app-lista-precios></app-lista-precios>
  -->
 	<div class="content">
@@ -18,7 +19,8 @@
 					(ngSubmit)="login(form)">
 					<div class="form-group mt-2">
 						<input type="email" name="email" id="email" class="form-control"
-							placeholder="Introduce tu email" [(ngModel)]="creds.email" (ngModelChange)="clearError()">
+							placeholder="Introduce tu email" [(ngModel)]="creds.email"
+							(ngModelChange)="clearError()">
 					</div>
 					<div class="form-group mt-2">
 						<input type="password" name="password" id="password"
@@ -45,28 +47,48 @@
 			<!-- CREAR CUENTA -->
 			<!-- OLVIDAR CONTRASEÑA -->
 
-			<div class="modal fade" id="exampleModal" tabindex="-1"
+			<div class="modal fade"  id="exampleModal" tabindex="-1"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h1 class="modal-title fs-5" id="exampleModalLabel">¿Olvidastes
-								la contraseña?</h1>
-							<button type="button" class="btn-close" data-bs-dismiss="modal"
-								aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							Ingresa tu Email y te enviaremos al correo tus credenciales
-							<div class="m-3">
-								<input type="text" class="form-control" id="recipient-name">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content olvido">
+						<form action="#"  [formGroup]='formOlvido'
+							(ngSubmit)="enviarEmail()">
+
+							<div class="modal-header text-center">
+								<h1 class="modal-title"  id="exampleModalLabel">¿Olvidastes
+									la contraseña?</h1>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Close"></button>
 							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-bs-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Enviar
-								Correo</button>
-						</div>
+							<div class="modal-body">
+								Ingresa tu Email y te enviaremos al correo tus credenciales
+								<div class="m-3">
+									<input type="email" class="form-control" name="emailOlvido"
+										required formControlName="emailOlvido">
+
+									<div
+										*ngIf="formOlvido.controls['emailOlvido'].invalid && (formOlvido.controls['emailOlvido'].dirty || formOlvido.controls['emailOlvido'].touched)">
+										<div
+											*ngIf="formOlvido.controls['emailOlvido'].errors?.['required']"
+											class="text-danger">Campo requerido</div>
+										<div
+											*ngIf="formOlvido.controls['emailOlvido'].errors?.['email']"
+											class="text-danger">Email inválido</div>
+									</div>
+
+
+								</div>
+							</div>
+
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-bs-dismiss="modal">Close</button>
+								<button type="submit" class="btn btn-primary"
+									[disabled]="formOlvido.invalid">Enviar Correo</button>
+							</div>
+						</form>
+
 					</div>
 				</div>
 			</div>
@@ -81,8 +103,8 @@
 				<h1 style="color: white">
 					<img src="../assets/img/iconos/candelabro.png" width="40px">
 					BARBERIA EL PIRATA
-<!-- 					<img src="../assets/img/iconos/candelabro.png" width="40px" style="  transform: scaleX(-1);
- -->					
+					<!-- 					<img src="../assets/img/iconos/candelabro.png" width="40px" style="  transform: scaleX(-1);
+ -->
 				</h1>
 
 				<div class="peluqueros">
@@ -100,10 +122,12 @@
 				</div>
 				<div class="informacion">
 					<h5>INFORMACIÓN</h5>
-					<span style="font-size: 15px"><img class="carrito" width="20px" style="margin-right:5px" src="/assets/img/iconos/instagram.png">RubenNH</span>
-					<span style="font-size: 15px">C/Francisco Pene nº23 </span> <span
+					<span style="font-size: 15px"><img class="carrito"
+						width="20px" style="margin-right: 5px"
+						src="/assets/img/iconos/instagram.png">RubenNH</span> <span
+						style="font-size: 15px">C/Francisco Pene nº23 </span> <span
 						style="font-size: 15px">04131 Almeria/Retamar</span> <span
-						style="font-size: 15px; margin-bottom:10px">+34 666555444</span>
+						style="font-size: 15px; margin-bottom: 10px">+34 666555444</span>
 
 				</div>
 				<div class="tienda2">
@@ -117,4 +141,5 @@
 		<router-outlet></router-outlet>
 	</div>
 </div>
+<app-alert #alert></app-alert>
 

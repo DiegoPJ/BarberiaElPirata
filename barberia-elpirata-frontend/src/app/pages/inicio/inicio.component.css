@@ -13,13 +13,28 @@
   width: 100%;
   min-height: 100vh; /* Use min-height instead of height */
 }
+#demotext {
+text-shadow: 0 0 0px #FFF, 0 0 10px #FFF, 0 0 10px #FFF;
+animation: sombra 2s infinite alternate;
+}
 
+
+@keyframes sombra {
+  0% {
+text-shadow: 0 0 0px #FFF, 0 0 10px #FFF, 0 0 10px #FFF;
+  }
+  100% {
+text-shadow: 0 0 0px #FFF, 0 0 0px #FFF, 0 0 1px #FFF;
+  }
+}
+.horasMa, .horasTa {
+	margin: 1rem;
+}
 				
 
 .card-vacio{
 	color:white;
 	display:flex;
-	justify-content: center;
 	align-items: center;
 	gap:25px;
 	flex-direction: column;

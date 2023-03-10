@@ -38,9 +38,9 @@ export class CarroServicioComponent implements OnInit,AfterViewInit {
 	lista: String[];
 	mañanaFin: Date = new Date();
 	tardeFin: Date = new Date();
-	numCitas: number;
+	 @Input() misCitas : Cita[];
 	citaAdmin : Cita;
-	
+	 @Output() misCitasEvent = new EventEmitter<Cita[]>();
 constructor(private listaServiciosService:ListaServiciosService,
 			private citaService:CitaService,
 			private userService:UserService,
@@ -65,19 +65,9 @@ constructor(private listaServiciosService:ListaServiciosService,
     });    
     }
     ngOnInit(): void {
-			    	     this.userRoles = this.authService.getUserRoles();
-
+			this.userRoles = this.authService.getUserRoles();
 			this.credenciales = localStorage.getItem("credencial");
-			 this.userService.obtenerEmail(this.credenciales)
-			    .pipe(
-			      switchMap((usuario) => {
-			        this.usuario = usuario;
-			        return this.citaService.getCitasByUsuario(this.usuario.id);
-			      })
-			    )
-			    .subscribe(citas => {
-			      this.numCitas = citas.length;
-			    });			
+			this.actualizarMisCitas();		
 		 	this.cita = {
 			id: 0,
 			nombre:"0",
@@ -110,15 +100,14 @@ constructor(private listaServiciosService:ListaServiciosService,
      this.horarioService.todosLosHorarios().subscribe(horarios => {
       	this.horarios = horarios;    
     	});	
-    	
-    this.citaService.escucharTodasLasCitas();
+
    		this.citaService.suscribirseATodasLasCitas().subscribe(citas => {
       	this.todasLasCitas = citas;
 			});
     			  
 	}
 	
- 	actualizarNumCitas(){
+ 	actualizarMisCitas(){
 		  this.userService.obtenerEmail(this.credenciales)
 			    .pipe(
 			      switchMap((usuario) => {
@@ -127,7 +116,8 @@ constructor(private listaServiciosService:ListaServiciosService,
 			      })
 			    )
 			    .subscribe(citas => {
-			      this.numCitas = citas.length;
+			      this.misCitas = citas;
+			      this.misCitasEvent.emit(this.misCitas);
 			    });	
 	 }
 	seleccionarServicio(x: any) {
@@ -249,7 +239,7 @@ compararFechaCompletaConHoras(fechaCompletaIni : Date,fechaCompletaFin: Date, ho
 	}
 	deleteCita(cita: Cita){
 	  	this.citaService.deleteCita(cita).subscribe(() => {
-
+		this.actualizarMisCitas();
 	    this.alert.show("success","La cita ha sido eliminada correctamente");
 		
 		}, error => {
@@ -260,7 +250,7 @@ compararFechaCompletaConHoras(fechaCompletaIni : Date,fechaCompletaFin: Date, ho
 	guardarCita(){
 	
 			
-	if (!this.userRoles.includes('ROLE_ADMIN') && this.numCitas >= 4) {
+	if (!this.userRoles.includes('ROLE_ADMIN') && this.misCitas.length >= 4) {
 	  this.alert.show('error', 'No puedes tener más de 4 citas asociadas');
 	  this.totalPrecio = 0;
 	  this.totalTiempo = 0;
@@ -308,8 +298,10 @@ compararFechaCompletaConHoras(fechaCompletaIni : Date,fechaCompletaFin: Date, ho
 			       (fechaCitaCompletaIni.getTime() < citaInicio.getTime() &&
 			        fechaCitaCompletaFin.getTime() > citaFin.getTime())) {
 						
-			    this.alert.show('error','Tu tiempo de servicios es de '+this.totalTiempo + 'minutos y se superpone con otra cita existente.'+ 
-			    'Seleccione otra hora disponible');
+			    this.alert.show('error','Tu tiempo de servicios es de '
+			    +this.totalTiempo + ' minutos  y se superpone con otra cita existente a las '
+			    + citaInicio.getHours() +":"+citaInicio.getMinutes()+
+			    'h ,Seleccione otra hora');
 			    this.totalPrecio = 0;
 			 	 this.totalTiempo = 0;
 			 	 this.serviciosSeleccionados.splice(0, this.serviciosSeleccionados.length);
@@ -334,7 +326,7 @@ compararFechaCompletaConHoras(fechaCompletaIni : Date,fechaCompletaFin: Date, ho
 				this.formulario.get('nombre')?.setValue('');
 			 	 this.totalTiempo = 0;
 			 	 this.serviciosSeleccionados.splice(0, this.serviciosSeleccionados.length);
-			 	 this.actualizarNumCitas();
+				this.actualizarMisCitas();
 			 	 this.citaService.todosLasCitas().subscribe(citas => {
 				  this.todasLasCitas = citas;
 				});	

@@ -4,11 +4,14 @@ import baserUrl from './helper';
 import { map, Observable } from 'rxjs';
 import { Credenciales, Usuario } from '../model';
 import jwt_decode from 'jwt-decode';
+import { CitaService } from './cita.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+   
+
 
   constructor(private httpClient :HttpClient) { }
   
@@ -25,6 +28,12 @@ export class UserService {
   public todosLosUsuariosConCitas(): Observable<Usuario[]>{
 	  	  return this.httpClient.get<Usuario[]>(`${baserUrl}/api/usuarios/todosLosUsuariosConCitas`);
   }
+  public enviarEmailReinicioContrasena(email: string) {
+	  console.log("elEmailpapi: "+email);
+  return this.httpClient.post(`${baserUrl}/api/usuarios/olvidarPassword`,{email});
+}
+    
+  
   public logout() {
     return this.httpClient.post(`${baserUrl}/logout`, {}).toPromise();
   }

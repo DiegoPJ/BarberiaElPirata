@@ -50,6 +50,7 @@ public class Usuario {
 	private String telefono;
 	private boolean enabled = true;
 	private String foto;
+    private String token;
 
 
 

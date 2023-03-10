@@ -38,8 +38,7 @@ public getCitaByFecha(fechaInicio: Date): Observable<Cita> {
 const formattedDate = fechaInicio.toLocaleString('es-ES', { timeZone: 'Europe/Madrid', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }).replace(',', '');
   const url = `${baserUrl}/api/citas/buscarPorFecha`;
   const params = { fechaInicio: formattedDate };
-  console.log(fechaInicio);
-  console.log("formaaattt :"+formattedDate)
+
   return this.httpClient.get<Cita>(url, { params });
 }
 
@@ -59,9 +58,8 @@ const formattedDate = fechaInicio.toLocaleString('es-ES', { timeZone: 'Europe/Ma
   public getCitasByUsuario(id_usuario: number): Observable<Cita[]> {
   return this.httpClient.get<Cita[]>(`${baserUrl}/api/citas/${id_usuario}`);
 	}
-	
-	
-	
+  
+    
     public escucharTodasLasCitas() {
     this.todosLasCitas().subscribe(citas => {
       this.todasLasCitas.next(citas);

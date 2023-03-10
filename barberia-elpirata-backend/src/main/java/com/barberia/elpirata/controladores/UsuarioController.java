@@ -1,8 +1,10 @@
 package com.barberia.elpirata.controladores;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,5 +56,16 @@ public class UsuarioController {
     public void eliminarUsuario(@PathVariable("usuarioId") Long usuarioId){
         usuarioService.eliminarUsuario(usuarioId);
     }
+    @PostMapping("/olvidarPassword")
+    public ResponseEntity<?> olvidarPassword(@RequestBody Map<String, String> body) {
+        String email = body.get("email");
+        if (email == null || email.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        usuarioService.enviarEmailReinicioContraseña(email);
+        return ResponseEntity.ok().build();
+    }
+
 
 }

@@ -16,7 +16,8 @@ import java.util.List;
 @Repository
 public interface CitaRepository extends JpaRepository<Cita, Long>{
 	
-	public List <Cita>  findAll();
+    public List<Cita> findAllByOrderByFechaInicioAsc();
+
 	public List<Cita> findByUsuario(Usuario usuario);
 	public Cita findByfechaInicio(Timestamp fechaInicio);
 

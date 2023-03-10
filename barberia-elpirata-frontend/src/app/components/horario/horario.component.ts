@@ -1,10 +1,10 @@
 import { Component,EventEmitter,Input,OnChanges,OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { Cita, Horario } from 'src/app/model';
+import { Cita, Credenciales, Horario, Usuario } from 'src/app/model';
 import { HorarioService } from 'src/app/services/horario.service';
 import { CitaService } from 'src/app/services/cita.service';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { forkJoin, interval, map, mergeMap } from 'rxjs';
+import { forkJoin, interval, map, mergeMap, switchMap } from 'rxjs';
 import { AlertComponent } from '../alert/alert.component';
 
 @Component({
@@ -23,13 +23,15 @@ export class HorarioComponent implements OnInit,OnChanges{
 	public horasMa: string[] = [];
 	public horasTa: string[] = [];
 	todasLasCitas : Cita[];
+	todasMisCitas : Cita[];
   	horarios: Horario[];
   	@Input() calendarioSelecIni: Date;
   	myDate:Date;
   	diaSemanaDatePiPe:any;
   	horaReservadaManana: { [key: string]: number } = {};
   	horaReservadaTarde: { [key: string]: number } = {};
-
+	usuario : any ;
+	credenciales:String | null;
 	constructor(		
 		private horarioService:HorarioService,
 		private citaService:CitaService,
@@ -51,36 +53,38 @@ export class HorarioComponent implements OnInit,OnChanges{
     }
 	
     ngOnInit(): void {
-    		
-		/*interval(5000).subscribe(() => {
-		      this.citaService.escucharTodasLasCitas();
-		    }); */  
-		    	this.citaService.escucharTodasLasCitas();	
+    				this.credenciales = localStorage.getItem('credencial')
+		
+		
 		this.citaService.suscribirseATodasLasCitas().subscribe(citas => {
       	this.todasLasCitas = citas;
       	this.escribirHoras();
 
       // aquí puedes hacer cualquier cosa que necesites con las citas
    		});
-    
+		
         this.horarioService.todosLosHorarios().subscribe(horarios => {
       	this.horarios = horarios;    
     	});
-    	
-    	
-    	     this.userRoles = this.authService.getUserRoles();
-
+    	 this.userRoles = this.authService.getUserRoles();
+    	 if(!this.userRoles.includes('ROLE_ADMIN')){
+			interval(5000).subscribe(() => {
+		      this.citaService.escucharTodasLasCitas();
+		    }); 
+		}else{
+			 this.citaService.escucharTodasLasCitas();
+		}
     }
-deleteCita(cita: Cita){
-	  	this.citaService.deleteCita(cita).subscribe(() => {
+/*deleteCita(cita: Cita){
 
+	  	this.citaService.deleteCita(cita).subscribe(() => {
 	    this.alert.show("success","La cita ha sido eliminada correctamente");
-		
+		this.actualizarMisCitas();	
 		}, error => {
 	    console.error(error);
 	    this.alert.show("error","Ha ocurrido un error al eliminar la cita");
 	  });
-	}
+	}*/
 	escribirHoras(){
 				if(this.isDateValid(this.calendarioSelecIni)){
 					let nombreDia = this.calendarioSelecIni.toLocaleDateString('en-US', { weekday: 'long' });

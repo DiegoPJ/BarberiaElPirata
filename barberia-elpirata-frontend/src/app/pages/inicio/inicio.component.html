@@ -7,11 +7,18 @@
 	<div id="izquierda">
 		<div class="cabeceraIzquierda">
 			<p>Reserva tu cita</p>
+			
+		</div>
+		<div id="demotext">
+			<button *ngIf="userRoles.includes('ROLE_ADMIN')" (click)="generateExcel()">Descargar citas</button>
+		
+			<p *ngIf="calendarioSelecIni != null">Seleccione una hora </p>
+			<p *ngIf="calendarioSelecIni == null">Seleccione una fecha del calendario</p>
 		</div>
 		<app-calendario (calendarioSeleccionado)="escuchaCalendario($event)"></app-calendario>
 		<app-horario #horarioIni [calendarioSelecIni]="calendarioSelecIni"
 			(fechaCitaCompleta)="escuchaCalendario($event)" ></app-horario>
-			<app-carro-servicio [fechaCitaCompleta]="fechaCitaCompleta"
+			<app-carro-servicio [fechaCitaCompleta]="fechaCitaCompleta"  [misCitas]="misCitas" (misCitasEvent)="misCitas = $event"
 				></app-carro-servicio>
 	</div>
 	<div id="derecha" ><!-- *ngIf="roles.includes('ROLE_ADMIN')" -->
@@ -21,18 +28,12 @@
 
 
 		<div class="cuerpoCitas">
-		
-			<div class="card-vacio" *ngIf="todasLasCitas.length == 0" >
-				<h1>Selecciona una fecha del calendario</h1>
-				<h2>Escoge una hora que te interese</h2> 
-				<h3>Esperando a que reserves tu cita ...</h3>
-				<div class="spinner-border" role="status" >
-					<span class="visually-hidden">Loading...</span>
-				</div>
+			<div class="card-vacio" *ngIf="misCitas.length == 0" >
+				<h1>Bienvenido {{usuario.nombre}}</h1>
+				<h5>Aqui aparecerán tus citas una vez las reserves</h5> 
 			</div>
-			<div class="card" *ngFor="let cita of todasMisCitas">
+			<div class="card" *ngFor="let cita of misCitas">
 				<div class="titulo">
-					
 					<p >{{ cita.fechaInicio | date: 'HH:mm' }}h</p>
 					<p >{{ cita.fechaInicio | date: 'EEEE' |
 						slice:0:1 | uppercase }}{{ cita.fechaInicio | date: 'EEEE' | slice:1 }}</p>

@@ -60,9 +60,9 @@ export class SignupComponent {
 						
 				this.userService.añadirUsuario(this.formSubmit.value).subscribe(
 			(data) => {
-				console.log("usuario guardado")
+				console.log("usuario registrado con exi")
 				this.buttonClose.nativeElement.click();
-				this.alert.show('success', 'Usuario Guardado');
+				this.alert.show('success', 'Usuario Registrado con exito');
 			},(error) => {
 				console.log(error);
 				this.buttonClose.nativeElement.click();
