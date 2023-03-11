@@ -45,6 +45,7 @@ export interface Servicio {
 	  imagen: string;
 	  extra: string;
 	  cortes: Corte[];
+	  tiempo: number;
 }
 
 export interface Corte {
@@ -54,7 +55,10 @@ export interface Corte {
 	  precio: number;
 	  imagen: string;
 	  extra: string;
+	  	  tiempo: number;
+
 	  servicio: Servicio;
+	  
 	  estilos: Estilo[];
 }
 
@@ -64,6 +68,8 @@ export interface Estilo {
 	  nombre: string;
 	  precio: number;
 	  imagen: string;
+	  	  tiempo: number;
+
 	  extra: string;
 }
 

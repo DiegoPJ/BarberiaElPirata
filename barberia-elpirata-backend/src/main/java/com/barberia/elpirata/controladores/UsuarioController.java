@@ -52,7 +52,7 @@ public class UsuarioController {
         return usuarioService.obtenerEmail(email);
     }
 
-    @DeleteMapping("/{usuarioId}")
+    @DeleteMapping("/eliminarUsuario/{usuarioId}")
     public void eliminarUsuario(@PathVariable("usuarioId") Long usuarioId){
         usuarioService.eliminarUsuario(usuarioId);
     }
@@ -66,6 +66,7 @@ public class UsuarioController {
         usuarioService.enviarEmailReinicioContraseña(email);
         return ResponseEntity.ok().build();
     }
+    
 
 
 }

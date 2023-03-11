@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 	<div class="container-fluid">
-	
+
 		<img routerLink="/" src="../assets/img/LOGOTOTAL.png" width="50px"
 			style="cursor: pointer" alt="Logo"> <a
 			*ngIf="getScreenWidth() > 768 && currentRoute == '/carro'"
@@ -8,11 +8,10 @@
 		<a *ngIf="currentRoute == '/cita'" class="navbar-brand"
 			style="font-size: 26px !important" href="#">Cita</a> <a
 			*ngIf="currentRoute == '/'" class="navbar-brand"
-			style="font-size: 26px !important" href="#">Ruben NH
-			</a> <a
-			*ngIf="currentRoute == '/admin'" class="navbar-brand"
-			style="font-size: 26px !important" href="#">Configuración</a>
-		<div *ngIf="currentRoute == '/carro'" class="carrito">
+			style="font-size: 26px !important" href="#">Ruben NH </a> <a
+			*ngIf="currentRoute == '/admin' && userRoles.includes('ROLE_ADMIN')"
+			class="navbar-brand" style="font-size: 26px !important" href="#">Configuración</a>
+		<div *ngIf="currentRoute == '/tienda'" class="carrito">
 			<img class="carrito" src="/assets/img/iconos/carrito.png">
 		</div>
 
@@ -25,19 +24,32 @@
 
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav ms-auto">
-				<li class="nav-item menu-item" *ngIf="currentRoute != '/admin'"><a
-					class="nav-link " routerLink="/admin">Configuración</a></li>
-				<li class="nav-item menu-item" *ngIf="currentRoute != '/'"><a
-					class="nav-link " routerLink="/">Inicio</a></li>
-				<li class="nav-item menu-item" *ngIf="currentRoute != '/carro'"><a
-					class="nav-link" routerLink="/carro">Tienda</a></li>
-				<li class="nav-item menu-item" *ngIf="currentRoute != '/cita'"><a
+				<li class="nav-item menu-item" ><a [routerLinkActive]="['active']"
+					class="nav-link "  routerLink="/admin">Configuración</a></li>
+				
+				<li class="nav-item menu-item" ><a [routerLinkActive]="['active']"
+					class="nav-link" routerLink="/tienda">Tienda</a></li>
+				<li class="nav-item menu-item" ><a [routerLinkActive]="['active']"
 					class="nav-link" routerLink="/cita">Cita</a></li>
-				<li class="nav-item menu-item">
-					<button class="cerrar-sesion" (click)="onlogout()">Cerrar
-						Sesión</button>
+<!-- 				<li class="nav-item menu-item"><a class="nav-link">Perfil</a></li>
+				<li class="nav-item menu-item"><a class="nav-link" (click)="onlogout()">Cerrar
+						Sesión</a></li> -->
+						<li class="nav-item menu-item" ><a [routerLinkActive]="['active']" 
+                                   [routerLinkActiveOptions]="{exact: true}"
+					class="nav-link " routerLink="/">Inicio</a></li>
+				<li class="nav-item menu-item mt-1">
+					<div class="btn-group ">
+  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{credencial}}</button>
+  <ul class="dropdown-menu dropdown-menu-end">
+<!--     <li><a class="dropdown-item" href="#">Perfil</a></li>
+ -->    <li><a class="dropdown-item" (click)="onlogout()">Cerrar Sesión</a></li>
+  </ul>
+</div>
+
 				</li>
-				<li class="nav-item menu-item"></li>
+
+
+
 			</ul>
 		</div>
 	</div>

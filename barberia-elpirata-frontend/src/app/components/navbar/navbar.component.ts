@@ -15,7 +15,8 @@ export class NavbarComponent implements OnInit {
 
   currentRoute: string = '';
    @Input() user: boolean;
-  
+ 	  	userRoles: string[];
+	credencial : any;
   constructor(private router: Router,    private userService:UserService,private authService: AuthService
 ) { }
 
@@ -24,11 +25,14 @@ export class NavbarComponent implements OnInit {
 	 	 if (credencial) {
 	    this.isAuthenticated = true;
 	  	}
-	// Suscribirse al evento de cambio de autenticación
+this.credencial = localStorage.getItem('credencial');
+this.credencial = this.credencial.split('@')[0];	// Suscribirse al evento de cambio de autenticación
     this.authService.authChange.subscribe(isAuthenticated => {
       this.isAuthenticated = isAuthenticated;
     });
-	  
+    	    	 this.userRoles = this.authService.getUserRoles();
+
+
 	  
     this.currentRoute = this.router.url;
 	  
@@ -57,6 +61,9 @@ onlogout(){
 }
 getScreenWidth(): number {
     return this.screenWidth;
+  }
+   changeColor(event: any) {
+    event.target.classList.toggle('active');
   }
 
 }

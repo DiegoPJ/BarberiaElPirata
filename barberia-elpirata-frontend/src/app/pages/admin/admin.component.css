@@ -56,3 +56,81 @@ th {
   background-color: #c82333;
   border-color: #bd2130;
 }
+.barberia{
+	color:white;
+	width: 100%;
+}
+.Agregar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15rem;
+}
+
+.Agregar input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+
+
+
+.servicios {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  width: 100%;
+}
+
+
+.servicio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+  border: 1px solid black;
+  
+}
+
+.cortes {
+  display: flex;
+  flex-direction: row;
+  margin:10px;
+  border: 1px solid black;
+  
+}
+
+.corte {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+    border: 1px solid black;
+  
+}
+
+.estilos {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  border: 1px solid black;
+  
+}
+
+.estilo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+}
+
+img {
+  object-fit: cover;
+  width: 100px;
+  height: 100px;
+}
+

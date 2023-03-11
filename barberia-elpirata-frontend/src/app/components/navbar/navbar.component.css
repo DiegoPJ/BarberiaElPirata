@@ -14,6 +14,9 @@
 	margin-bottom: 4px;
 	transition: transform 1s ease-in-out;
 }
+.navbar-nav .nav-link.active {
+  color: white;
+}
 .menu-item {
   margin-right: 20px;
 }

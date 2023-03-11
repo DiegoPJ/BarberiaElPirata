@@ -32,8 +32,11 @@ export class UserService {
 	  console.log("elEmailpapi: "+email);
   return this.httpClient.post(`${baserUrl}/api/usuarios/olvidarPassword`,{email});
 }
+    	public deleteUsuario(usuario: Usuario) {
+  	return this.httpClient.delete(`${baserUrl}/api/usuarios/eliminarUsuario/${usuario.id.toString()}`,
+  	 { responseType: 'text' })
     
-  
+ }
   public logout() {
     return this.httpClient.post(`${baserUrl}/logout`, {}).toPromise();
   }

@@ -9,13 +9,12 @@ import * as XLSX from 'xlsx';
 import { formatDate } from '@angular/common';
 
 @Component({
-  selector: 'app-inicio',
-  templateUrl: './inicio.component.html',
-  styleUrls: ['./inicio.component.css']
+  selector: 'app-cita',
+  templateUrl: './cita.component.html',
+  styleUrls: ['./cita.component.css']
 })
 
-export class InicioComponent implements OnInit,AfterViewInit{
-	roles: string[] = [] ; 
+export class CitaComponent implements OnInit,AfterViewInit{
 	usuario:any;
 	usuarios?: Usuario[];
 	calendarioSelecIni:Date;
@@ -57,10 +56,7 @@ constructor(
 	.subscribe(usuarios => {
 		this.usuarios = usuarios;
 	})
-		this.roles = JSON.parse(localStorage.getItem('roles') || '[]');
-		console.log("ROLEEESS"+this.roles)
-		console.log("ROLEEESS"+localStorage.getItem('roles'))
-    
+
     
    
 }

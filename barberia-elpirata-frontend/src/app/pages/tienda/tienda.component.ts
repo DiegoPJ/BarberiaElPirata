@@ -3,11 +3,11 @@ import { Producto } from 'src/app/model';
 import { CarroService } from 'src/app/services/carro.service';
 
 @Component({
-  selector: 'app-carro-productos',
-  templateUrl: './carro-productos.component.html',
-  styleUrls: ['./carro-productos.component.css']
+  selector: 'app-tienda',
+  templateUrl: './tienda.component.html',
+  styleUrls: ['./tienda.component.css']
 })
-export class CarroProductosComponent implements OnInit{
+export class TiendaComponent implements OnInit{
 
 	productos : Producto[] = [];
 	@ViewChild('contenedor') contenedor : ElementRef;

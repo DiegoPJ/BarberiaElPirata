@@ -29,8 +29,9 @@
 
 		<div class="cuerpoCitas">
 			<div class="card-vacio" *ngIf="misCitas.length == 0" >
-				<h1>Bienvenido {{usuario.nombre}}</h1>
+				<h1 *ngIf="usuario != null || usuario != undefined">Bienvenido {{usuario.nombre}}</h1>
 				<h5>Aqui aparecerán tus citas una vez las reserves</h5> 
+				
 			</div>
 			<div class="card" *ngFor="let cita of misCitas">
 				<div class="titulo">

@@ -13,7 +13,16 @@ export class CitaService {
   private todasLasCitas: BehaviorSubject<Cita[]> = new BehaviorSubject<Cita[]>([]);
 
 
-  constructor(private httpClient :HttpClient,private datePipe: DatePipe) { }
+  constructor(private httpClient :HttpClient,private datePipe: DatePipe) { 
+	  
+	  setInterval(() => {
+    this.eliminarCitasPasadasDeHora();
+  }, 3600000);
+  }
+  
+  
+  
+  
   
 	public deleteCita(cita: Cita) {
 		console.log(cita);
@@ -40,6 +49,19 @@ const formattedDate = fechaInicio.toLocaleString('es-ES', { timeZone: 'Europe/Ma
   const params = { fechaInicio: formattedDate };
 
   return this.httpClient.get<Cita>(url, { params });
+}
+
+public eliminarCitasPasadasDeHora() {
+  const citas = this.todasLasCitas.getValue();
+  const horaActual = new Date();
+  citas.forEach(cita => {
+    const fechaCita = new Date(cita.fechaFin);
+    if (fechaCita < horaActual) {
+      this.deleteCita(cita).subscribe(() => {
+        console.log(`Cita con id ${cita.id} eliminada.`);
+      });
+    }
+  });
 }
 
 

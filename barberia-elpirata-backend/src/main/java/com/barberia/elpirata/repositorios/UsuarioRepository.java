@@ -19,4 +19,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
  	
  	  @Query("SELECT c FROM Usuario u LEFT JOIN u.citas c ON u.id = c.usuario")
  	   public List <Usuario> findAllWithCitas();
+ 	    public void deleteByEmail(String email);
 }
