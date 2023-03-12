@@ -30,7 +30,9 @@
 		<div class="cuerpoCitas">
 			<div class="card-vacio" *ngIf="misCitas.length == 0" >
 				<h1 *ngIf="usuario != null || usuario != undefined">Bienvenido {{usuario.nombre}}</h1>
-				<h5>Aqui aparecerán tus citas una vez las reserves</h5> 
+				<h4>Aqui aparecerán tus citas una vez las reserves</h4> 
+				<h5>Selecciona una fecha del calendario </h5> 
+				<h6>y te aparecerá el horario en la parte inferior</h6>
 				
 			</div>
 			<div class="card" *ngFor="let cita of misCitas">

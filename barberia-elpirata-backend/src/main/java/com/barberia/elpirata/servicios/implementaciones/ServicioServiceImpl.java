@@ -27,5 +27,14 @@ public class ServicioServiceImpl implements ServicioService{
 	    // Guardar la nueva peluquería
 	    return barberiaRepository.save(servicio);
 	}
+	@Override
+	public void eliminarServicio(Long servicioId) throws Exception {
+	    Servicio servicio = barberiaRepository.findById(servicioId).orElse(null);
+	    if (servicio == null) {
+	        throw new Exception("Servicio no encontrado");
+	    }
+	    barberiaRepository.delete(servicio);
+	}
+
 
 }

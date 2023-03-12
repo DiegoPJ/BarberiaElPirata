@@ -28,5 +28,14 @@ public class EstiloServiceImpl implements EstiloService{
 	    // Guardar el nuevo estilo
 	    return estiloRepository.save(estilo);
 	}
+	@Override
+	public void eliminarEstilo(Long estiloId) throws Exception {
+	    Estilo estilo = estiloRepository.findById(estiloId).orElse(null);
+	    if (estilo == null) {
+	        throw new Exception("Estilo no encontrado");
+	    }
+	    estiloRepository.delete(estilo);
+	}
+
 
 }

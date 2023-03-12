@@ -24,6 +24,7 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { RoleGuard } from './helpers/role.guard';
 import { CitaComponent } from './pages/cita/cita.component';
 import { TiendaComponent } from './pages/tienda/tienda.component';
+import { AdminTiendaComponent } from './pages/admin-tienda/admin-tienda.component';
 
 
 const appRoutes:Routes =[
@@ -46,6 +47,12 @@ const appRoutes:Routes =[
 		 component:AdminComponent,
 		 canActivate: [RoleGuard],
 		  data: { expectedRoles: ['ROLE_ADMIN'] }
+	},
+	{
+		path:'admintienda',
+		 component:AdminTiendaComponent,
+		 canActivate: [RoleGuard],
+		  data: { expectedRoles: ['ROLE_ADMIN'] }
 	}
 ]
 
@@ -64,6 +71,7 @@ const appRoutes:Routes =[
     TiendaComponent,
     NavbarComponent,
     AdminComponent,
+    AdminTiendaComponent,
   ],
   imports: [
     BrowserModule,

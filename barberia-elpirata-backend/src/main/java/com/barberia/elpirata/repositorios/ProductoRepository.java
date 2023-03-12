@@ -11,5 +11,6 @@ import com.barberia.elpirata.entidades.Producto;
 public interface ProductoRepository extends JpaRepository<Producto, Long>{
 
 	public List <Producto>  findAll();
-
+	public void deleteById(Long id);
+	
 }

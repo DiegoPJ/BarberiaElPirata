@@ -12,6 +12,7 @@ public interface CorteRepository extends JpaRepository<Corte, Long>{
 	
 	 public List<Corte> findAll();
 	 public Corte findByNombre(String nombre);
+		public void deleteById(Long id);
 
 	 
 }

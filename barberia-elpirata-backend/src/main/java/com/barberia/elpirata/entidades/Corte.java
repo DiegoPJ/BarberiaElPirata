@@ -36,7 +36,7 @@ public class Corte {
     
     private String imagen;
     
-    private String suplemento;
+    private String extra;
     
     private int tiempo;
     

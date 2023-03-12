@@ -12,7 +12,14 @@ export class CarroService {
 	productos : Producto;
   constructor(private httpClient : HttpClient) { }
   
-   public todosLasCitas(): Observable<Producto[]>{
-	  	  return this.httpClient.get<Producto[]>(`${baserUrl}/api/productos`);
+   public todosLosProductos(): Observable<Producto[]>{
+	  	  return this.httpClient.get<Producto[]>(`${baserUrl}/api/productos/todosLosProductos`);
+  }
+  public eliminarProducto(productoId: number): Observable<void> {
+	  return this.httpClient.delete<void>(`${baserUrl}/api/productos/eliminarProducto/${productoId}`);
+  }
+  
+  public añadirProducto(producto: Producto): Observable<Producto> {
+	  return this.httpClient.post<Producto>(`${baserUrl}/api/productos/guardarProducto`, producto);
   }
 }

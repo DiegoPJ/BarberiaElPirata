@@ -18,7 +18,7 @@ constructor(private carroService: CarroService) {
 	
  }
     ngOnInit(): void {
-        this.carroService.todosLasCitas()
+        this.carroService.todosLosProductos()
 			  .subscribe(
 			    (productos) => {
 			      this.productos = productos;

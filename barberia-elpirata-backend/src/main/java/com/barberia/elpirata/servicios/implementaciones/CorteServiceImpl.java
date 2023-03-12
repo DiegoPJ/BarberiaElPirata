@@ -28,5 +28,15 @@ public class CorteServiceImpl implements CorteService{
 	    // Guardar el nuevo corte
 	    return corteRepository.save(corte);
 	}
+	
+	@Override
+	public void eliminarCorte(Long corteId) throws Exception {
+	    Corte corte = corteRepository.findById(corteId).orElse(null);
+	    if (corte == null) {
+	        throw new Exception("Corte no encontrado");
+	    }
+	    corteRepository.delete(corte);
+	}
+
 
 }

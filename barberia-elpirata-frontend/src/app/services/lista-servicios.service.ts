@@ -12,14 +12,14 @@ export class ListaServiciosService {
 
 
 public todaLaListaDeServicios(): Observable<Servicio[]>{
-	  	  return this.httpClient.get<Servicio[]>(`${baserUrl}/api/servicios`);
+	  	  return this.httpClient.get<Servicio[]>(`${baserUrl}/api/servicios/todosLosServicios`);
   }
 
 public todaLaListaDeServiciosCorte(): Observable<Corte[]>{
-	  	  return this.httpClient.get<Corte[]>(`${baserUrl}/api/cortes`);
+	  	  return this.httpClient.get<Corte[]>(`${baserUrl}/api/cortes/todosLosCortes`);
   }
 public todaLaListaDeServiciosEstilo(): Observable<Estilo[]>{
-	  	  return this.httpClient.get<Estilo[]>(`${baserUrl}/api/estilos`);
+	  	  return this.httpClient.get<Estilo[]>(`${baserUrl}/api/estilos/todosLosEstilos`);
   }
 
 }

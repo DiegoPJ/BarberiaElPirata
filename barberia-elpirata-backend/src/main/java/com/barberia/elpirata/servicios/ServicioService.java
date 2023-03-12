@@ -9,4 +9,7 @@ import com.barberia.elpirata.entidades.Usuario;
 public interface ServicioService {
 
 	public Servicio guardarServicio(Servicio servicio) throws Exception;
+
+	void eliminarServicio(Long servicioId) throws Exception;
+
 }

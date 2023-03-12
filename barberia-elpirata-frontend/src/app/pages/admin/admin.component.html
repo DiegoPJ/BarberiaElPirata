@@ -1,6 +1,8 @@
 <app-navbar></app-navbar>
 <div class="cuerpo">
-
+<div class="navbarAdmin">
+<a class="nav-link" routerLink="/admintienda">Tienda</a>
+</div>
 	<div class="usuarios">
 		<h2>Lista de usuarios</h2>
 		<table class="table table-striped">
@@ -64,8 +66,8 @@
 							</ul>
 						</div>
 					</td>
-					<!-- <td><button class="btn btn-primary">Editar</button></td>
-					<td><button class="btn btn-danger">Bloquear</button></td> -->
+					<td><button class="btn btn-primary">Editar</button></td>
+					<td><button class="btn btn-danger">Bloquear</button></td>
 					<td><button class="btn btn-danger"
 							(click)="deleteUsuario(usuario)">Borrar</button></td>
 				</tr>

@@ -5,5 +5,7 @@ import com.barberia.elpirata.entidades.Estilo;
 public interface EstiloService {
 
 	public Estilo guardarEstilo(Estilo estilo) throws Exception;
+
+	void eliminarEstilo(Long estiloId) throws Exception;
 	
 }

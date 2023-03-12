@@ -1,0 +1,112 @@
+<div class="cuerpo">
+	<div class="cabecera">
+		<h1>Shopping Car</h1>
+	</div>
+	<div class="carroProductos">
+		<div class="contenedor">
+
+			<div class="añadir">
+				<h2>Añadir</h2>
+				<form action="#" [formGroup]="productoForm"
+					(ngSubmit)="agregarProducto()">
+
+					<label>Nombre del producto</label> <input type="text"
+						formControlName="nombre" class="form-control">
+					<div
+						*ngIf="productoForm.controls['nombre'].invalid && (productoForm.controls['nombre'].dirty || productoForm.controls['nombre'].touched)"
+						class="text-danger">
+						<div *ngIf="productoForm.controls['nombre'].errors?.['required']">El
+							nombre es requerido</div>
+					</div>
+
+					<label>Valor del producto</label> <input type="number"
+						formControlName="precio" class="form-control">
+					<div
+						*ngIf="productoForm.controls['precio'].invalid && (productoForm.controls['precio'].dirty || productoForm.controls['precio'].touched)"
+						class="text-danger">
+						<div *ngIf="productoForm.controls['precio'].errors?.['required']">El
+							valor es requerido</div>
+						<div *ngIf="productoForm.controls['precio'].errors?.['pattern']">El
+							valor debe ser un número</div>
+					</div>
+
+					<label>Existencia</label> <input type="number"
+						formControlName="cantidad" class="form-control">
+					<div
+						*ngIf="productoForm.controls['cantidad'].invalid && (productoForm.controls['cantidad'].dirty || productoForm.controls['cantidad'].touched)"
+						class="text-danger">
+						<div
+							*ngIf="productoForm.controls['cantidad'].errors?.['required']">La
+							cantidad es requerida</div>
+						<div *ngIf="productoForm.controls['cantidad'].errors?.['pattern']">La
+							cantidad debe ser un número entero</div>
+					</div>
+
+					<label>Url Imagen</label> <input type="text"
+						formControlName="imagen" class="form-control">
+					<div
+						*ngIf="productoForm.controls['imagen'].invalid && (productoForm.controls['imagen'].dirty || productoForm.controls['imagen'].touched)"
+						class="text-danger">
+						<div *ngIf="productoForm.controls['imagen'].errors?.['required']">La
+							URL de la imagen es requerida</div>
+					</div>
+
+					<button type="submit" class="button" id="botonEditar"
+						[disabled]="!productoForm.valid">Agregar Producto</button>
+
+				</form>
+
+
+
+			</div>
+
+			<div class="editar">
+				<h2>Editar</h2>
+				<form>
+					<label>Nombre del producto</label> <select
+						[(ngModel)]="productoEditable"
+						[ngModelOptions]="{standalone: true}">
+						<option *ngFor="let producto of productos" [ngValue]="producto">{{producto.nombre}}</option>
+					</select> <label>Valor del producto</label> <input type="number"
+						id="valorAñadir" [(ngModel)]="productoEditable.precio"
+						[ngModelOptions]="{standalone: true}"> <label>Existencia</label>
+					<input type="number" id="existenciaAñadir"
+						[(ngModel)]="productoEditable.cantidad"
+						[ngModelOptions]="{standalone: true}"> <label>Url
+						Imagen</label> <input type="text" id="ImagenAñadir"
+						[(ngModel)]="productoEditable.imagen"
+						[ngModelOptions]="{standalone: true}"> <input
+						(click)="editarProducto()" class="button" type="button"
+						id="botonEditar" value="Editar">
+				</form>
+			</div>
+
+
+			<div class="eliminar">
+				<h2>Eliminar</h2>
+
+				<form>
+					<label>Nombre del producto</label> <select  [(ngModel)]="productoEliminar"  [ngModelOptions]="{standalone: true}">
+						<option *ngFor="let producto of productos" [ngValue]="producto">{{producto.nombre}}</option>
+					</select>
+					<button class="button" type="button" id="botonEliminar" (click)="eliminarProducto()">Eliminar</button>
+				</form>
+
+			</div>
+		</div>
+
+		<!-- 		Mostrar el mensaje
+ -->
+		<div class="contenedorMensaje">
+			<div id="mensaje"></div>
+		</div>
+
+		<!-- 		Productos
+ -->
+		<div class="contenedorProductos">
+			<h2>Productos</h2>
+			<div class="mostrarProductos" id="mostrarProductos"></div>
+		</div>
+
+	</div>
+</div>
