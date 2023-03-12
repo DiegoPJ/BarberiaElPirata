@@ -11,8 +11,8 @@ export class TiendaComponent implements OnInit{
 
 	productos : Producto[] = [];
 	@ViewChild('contenedor') contenedor : ElementRef;
-	@ViewChild('header') header : ElementRef;
-	@ViewChild('carroProductos') carroProductos : ElementRef;
+/*	@ViewChild('header') header : ElementRef;
+*/	@ViewChild('carroProductos') carroProductos : ElementRef;
 	
 constructor(private carroService: CarroService) {
 	
@@ -30,12 +30,12 @@ constructor(private carroService: CarroService) {
 			  );
 			   	
     }
-	 		@HostListener('window:scroll', ['$event']) onScroll() {
+	 		/*@HostListener('window:scroll', ['$event']) onScroll() {
 			if (this.contenedor.nativeElement.getBoundingClientRect().top < 10) {
 				this.header.nativeElement.classList.add("scroll");
 			} else {
 				this.header.nativeElement.classList.remove("scroll");
-			}  	}
+			}  	}*/
 	
 }
 

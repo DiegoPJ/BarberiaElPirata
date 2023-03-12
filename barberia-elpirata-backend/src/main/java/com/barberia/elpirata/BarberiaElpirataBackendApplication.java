@@ -78,68 +78,68 @@ public class BarberiaElpirataBackendApplication implements CommandLineRunner {
 //		
 //		// crear Horario
 //
-//		Horario horario = new Horario();
-//		horario.setDiaSemana("Lunes");
-//		horario.setHora_apertura_mañana("10:00");
-//		horario.setHora_cierre_mañana("14:00");
-//		horario.setHora_apertura_tarde("16:00");
-//		horario.setHora_cierre_tarde("21:00");
-//
-//		horarioService.guardarHorario(horario);
-//
-//		Horario horario2 = new Horario();
-//		horario2.setDiaSemana("Martes");
-//		horario2.setHora_apertura_mañana("09:00");
-//		horario2.setHora_cierre_mañana("14:00");
-//		horario2.setHora_apertura_tarde("16:00");
-//		horario2.setHora_cierre_tarde("23:00");
-//
-//		horarioService.guardarHorario(horario2);
-//
-//		Horario horario3 = new Horario();
-//		horario3.setDiaSemana("Miércoles");
-//		horario3.setHora_apertura_mañana("11:00");
-//		horario3.setHora_cierre_mañana("14:00");
-//		horario3.setHora_apertura_tarde("16:00");
-//		horario3.setHora_cierre_tarde("22:00");
-//
-//		horarioService.guardarHorario(horario3);
-//
-//		Horario horario4 = new Horario();
-//		horario4.setDiaSemana("Jueves");
-//		horario4.setHora_apertura_mañana("12:00");
-//		horario4.setHora_cierre_mañana("14:00");
-//		horario4.setHora_apertura_tarde("16:00");
-//		horario4.setHora_cierre_tarde("21:00");
-//
-//		horarioService.guardarHorario(horario4);
-//
-//		Horario horario5 = new Horario();
-//		horario5.setDiaSemana("Viernes");
-//		horario5.setHora_apertura_mañana("10:00");
-//		horario5.setHora_cierre_mañana("14:00");
-//		horario5.setHora_apertura_tarde("16:00");
-//		horario5.setHora_cierre_tarde("21:00");
-//
-//		horarioService.guardarHorario(horario5);
-//
-//		Horario horario6 = new Horario();
-//		horario6.setDiaSemana("Sábado");
-//		horario6.setHora_apertura_mañana("10:00");
-//		horario6.setHora_cierre_mañana("14:00");
-//		horario6.setHora_apertura_tarde("16:00");
-//		horario6.setHora_cierre_tarde("21:00");
-//
-//		horarioService.guardarHorario(horario6);
-//
-//		Horario horario7 = new Horario();
-//		horario7.setDiaSemana("Domingo");
-//		horario7.setHora_apertura_mañana("10:00");
-//		horario7.setHora_cierre_mañana("14:00");
-//		horario7.setHora_apertura_tarde("16:00");
-//		horario7.setHora_cierre_tarde("21:00");
-//
-//		horarioService.guardarHorario(horario7);
+		Horario horario = new Horario();
+		horario.setDiaSemana("Lunes");
+		horario.setHora_apertura_manana("10:00");
+		horario.setHora_cierre_manana("14:00");
+		horario.setHora_apertura_tarde("16:00");
+		horario.setHora_cierre_tarde("21:00");
+
+		horarioService.guardarHorario(horario);
+
+		Horario horario2 = new Horario();
+		horario2.setDiaSemana("Martes");
+		horario2.setHora_apertura_manana("09:00");
+		horario2.setHora_cierre_manana("14:00");
+		horario2.setHora_apertura_tarde("16:00");
+		horario2.setHora_cierre_tarde("23:00");
+
+		horarioService.guardarHorario(horario2);
+
+		Horario horario3 = new Horario();
+		horario3.setDiaSemana("Miércoles");
+		horario3.setHora_apertura_manana("11:00");
+		horario3.setHora_cierre_manana("14:00");
+		horario3.setHora_apertura_tarde("16:00");
+		horario3.setHora_cierre_tarde("22:00");
+
+		horarioService.guardarHorario(horario3);
+
+		Horario horario4 = new Horario();
+		horario4.setDiaSemana("Jueves");
+		horario4.setHora_apertura_manana("12:00");
+		horario4.setHora_cierre_manana("14:00");
+		horario4.setHora_apertura_tarde("16:00");
+		horario4.setHora_cierre_tarde("21:00");
+
+		horarioService.guardarHorario(horario4);
+
+		Horario horario5 = new Horario();
+		horario5.setDiaSemana("Viernes");
+		horario5.setHora_apertura_manana("10:00");
+		horario5.setHora_cierre_manana("14:00");
+		horario5.setHora_apertura_tarde("16:00");
+		horario5.setHora_cierre_tarde("21:00");
+
+		horarioService.guardarHorario(horario5);
+
+		Horario horario6 = new Horario();
+		horario6.setDiaSemana("Sábado");
+		horario6.setHora_apertura_manana("10:00");
+		horario6.setHora_cierre_manana("14:00");
+		horario6.setHora_apertura_tarde("16:00");
+		horario6.setHora_cierre_tarde("21:00");
+
+		horarioService.guardarHorario(horario6);
+
+		Horario horario7 = new Horario();
+		horario7.setDiaSemana("Domingo");
+		horario7.setHora_apertura_manana("10:00");
+		horario7.setHora_cierre_manana("14:00");
+		horario7.setHora_apertura_tarde("16:00");
+		horario7.setHora_cierre_tarde("21:00");
+
+		horarioService.guardarHorario(horario7);
 //
 //
 //		Servicio servicio1 = new Servicio();

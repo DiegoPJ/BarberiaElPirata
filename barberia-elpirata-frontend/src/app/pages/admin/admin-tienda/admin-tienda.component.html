@@ -50,6 +50,16 @@
 						<div *ngIf="productoForm.controls['imagen'].errors?.['required']">La
 							URL de la imagen es requerida</div>
 					</div>
+					<label>Descripción del producto</label>
+					<textarea formControlName="descripcion" class="form-control"
+						rows="7"></textarea>
+					<div
+						*ngIf="productoForm.controls['descripcion'].invalid && (productoForm.controls['descripcion'].dirty || productoForm.controls['descripcion'].touched)"
+						class="text-danger">
+						<div
+							*ngIf="productoForm.controls['descripcion'].errors?.['required']">La
+							descripción es requerida</div>
+					</div>
 
 					<button type="submit" class="button" id="botonEditar"
 						[disabled]="!productoForm.valid">Agregar Producto</button>
@@ -75,8 +85,12 @@
 						[ngModelOptions]="{standalone: true}"> <label>Url
 						Imagen</label> <input type="text" id="ImagenAñadir"
 						[(ngModel)]="productoEditable.imagen"
-						[ngModelOptions]="{standalone: true}"> <input
-						(click)="editarProducto()" class="button" type="button"
+						[ngModelOptions]="{standalone: true}"> <label>Descripción
+						del producto</label>
+					<textarea style="color:black" rows="6" id="descripcionAñadir"
+						[(ngModel)]="productoEditable.descripcion"
+						[ngModelOptions]="{standalone: true}"></textarea>
+					<input (click)="editarProducto()" class="button" type="button"
 						id="botonEditar" value="Editar">
 				</form>
 			</div>
@@ -86,10 +100,13 @@
 				<h2>Eliminar</h2>
 
 				<form>
-					<label>Nombre del producto</label> <select  [(ngModel)]="productoEliminar"  [ngModelOptions]="{standalone: true}">
+					<label>Nombre del producto</label> <select
+						[(ngModel)]="productoEliminar"
+						[ngModelOptions]="{standalone: true}">
 						<option *ngFor="let producto of productos" [ngValue]="producto">{{producto.nombre}}</option>
 					</select>
-					<button class="button" type="button" id="botonEliminar" (click)="eliminarProducto()">Eliminar</button>
+					<button class="button" type="button" id="botonEliminar"
+						(click)="eliminarProducto()">Eliminar</button>
 				</form>
 
 			</div>

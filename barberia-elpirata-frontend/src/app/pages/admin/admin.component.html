@@ -1,8 +1,10 @@
-<app-navbar></app-navbar>
+
+ <app-navbar></app-navbar>
+
 <div class="cuerpo">
-<div class="navbarAdmin">
-<a class="nav-link" routerLink="/admintienda">Tienda</a>
-</div>
+	<div class="navbarAdmin">
+		<a class="nav-link" routerLink="/admintienda">Tienda</a>
+	</div>
 	<div class="usuarios">
 		<h2>Lista de usuarios</h2>
 		<table class="table table-striped">
@@ -74,7 +76,12 @@
 			</tbody>
 		</table>
 	</div>
+	<h1 style="color:black ;margin:20px">Horario</h1>
+		<app-admin-horario></app-admin-horario>
+
+
 	<div class="barberia">
+		<h1 style="color:black ;margin:20px">Servicios</h1>
 		<h3>Servicios - Cortes - Estilos</h3>
 		<div class="Agregar Barberia">
 			<div class="agregar-servicio">

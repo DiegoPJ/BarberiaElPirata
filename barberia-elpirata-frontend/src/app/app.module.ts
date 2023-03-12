@@ -24,7 +24,8 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { RoleGuard } from './helpers/role.guard';
 import { CitaComponent } from './pages/cita/cita.component';
 import { TiendaComponent } from './pages/tienda/tienda.component';
-import { AdminTiendaComponent } from './pages/admin-tienda/admin-tienda.component';
+import { AdminTiendaComponent } from './pages/admin/admin-tienda/admin-tienda.component';
+import { AdminHorarioComponent } from './pages/admin/admin-horario/admin-horario.component';
 
 
 const appRoutes:Routes =[
@@ -72,6 +73,7 @@ const appRoutes:Routes =[
     NavbarComponent,
     AdminComponent,
     AdminTiendaComponent,
+    AdminHorarioComponent,
   ],
   imports: [
     BrowserModule,

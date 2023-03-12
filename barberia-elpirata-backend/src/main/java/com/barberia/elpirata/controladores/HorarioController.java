@@ -14,7 +14,7 @@ import com.barberia.elpirata.repositorios.HorarioRepository;
 import com.barberia.elpirata.servicios.HorarioService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/horarios")
 public class HorarioController {
 	
 	@Autowired
@@ -23,7 +23,7 @@ public class HorarioController {
 	@Autowired
 	private HorarioService horarioService;
 	
-	@GetMapping("/horarios")
+	@GetMapping("/todosLosHorarios")
     public List<Horario> obtenerHorario(){
     		List<Horario> x = horarioRepository.findAll();
         return x;

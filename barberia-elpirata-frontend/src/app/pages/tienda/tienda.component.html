@@ -6,7 +6,7 @@
 		
 		<div *ngFor="let producto of productos" class="item">
 			<div class="imagen">
-				<img src="../assets/img/productos/cerveza.png" alt="producto 1">
+				<img [src]="producto.imagen" alt="producto 1">
 				<div class="overlay">
 				<p>{{producto.descripcion}}</p>
 				</div>

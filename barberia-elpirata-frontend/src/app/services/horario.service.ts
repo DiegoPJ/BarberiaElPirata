@@ -21,6 +21,9 @@ export class HorarioService {
 	  return this.httpClient.get(`${baserUrl}/usuarios/${email}`);
   }*/
   public todosLosHorarios(): Observable<Horario[]>{
-	  	  return this.httpClient.get<Horario[]>(`${baserUrl}/api/horarios`);
+	  	  return this.httpClient.get<Horario[]>(`${baserUrl}/api/horarios/todosLosHorarios`);
+  }
+   public añadirHorario(horario: Horario): Observable<Horario> {
+	  return this.httpClient.post<Horario>(`${baserUrl}/api/horarios/guardarHorario`, horario);
   }
 }

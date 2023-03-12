@@ -23,17 +23,17 @@ public class Horario {
     @Column(name="diaSemana", unique=true)
 	private String diaSemana;
 	
-	private String hora_apertura_mañana;
-	private String hora_cierre_mañana;
+	private String hora_apertura_manana;
+	private String hora_cierre_manana;
 	private String hora_apertura_tarde;
 	private String hora_cierre_tarde;
 	
-	public Horario(String diaSemana, String hora_apertura_mañana, String hora_cierre_mañana, String hora_apertura_tarde,
+	public Horario(String diaSemana, String hora_apertura_manana, String hora_cierre_manana, String hora_apertura_tarde,
 			String hora_cierre_tarde) {
 		super();
 		this.diaSemana = diaSemana;
-		this.hora_apertura_mañana = hora_apertura_mañana;
-		this.hora_cierre_mañana = hora_cierre_mañana;
+		this.hora_apertura_manana = hora_apertura_manana;
+		this.hora_cierre_manana = hora_cierre_manana;
 		this.hora_apertura_tarde = hora_apertura_tarde;
 		this.hora_cierre_tarde = hora_cierre_tarde;
 	}

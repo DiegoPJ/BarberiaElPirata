@@ -227,7 +227,7 @@ compararFechaCompletaConHoras(fechaCompletaIni : Date,fechaCompletaFin: Date, ho
 							console.log("pipe: "+ this.diaSemanaDatePiPe.toLowerCase())*/
 						if(nombreDia == 
 						this.horarios[i].diaSemana.toLowerCase()){
-							horarioFin.push(this.horarios[i].hora_cierre_mañana);
+							horarioFin.push(this.horarios[i].hora_cierre_manana);
 							horarioFin.push(this.horarios[i].hora_cierre_tarde);
 
 							return horarioFin;
@@ -298,6 +298,18 @@ compararFechaCompletaConHoras(fechaCompletaIni : Date,fechaCompletaFin: Date, ho
 			       (fechaCitaCompletaIni.getTime() < citaInicio.getTime() &&
 			        fechaCitaCompletaFin.getTime() > citaFin.getTime())) {
 						
+						
+				/*console.log(fechaCitaCompletaIni.getTime() >= citaInicio.getTime() 
+			  	&& fechaCitaCompletaIni.getTime() < citaFin.getTime())
+				
+				console.log(fechaCitaCompletaFin.getTime() > citaInicio.getTime()
+			       )
+			       
+			       console.log(fechaCitaCompletaFin.getTime() <= citaFin.getTime())
+			    
+			    console.log(fechaCitaCompletaIni.getTime() < citaInicio.getTime() &&
+			        fechaCitaCompletaFin.getTime() > citaFin.getTime())*/
+			       
 			    this.alert.show('error','Tu tiempo de servicios es de '
 			    +this.totalTiempo + ' minutos  y se superpone con otra cita existente a las '
 			    + citaInicio.getHours() +":"+citaInicio.getMinutes()+

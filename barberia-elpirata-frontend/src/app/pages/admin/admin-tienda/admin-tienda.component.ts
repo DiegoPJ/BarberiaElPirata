@@ -41,7 +41,8 @@ export class AdminTiendaComponent implements OnInit {
 ]],
       cantidad: ['', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')
 ]],
-      imagen: ['', Validators.required]
+      imagen: ['', Validators.required],
+      descripcion: ['', Validators.required]
     });
     }
      agregarProducto() {
@@ -52,7 +53,7 @@ export class AdminTiendaComponent implements OnInit {
         precio: this.productoForm.value.precio,
         cantidad: this.productoForm.value.cantidad,
         imagen: this.productoForm.value.imagen,
-        descripcion: '',
+        descripcion: this.productoForm.value.descripcion,
         id: -1
       };
 		 

@@ -46,6 +46,7 @@ public class WebSecurityConfig   {
 			.csrf().disable()
 			.authorizeHttpRequests()
 			.requestMatchers("/api/usuarios/eliminarUsuario/{usuarioId}").hasAuthority("ROLE_ADMIN")
+			.requestMatchers("/api/horarios/guardarHorario").hasAuthority("ROLE_ADMIN")
 			.requestMatchers("/api/usuarios/guardarUsuario").permitAll()
 			.requestMatchers("/api/usuarios/olvidarPassword").permitAll()
 //			.requestMatchers("/api/usuarios").permitAll()

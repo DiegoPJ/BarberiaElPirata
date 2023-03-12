@@ -1,0 +1,24 @@
+.dia form div{
+	display: flex;
+	flex-direction: column;
+
+}	
+
+#horaInicioMañana, .horaApertura, .horaCierre {
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+}
+
+.mañanaTarde {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+	margin: 10px;
+}
+.horario {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 columnas iguales */
+}

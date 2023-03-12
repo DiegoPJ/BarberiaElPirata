@@ -20,8 +20,8 @@ public class HorarioServiceImpl implements HorarioService {
             return horarioRepository.save(horario);
         } else {
             horarioExistente.setDiaSemana(horario.getDiaSemana());
-            horarioExistente.setHora_apertura_mañana(horario.getHora_apertura_mañana());
-            horarioExistente.setHora_cierre_mañana(horario.getHora_cierre_mañana());
+            horarioExistente.setHora_apertura_manana(horario.getHora_apertura_manana());
+            horarioExistente.setHora_cierre_manana(horario.getHora_cierre_manana());
             horarioExistente.setHora_apertura_tarde(horario.getHora_apertura_tarde());
             horarioExistente.setHora_cierre_tarde(horario.getHora_cierre_tarde());
             return horarioRepository.save(horarioExistente);

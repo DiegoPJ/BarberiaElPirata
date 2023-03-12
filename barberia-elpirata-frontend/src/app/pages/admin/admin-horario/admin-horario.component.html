@@ -1,0 +1,157 @@
+<div class="horario">
+	<div class="dia" >
+		<h4>Añadir</h4>
+	
+		<form [formGroup]="horarioForm" (ngSubmit)="agregarHorario()">
+			<div class="mañanaTarde">
+				<div class="container">
+					<h3 style="margin:15px">Mañana</h3>
+					<div class="diaSemana">
+						<label for="horaInicioLunesMañana">Dia</label> <select
+							 formControlName="diaSemana">
+							<option value="Lunes">Lunes</option>
+							<option value="Martes">Martes</option>
+							<option value="Miércoles">Miércoles</option>
+							<option value="Jueves">Jueves</option>
+							<option value="Viernes">Viernes</option>
+							<option value="Sábado">Sábado</option>
+							<option value="Domingo">Domingo</option>
+						</select>
+					</div>
+					<div class="horaApertura">
+						<label for="horaInicioLunesMañana">Hora Apertura Mañana</label> <select
+							formControlName="hora_apertura_manana">
+							<option value="08:00">08:00</option>
+							<option value="08:30">08:30</option>
+							<option value="09:00">09:00</option>
+							<option value="09:30">09:30</option>
+							<option value="10:00">10:00</option>
+							<option value="10:30">10:30</option>
+							<option value="11:00">11:00</option>
+							<option value="11:30">11:30</option>
+						</select>
+					</div>
+					<div class="horaCierre">
+						<label for="horaFinMañana">Hora Cierre Mañana</label> <select
+							formControlName="hora_cierre_manana">
+							<option value="12:30">12:30</option>
+							<option value="13:00">13:00</option>
+							<option value="13:30">13:30</option>
+							<option value="14:00">14:00</option>
+							<option value="14:30">14:30</option>
+							<option value="15:00">15:00</option>
+							<option value="15:30">15:30</option>
+						</select>
+					</div>
+				</div>
+				<div class="container">
+					<h3 style="margin:15px">Tarde</h3><br>
+					<div class="horaApertura">
+						<label for="horaInicioTarde">Hora Apertura Tarde</label> <select
+							formControlName="hora_apertura_tarde">
+							<option value="16:00">16:00</option>
+							<option value="16:30">16:30</option>
+							<option value="17:00">17:00</option>
+							<option value="17:30">17:30</option>
+						</select>
+					</div>
+					<div class="horaCierre">
+						<label for="horaFinTarde">Hora Cierre Tarde</label> <select
+							formControlName="hora_cierre_tarde">
+							<option value="19:30">19:30</option>
+							<option value="20:00">20:00</option>
+							<option value="20:30">20:30</option>
+							<option value="21:00">21:00</option>
+							<option value="21:30">21:30</option>
+							<option value="22:00">22:00</option>
+							<option value="22:30">22:30</option>
+							<option value="23:00">23:00</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<button [disabled]="!horarioForm.valid" type="submit">Agregar</button>
+
+		</form>
+	</div>
+	<div class="dia">
+		<h4>Editar</h4>
+	
+		<form (ngSubmit)="editarHorario(horarioEditable)">
+			<div class="mañanaTarde">
+				<div class="container">
+					<h3 style="margin:15px">Mañana</h3>
+					<div class="diaSemana">
+						<label for="horaInicioLunesMañana">Dia</label> <select
+							 [(ngModel)]="horarioEditable" [ngModelOptions]="{standalone: true}">
+							<option *ngFor="let horario of horarios" [ngValue]="horario">{{horario.diaSemana}}</option>
+<!-- 							<option value="Lunes">Lunes</option>
+							<option value="Martes">Martes</option>
+							<option value="Miércoles">Miércoles</option>
+							<option value="Jueves">Jueves</option>
+							<option value="Viernes">Viernes</option>
+							<option value="Sábado">Sábado</option>
+							<option value="11:00">Domingo</option> -->
+						</select>
+					</div>
+					<div class="horaApertura">
+						<label for="horaInicioLunesMañana">Hora Apertura Mañana</label> <select
+							[(ngModel)]="horarioEditable.hora_apertura_manana" [ngModelOptions]="{standalone: true}">
+							<option [value]="horarioEditable.hora_apertura_manana">{{horarioEditable.hora_apertura_manana}}</option>
+							<option value="08:00">08:00</option>
+							<option value="08:30">08:30</option>
+							<option value="09:00">09:00</option>
+							<option value="09:30">09:30</option>
+							<option value="10:00">10:00</option>
+							<option value="10:30">10:30</option>
+							<option value="11:00">11:00</option>
+							<option value="11:30">11:30</option>
+						</select>
+					</div>
+					<div class="horaCierre">
+						<label for="horaFinMañana">Hora Cierre Mañana</label> <select
+							[(ngModel)]="horarioEditable.hora_cierre_manana" [ngModelOptions]="{standalone: true}">
+							<option [value]="horarioEditable.hora_cierre_manana">{{horarioEditable.hora_cierre_manana}}</option>
+							<option value="12:30">12:30</option>
+							<option value="13:00">13:00</option>
+							<option value="13:30">13:30</option>
+							<option value="14:00">14:00</option>
+							<option value="14:30">14:30</option>
+							<option value="15:00">15:00</option>
+							<option value="15:30">15:30</option>
+						</select>
+					</div>
+				</div>
+				<div class="container">
+					<h3 style="margin:15px">Tarde</h3><br>
+					<div class="horaApertura">
+						<label for="horaInicioTarde">Hora Apertura Tarde</label> <select
+							[(ngModel)]="horarioEditable.hora_apertura_tarde" [ngModelOptions]="{standalone: true}">
+							<option [value]="horarioEditable.hora_apertura_tarde">{{horarioEditable.hora_apertura_tarde}}</option>
+							<option value="16:00">16:00</option>
+							<option value="16:30">16:30</option>
+							<option value="17:00">17:00</option>
+							<option value="17:30">17:30</option>
+						</select>
+					</div>
+					<div class="horaCierre">
+						<label for="horaFinTarde">Hora Cierre Tarde</label> <select
+							[(ngModel)]="horarioEditable.hora_cierre_tarde" [ngModelOptions]="{standalone: true}">
+							<option [value]="horarioEditable.hora_cierre_tarde">{{horarioEditable.hora_cierre_tarde}}</option>
+							<option value="19:30">19:30</option>
+							<option value="20:00">20:00</option>
+							<option value="20:30">20:30</option>
+							<option value="21:00">21:00</option>
+							<option value="21:30">21:30</option>
+							<option value="22:00">22:00</option>
+							<option value="22:30">22:30</option>
+							<option value="23:00">23:00</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<button type="submit">Guardar cambios</button>
+
+		</form>
+	</div>
+</div>

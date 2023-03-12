@@ -124,8 +124,8 @@ export class HorarioComponent implements OnInit,OnChanges{
 							console.log("pipe: "+ this.diaSemanaDatePiPe.toLowerCase())*/
 						if(nombreDia == 
 						this.horarios[i].diaSemana.toLowerCase()){
-							this.generarHoras(this.horarios[i].hora_apertura_mañana.toString()
-											,this.horarios[i].hora_cierre_mañana.toString()
+							this.generarHoras(this.horarios[i].hora_apertura_manana.toString()
+											,this.horarios[i].hora_cierre_manana.toString()
 											,this.horarios[i].hora_apertura_tarde.toString()
 											,this.horarios[i].hora_cierre_tarde.toString());
 							
