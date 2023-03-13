@@ -1,0 +1,146 @@
+.agregar-servicio,
+.agregar-corte,
+.agregar-estilo {
+width: 100%;
+max-width: 400px;
+margin-bottom: 20px;
+color:red;
+}
+
+.agregar-servicio h4,
+.agregar-corte h4,
+.agregar-estilo h4 {
+font-size: 1.5rem;
+font-weight: bold;
+margin-bottom: 10px;
+}
+
+.agregar-servicio label,
+.agregar-corte label,
+.agregar-estilo label {
+font-size: 1.2rem;
+font-weight: bold;
+display: block;
+margin-bottom: 5px;
+}
+
+.agregar-servicio input[type="text"],
+.agregar-corte input[type="text"],
+.agregar-estilo input[type="text"],
+.agregar-servicio input[type="file"],
+.agregar-corte input[type="file"],
+.agregar-estilo input[type="file"] {
+width: 100%;
+padding: 8px;
+font-size: 1.2rem;
+border: 1px solid #ccc;
+margin-bottom: 10px;
+}
+
+.agregar-servicio button,
+.agregar-corte button,
+.agregar-estilo button {
+padding: 8px 15px;
+font-size: 1.2rem;
+font-weight: bold;
+color: #fff;
+background-color: #28a745;
+border: none;
+cursor: pointer;
+}
+
+.agregar-servicio button:hover,
+.agregar-corte button:hover,
+.agregar-estilo button:hover {
+background-color: #218838;
+}
+.servicios {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  margin-top: 50px;
+  color:black;
+  gap:20px;
+}
+
+.servicio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  padding: 10px;
+  background: #ccffcc;
+}
+
+.servicio > * {
+  margin: 40px;
+}
+
+.servicio input[type="text"] {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: transparent;
+  
+}
+
+.servicio img {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.cortes {
+  margin-top: 10px;
+  padding: 20px;
+}
+
+.corte {
+  margin-top: 10px;
+  padding: 10px;
+    background:#ff9393;
+   
+}
+
+.corte > * {
+  margin: 30px;
+}
+
+.corte input[type="text"] {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: transparent;
+}
+
+.corte img {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.estilos {
+  margin-top: 10px;
+  padding: 20px;
+}
+
+.estilo {
+	background:#7d7dff;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.estilo > * {
+  margin: 30px;
+}
+
+.estilo input[type="text"] {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: transparent;
+}
+
+.estilo img {
+  max-width: 200px;
+  max-height: 200px;
+}

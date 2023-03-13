@@ -14,37 +14,8 @@ import { UserService } from 'src/app/services/user.service';
 export class AdminComponent implements OnInit{
 	  usuarios: Usuario[] = [];
   	@ViewChild(AlertComponent) alert: AlertComponent;
-  		servicios :Servicio[] = [];
-	nuevoServicio = {
-	  	nombre: '',
-		  imagen: '',
-		  precio: '',
-		  tiempo: '',
-		  extra:  ''
-	};
-	servicioPush : Servicio;
-	nuevoCorte = {
-	  	nombre: '',
-		  imagen: '',
-		  precio: '',
-		  tiempo: '',
-		  extra: '',
-		  servicio:[]
-	};
-		cortePush : Corte;
-
-	nuevoEstilo = {
-	  	nombre: '',
-		  imagen: '',
-		  precio: '',
-		  tiempo: '',
-		  extra: '',
-		  corte: []
-	};
-	  estiloPush : Estilo;
-	
+  	
 mostrarCitas = false;
-    cortes: Corte[];
 
 	constructor(private userService:UserService,
 				private citaService:CitaService,
@@ -77,23 +48,7 @@ mostrarCitas = false;
 	    });
 	  });
 	});
-	//SERVICIOS
-	forkJoin({
-      servicios: this.listaServiciosService.todaLaListaDeServicios(),
-      cortes: this.listaServiciosService.todaLaListaDeServiciosCorte(),
-      estilos: this.listaServiciosService.todaLaListaDeServiciosEstilo()
-    }).subscribe(
-      ({ servicios, cortes, estilos }) => {
-        this.servicios = servicios;
-        this.cortes = cortes;
-        for (const corte of cortes) {
-          corte.estilos = estilos.filter(e => e.corte.id === corte.id);
-        }
-        for (const barberia of servicios) {
-          barberia.cortes = cortes.filter(c => c.servicio.id === barberia.id);
-        }
-      }
-    );
+	
     }
 	deleteCita(cita: Cita){
 	  this.citaService.deleteCita(cita).subscribe(() => {
@@ -114,35 +69,6 @@ mostrarCitas = false;
 	toggleCitas() {
   this.mostrarCitas = !this.mostrarCitas;
 }	
-agregarServicio() {
-  this.cortePush.nombre = this.nuevoCorte.nombre;
-  this.cortePush.precio = Number(this.nuevoCorte.precio);
-  this.cortePush.imagen = this.nuevoCorte.imagen;
-  this.cortePush.tiempo = Number(this.nuevoCorte.tiempo)
-  this.cortePush.extra = this.nuevoCorte.extra;
-  };	
-agregarCorte() {
-  this.cortePush.nombre = this.nuevoCorte.nombre;
-  this.cortePush.precio = Number(this.nuevoCorte.precio);
-  this.cortePush.imagen = this.nuevoCorte.imagen;
-  this.cortePush.tiempo = Number(this.nuevoCorte.tiempo)
-  this.cortePush.extra = this.nuevoCorte.extra;
-  };
-agregarEstilo() {
-  this.cortePush.nombre = this.nuevoCorte.nombre;
-  this.cortePush.precio = Number(this.nuevoCorte.precio);
-  this.cortePush.imagen = this.nuevoCorte.imagen;
-  this.cortePush.tiempo = Number(this.nuevoCorte.tiempo)
-  this.cortePush.extra = this.nuevoCorte.extra;
-  };
-
-
-	editarServicio(servicio : Servicio){}
-	eliminarServicio(servicio : Servicio){}
-	editarCorte(corte: Corte){}
-	eliminarCorte(corte: Corte){}
-	editarEstilo(estilo : Estilo){}
-	eliminarEstilo(estilo: Estilo){}
 
 
 

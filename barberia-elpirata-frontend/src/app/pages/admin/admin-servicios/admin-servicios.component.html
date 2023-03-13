@@ -1,0 +1,112 @@
+<h1 style="color: black; margin: 20px">Servicios</h1>
+
+
+<div class="servicios">
+	<div class="agregar-servicio">
+		<h4>Agregar Servicio</h4>
+		<form (ngSubmit)="agregarServicio()">
+			<label>Nombre:</label> <input type="text"
+				[(ngModel)]="nuevoServicio.nombre" name="nombre"> <label>Imagen:</label>
+			<input type="file" [(ngModel)]="nuevoServicio.imagen" name="nombre">
+			<label>Precio:</label> <input type="text"
+				[(ngModel)]="nuevoServicio.precio" name="precio"> <label>Tiempo:</label>
+			<input type="text" [(ngModel)]="nuevoServicio.tiempo" name="tiempo"><label>Nombre
+				Extra:</label> <input type="text" [(ngModel)]="nuevoServicio.extra"
+				name="extra">
+			<button type="submit" class="btn btn-success">Agregar
+				Servicio</button>
+		</form>
+	</div>
+	<h5>Servicio:</h5>
+
+
+
+	<div class="servicio" *ngFor="let servicio of servicios">
+		<div class="servicio-detalle">
+			<div class="servicio-info">
+				<label>Nombre:</label> <input type="text"
+					[(ngModel)]="servicio.nombre"> <img
+					[src]="'../assets/img/pelaos/'+ servicio.imagen"> <label>Precio:</label>
+				<input type="text" [(ngModel)]="servicio.precio"
+					placeholder="{{servicio.precio}} €"> <label>Tiempo:</label>
+				<input type="text" [(ngModel)]="servicio.tiempo"
+					placeholder="{{servicio.tiempo}} minutos">
+				<button class="btn btn-success" (click)="editarServicio(servicio)">Actualizar</button>
+				<button class="btn btn-danger" (click)="eliminarServicio(servicio)">Eliminar</button>
+			</div>
+
+			<div class="cortes">
+				<div class="agregar-corte">
+					<h4>Agregar Corte</h4>
+					<form (ngSubmit)="agregarCorte(servicio)">
+						<label>Nombre:</label> <input type="text"
+							[(ngModel)]="nuevoCorte.nombre" name="nombre"> <label>Imagen:</label>
+						<input type="file" [(ngModel)]="nuevoCorte.imagen" name="nombre">
+						<label>Precio:</label> <input type="text"
+							[(ngModel)]="nuevoCorte.precio" name="precio"> <label>Tiempo:</label>
+						<input type="text" [(ngModel)]="nuevoCorte.tiempo" name="tiempo"><label>Nombre
+							Extra:</label> <input type="text" [(ngModel)]="nuevoCorte.extra"
+							name="extra">
+						<button type="submit" class="btn btn-success">Agregar
+							Corte</button>
+					</form>
+				</div>
+				<h5>Cortes:</h5>
+				<div class="corte" *ngFor="let corte of servicio.cortes">
+					<div class="corte-detalle">
+						<div class="corte-info">
+							<label>Nombre:</label> <input type="text"
+								[(ngModel)]="corte.nombre"> <img
+								[src]="'../assets/img/pelaos/'+ corte.imagen"> <label>Precio:</label>
+							<input type="text" [(ngModel)]="corte.precio"
+								placeholder="{{corte.precio}} €"> <label>Tiempo:</label>
+							<input type="text" [(ngModel)]="corte.tiempo"
+								placeholder="{{corte.tiempo}} minutos">
+							<button class="btn btn-success" (click)="editarCorte(corte)">Actualizar</button>
+							<button class="btn btn-danger" (click)="eliminarCorte(corte)">Eliminar</button>
+						</div>
+
+						<div class="estilos">
+							<div class="agregar-estilo">
+								<h4>Agregar Estilo</h4>
+								<form (ngSubmit)="agregarEstilo(corte)">
+									<label>Nombre:</label> <input type="text"
+										[(ngModel)]="nuevoEstilo.nombre" name="nombre"> <label>Imagen:</label>
+									<input type="file" [(ngModel)]="nuevoEstilo.imagen"
+										name="nombre"> <label>Precio:</label> <input
+										type="text" [(ngModel)]="nuevoEstilo.precio" name="precio">
+									<label>Tiempo:</label> <input type="text"
+										[(ngModel)]="nuevoEstilo.tiempo" name="tiempo"><label>Nombre
+										Extra:</label> <input type="text" [(ngModel)]="nuevoEstilo.extra"
+										name="extra">
+									<button type="submit" class="btn btn-success">Agregar
+										Estilo</button>
+								</form>
+							</div>
+							<h5>Estilos:</h5>
+							<div class="estilo" *ngFor="let estilo of corte.estilos">
+								<div class="estilo-detalle">
+									<div class="estilo-info">
+										<label>Nombre:</label> <input type="text"
+											[(ngModel)]="estilo.nombre"> <img
+											[src]="'../assets/img/pelaos/'+ estilo.imagen"> <label>Precio:</label>
+										<input type="text" [(ngModel)]="estilo.precio"
+											placeholder="{{estilo.precio}} €"> <label>Tiempo:</label>
+										<input type="text" [(ngModel)]="estilo.tiempo"
+											placeholder="{{estilo.tiempo}} minutos">
+										<button class="btn btn-success" (click)="editarEstilo(estilo)">Actualizar</button>
+										<button class="btn btn-danger"
+											(click)="eliminarEstilo(estilo)">Eliminar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<app-alert></app-alert>
